@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>CIR 2 Test Chat</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <link rel="stylesheet" href="../css/index.css">
-    </head>
 
-    <body>
-         <h1>Bienvenue</h1>
-    </body>
+<head>
+    <title>Escap'ISEN</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
+</head>
 
-    <script>
-        let socket = io();
-    </script>
+<script>
+    let socket = io();
+</script>
+
+
+
+<body>
     <script src="../js/main.js"></script>
+    
+
+    <div id="infos">
+        <div>
+            <h3>Objectif</h3>
+            <p>Faire avancer ....</p>
+        </div>
+        <div>
+            <h2>Règles</h2>
+            <p>aapiubfe</p>
+        </div>
+    </div>
+
+        <div id="code">   
+            <p>Code ici</p>
+        </div>
+        <div id="buttons">
+            <button>RESET</button>
+            <button>SUBMIT</button>
+        </div>
+
+</body>
 
 </html>

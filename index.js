@@ -1,82 +1,57 @@
-/**** Import npm libs ****/
+const port = 4200;
 
 const express = require('express');
 const app = express();
+const server = require('http').createServer(app);
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const session = require("express-session")({
-  // CIR2-chat encode in sha256
-  secret: "eb8fcc253281389225b4f7872f2336918ddc7f689e1fc41b64d5c4f378cdc438",
+const io = require('socket.io')(server);
+
+const sharedsession = require("express-socket.io-session");
+
+const bodyParser = require('body-parser');
+const session = require('express-session')({
+  secret: "30cm",
   resave: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 2 * 60 * 60 * 1000,
-    secure: false
+    maxAge: 56060 * 1000,
+    secure: false,
   }
 });
-const sharedsession = require("express-socket.io-session");
-const bodyParser = require('body-parser');
-const { body, validationResult } = require('express-validator');
 
-/**** Import project libs ****/
-
-const states = require('./back/modules/states');
-const Theoden = require('./back/models/Theoden');
-
-/**** Project configuration ****/
-
-const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// Init of express, to point our assets
-app.use(express.static(__dirname + '/front/'));
+/* init express */
 app.use(urlencodedParser);
 app.use(session);
+app.use(express.static(__dirname + "/front/"));
 
-// Configure socket io with session middleware
 io.use(sharedsession(session, {
-  // Session automatiquement sauvegardée en cas de modification
   autoSave: true
 }));
 
-// Détection de si nous sommes en production, pour sécuriser en https
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  session.cookie.secure = true // serve secure cookies
-}
-
 /**** Code ****/
-
-app.get('/', (req, res) => {
-  let sessionData = req.session;
-
-  // Test des modules 
-  states.printServerStatus();
-  states.printProfStatus();
-  let test = new Theoden();
-  
-  // Si l'utilisateur n'est pas connecté
-  if (!sessionData.username) {
-    res.sendFile(__dirname + '/front/html/index.html');
-  } else {
-    res.sendFile(__dirname + '/front/html/index.html');
-  }
+app.get('/', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/accueil.html');
 });
 
-app.post('/login', body('login').isLength({ min: 3 }).trim().escape(), (req, res) => {
-  const login = req.body.login
+app.get('/levels', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/levels.html');
+});
+app.get('/game', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/index.html');
+});
 
-  // Error management
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    console.log(errors);
-    //return res.status(400).json({ errors: errors.array() });
-  } else {
-    // Store login
-    req.session.username = login;
-    req.session.save()
-    res.redirect('/');
-  }
+app.post('/', (req, res) => {
+  res.sendFile(__dirname + '/front/views/index.html');
+});
+
+app.post('/levels', (req, res) => {
+  res.sendFile(__dirname + '/front/html/levels.html');
+});
+
+app.post('/game', (req, res) => {
+  res.sendFile(__dirname + '/front/html/index.html');
 });
 
 io.on('connection', (socket) => {
@@ -98,6 +73,6 @@ io.on('connection', (socket) => {
 });
 
 http.listen(4200, () => {
-  console.log('Serveur lancé sur le port 4200');
+  console.log('Serveur : http://localhost:4200');
 });
 
