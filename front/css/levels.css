@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "pixel-custom";
+    src: url("../asset/VCR_OSD_MONO_1.001.ttf");
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+body {
+    background-image: url("../asset/backAccueilFlou.png");
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+}
+
+p {
+    font-family: 'pixel-custom';
+    color: white;
+    text-align: center;
+    font-size: xx-large;
+    margin-top: 100px;
+    font: bold;
+}
+
+button {
+    padding: 30px;
+    border-radius: 3px;
+}
+
+#lvls {
+    margin: 0;
+    padding:0;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    row-gap: 30px;
+}
+
+#lvl1 {
+    background-color: aqua;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#lvl2 {
+    background-color: orange;
+    grid-column: 4;
+    grid-row: 1;
+}
+
+#lvl3 {
+    background-color: red;
+    grid-column: 6;
+    grid-row: 1;
+}
+
+#lvl4 {
+    background-color: blue;
+    grid-column: 8;
+    grid-row: 1;
+}
+
+#lvl5 {
+    background-color: purple;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#lvl6 {
+    background-color: green;
+    grid-column: 4;
+    grid-row: 2;
+}
+
+#lvl7 {
+    background-color: yellow;
+    grid-column: 6;
+    grid-row: 2;
+}
+
+#lvl8 {
+    background-color: rgb(202, 247, 96);
+    grid-column: 8;
+    grid-row: 2;
+}
