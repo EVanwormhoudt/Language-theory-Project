@@ -9,14 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
 </head>
 
-<script>
-    let socket = io();
-</script>
+
 
 
 
 <body>
-    <script src="../js/main.js"></script>
+    
     
 
     <div id="infos">
@@ -31,13 +29,28 @@
     </div>
 
         <div id="code">   
-            <p>Code ici</p>
+            <div id="editorText">
+                <pre id="editor">function foo(items) {
+                    var i;
+                    for (i = 0; i &lt; items.length; i++) {
+                        alert("Ace Rocks " + items[i]);
+                    }
+                }</pre>
+            </div>
+
         </div>
         <div id="buttons">
             <button>RESET</button>
             <button>SUBMIT</button>
         </div>
 
+        <script src="../docAce/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/mainGame.js"></script>
+        <script src="../js/main.js"></script>
+        <script>
+            let socket = io();
+        </script>
 </body>
 
 </html>
+
