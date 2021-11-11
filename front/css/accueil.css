@@ -11,6 +11,9 @@ body {
     background-attachment:fixed;
     background-repeat:no-repeat;
     -webkit-background-size: cover;
+    color: white;
+    font-family: 'pixel-custom';
+    text-align: center;
 }
 
 #logo {
@@ -20,10 +23,15 @@ body {
     margin-top: 8%;
 }
 p {
-    font-family: 'pixel-custom';
-    color: white;
-    text-align: center;
     font-size: xx-large;
     margin-top: 100px;
-    font: bold;
+}
+
+#titre {
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+#desc {
+    font-size: 35px;
 }

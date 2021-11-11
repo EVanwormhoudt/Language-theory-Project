@@ -17,37 +17,48 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-let map;
+let map, tilesets;
 
 function preload() {
     /*
     this.load.setPath("assets");
-    this.load.tilemapTiledJSON("testmap.json", "testmap");
     this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
     */
 
+    this.load.tilemapTiledJSON("testmap", "../../asset/testmap.json");
     this.load.tilemapTiledJSON('testmap2', '../../asset/testmap2.json');
 
     this.load.image('tiles', 'asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
 }
 
 function create() {
-    /*
-    this.map = this.add.tilemap("testmap");
-    let tileset = this.map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png');
 
-    this.background = this.map.createLayer("Calque de Tuiles 1", tileset);
-    */
+    socket.emit('partie', '');
 
-    map = this.add.tilemap('testmap2');
+    socket.on('choixlvl', (lvl) => {
+        switch (lvl) {
+            case '1':
+                map = this.add.tilemap('testmap');
 
-    let tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png','tiles');
-    
-    console.log(map);
-    console.log(tilesets);
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
 
-    let sol = map.createLayer('sol', tilesets);
-    let walls = map.createLayer('walls', tilesets);
+                map.createLayer('sol', tilesets);
+                map.createLayer('walls', tilesets);
+
+                break;
+            case '2':
+                map = this.add.tilemap('testmap2');
+
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+
+                map.createLayer('sol', tilesets);
+                map.createLayer('walls', tilesets);
+
+                break;
+            default:
+
+        }
+    });
 
     let controlConfig = {
         camera: this.cameras.main,

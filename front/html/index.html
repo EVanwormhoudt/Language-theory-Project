@@ -14,28 +14,29 @@
 
 
 <body>
-    
-    
 
     <div id="infos">
         <div>
-            <h3>Objectif</h3>
-            <p>Faire avancer ....</p>
+            <h3 id="title_target"></h3>
+            <p id="desc_target"></p>
         </div>
         <div>
-            <h2>Règles</h2>
-            <p>aapiubfe</p>
+            <h2 id="rules"></h2>
+            <p id="txt_rules"></p>
         </div>
     </div>
 
         <div id="code">   
             <div id="editorText">
-                <pre id="editor">function foo(items) {
-                    var i;
-                    for (i = 0; i &lt; items.length; i++) {
-                        alert("Ace Rocks " + items[i]);
-                    }
-                }</pre>
+                <pre id="editor">
+//Niveau 1 : Escap’Isen
+function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}                    
+</pre>
             </div>
 
         </div>
@@ -47,9 +48,6 @@
         <script src="../docAce/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/mainGame.js"></script>
         <script src="../js/main.js"></script>
-        <script>
-            let socket = io();
-        </script>
 </body>
 
 </html>
