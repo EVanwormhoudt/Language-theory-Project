@@ -10,9 +10,6 @@
 </head>
 
 
-
-
-
 <body>
 
     <div id="infos">
@@ -28,26 +25,20 @@
 
         <div id="code">   
             <div id="editorText">
-                <pre id="editor">
-//Niveau 1 : Escap’Isen
-function foo(items) {
-    var i;
-    for (i = 0; i &lt; items.length; i++) {
-        alert("Ace Rocks " + items[i]);
-    }
-}                    
-</pre>
+                <pre id="editor"></pre>
             </div>
 
         </div>
         <div id="buttons">
-            <button>RESET</button>
-            <button>SUBMIT</button>
+            <button id="clear">RESET</button>
+            <button id="compilation">SUBMIT</button>
         </div>
 
         <script src="../docAce/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="../js/mainGame.js"></script>
+        <script src="../js/langage.js"></script>
         <script src="../js/main.js"></script>
+        
 </body>
 
 </html>

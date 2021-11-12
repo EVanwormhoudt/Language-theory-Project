@@ -5,7 +5,8 @@ editor.setTheme("ace/theme/chaos");
 let socket = io();  
 
 socket.on('choixlvl', (lvl) => {
-    console.log(lvl);
+
+    console.log("level : ",lvl);
     
 
     let title_target = document.getElementById("title_target");
@@ -32,3 +33,16 @@ socket.on('choixlvl', (lvl) => {
     }
 
 });
+
+function test() {
+    console.log("test");
+}
+
+document.getElementById("compilation").addEventListener('click', () => {
+    console.log(langage.parse(editor.getValue()));
+})
+
+document.getElementById("clear").addEventListener('click', () => {
+    editor.setValue("");
+})
+
