@@ -4,62 +4,71 @@
 <head>
     <title>Escap'ISEN</title>
     <link rel="stylesheet" href="../css/levels.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
     <script> let socket = io();</script>
-    <p>Levels</p>
+    <div id="title">
+        <h1>Levels</h1>
+    </div>
+    
     <div id="lvls">
-        <button id="lvl1" value="1">
+        <a id="lvl1" value="1">
             <div>
-                <p>1<br>Escap’Isen</p>
-                <img style="width: 36; height: 50px" src="../asset/etoileMulti.png">
+                <p>1. Niveau 1</p>
+                <div id="etoiles">
+                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+                </div>
+
             </div>
-        </button>
-        <button id="lvl2" value="2">
+        </a>
+        <a id="lvl2" value="2">
             <div>
-                <p>2<br>Escap’Isen 2</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>2. Niveau 2</p>
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl3" value="3">
+        </a>
+        <a id="lvl3" value="3">
             <div>
-                <p>3<br>Escap’Isen L’éveil du prisonnier</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>3. Niveau 3</p>
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl4">
+        </a>
+        <a id="lvl4" value="4">
             <div>
-                <p>4<br>Escap’Isen Le retour</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>4. Niveau 4</p>
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl5">
+        </a>
+        <a id="lvl5" value="5">
             <div>
-                <p>5<br>Escap’Isen la revanche du gardien</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>5. Niveau 5</p>
+                <img  id="cadena"style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl6">
+        </a>
+        <a id="lvl6" value="6">
             <div>
-                <p>6<br>Escap’Isen héros déchu</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>6. Niveau 6</p>
+                <img  id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl7">
+        </a>
+        <a id="lvl7" value="7">
             <div>
-                <p>7<br>Escap’Isen Prologue</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>7. Niveau 7</p>
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
-        <button id="lvl8">
+        </a>
+        <a id="lvl8" value="8">
             <div>
-                <p>8<br>Escap’Isen Fin</p>
-                <img style="width: 72; height: 109.525px" src="../asset/CADENAS-BLOQUE.png">
+                <p>8. Niveau 8</p>
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </button>
+        </a>
     </div>
     <script src="../js/levels.js"></script>
 </body>

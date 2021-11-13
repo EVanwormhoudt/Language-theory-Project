@@ -11,19 +11,61 @@ body {
     background-attachment:fixed;
     background-repeat:no-repeat;
     -webkit-background-size: cover;
+
+}
+
+h1 {
+    font-family: 'pixel-custom';
+    color: white;
+    text-align: center;
+    font: bold;
+    padding-top: 15px;
 }
 
 p {
     font-family: 'pixel-custom';
     color: white;
     text-align: center;
-    font-size: xx-large;
     font: bold;
+    font-size:xx-large;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+#title {
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 
 button {
     padding: 30px;
     border-radius: 3px;
+}
+#etoiles {
+    background-image: url("../asset/fondetoiles.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 217.5px;
+    height: 73.5px;
+    margin-left: 50px;
+}
+
+#etoilevide {
+    padding-top: 5px;
+    margin-left: 18px;
+}
+
+#cadena {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #lvls {
@@ -35,49 +77,81 @@ button {
 }
 
 #lvl1 {
-    background-color: aqua;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 2;
     grid-row: 1;
 }
 
 #lvl2 {
-    background-color: orange;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 4;
     grid-row: 1;
 }
 
 #lvl3 {
-    background-color: red;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 6;
     grid-row: 1;
 }
 
 #lvl4 {
-    background-color: blue;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 8;
     grid-row: 1;
 }
 
 #lvl5 {
-    background-color: purple;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 2;
     grid-row: 2;
 }
 
 #lvl6 {
-    background-color: green;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 4;
     grid-row: 2;
 }
 
 #lvl7 {
-    background-color: yellow;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 6;
     grid-row: 2;
 }
 
 #lvl8 {
-    background-color: rgb(202, 247, 96);
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
     grid-column: 8;
     grid-row: 2;
 }

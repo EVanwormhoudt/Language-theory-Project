@@ -18,6 +18,7 @@ const config = {
 
 const game = new Phaser.Game(config)
 let map, tilesets;
+let cursors;
 
 function preload() {
     /*
@@ -25,10 +26,15 @@ function preload() {
     this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
     */
 
-    this.load.tilemapTiledJSON("testmap", "../../asset/testmap.json");
-    this.load.tilemapTiledJSON('testmap2', '../../asset/testmap2.json');
+    this.load.tilemapTiledJSON("testmap", "asset/testmap.json");
+    this.load.tilemapTiledJSON('testmap2', 'asset/testmap2.json');
 
     this.load.image('tiles', 'asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
+
+    this.load.spritesheet('face', 'asset/sprite_face.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('right', 'asset/sprite_right.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('left', 'asset/sprite_left.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('back', 'asset/sprite_back.png', {frameWidth: 64, frameHeight: 32});
 }
 
 function create() {
@@ -37,7 +43,7 @@ function create() {
 
     socket.on('choixlvl', (lvl) => {
         switch (lvl) {
-            case '1':
+            case 1:
                 map = this.add.tilemap('testmap');
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
@@ -46,7 +52,7 @@ function create() {
                 map.createLayer('walls', tilesets);
 
                 break;
-            case '2':
+            case 2:
                 map = this.add.tilemap('testmap2');
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
@@ -56,7 +62,6 @@ function create() {
 
                 break;
             default:
-
         }
     });
 
@@ -67,9 +72,14 @@ function create() {
         maxSpeed: 3
     };
 
-    this.cameras.main.setZoom(0.4);
+    player = new Player(this, 0, 0, 'face', 'right','left','back');
+    cursors = this.input.keyboard.createCursorKeys();
+
+    this.cameras.main.setZoom(0.5);
+    
+    
 }
 
 function update() {
-
+    player.movePlayer(player,cursors);
 }

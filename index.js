@@ -76,12 +76,7 @@ io.on('connection', (socket) => {
   socket.on('lvl', (msg) => {
     //Affichage en console
     console.log('Level Click : ' + msg);
-    if(nblvl == null) {
-      nblvl = msg;
-    }else {
-      nblvl = null;
-      nblvl = msg;
-    }
+    nblvl = msg;
     //Envoie le message pour tous, Affichage du chat sur la page leaderboard
   });
 
