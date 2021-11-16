@@ -6,14 +6,17 @@
 
 %%
 \s+                   /* skip whitespace */
-\n                    return '\n';
+"\n"                   return '\n';
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
 ";"                   return ';';
+":"                   return ':';
 "*"                   return '*';
 "/"                   return '/';
 "-"                   return '-';
 "+"                   return '+';
 "^"                   return '^';
+"{"                   return '{';
+"}"                   return '}';
 "("                   return '(';
 ")"                   return ')';
 "PI"                  return 'PI';
@@ -24,6 +27,13 @@
 "FinSi"				  return 'FINSI';
 "E"                   return 'E';
 <<EOF>>               return 'EOF';
+"move"                return 'MOVE';
+"haut"                return 'UP';
+"bas"                 return 'DOWN';
+"droite"              return 'RIGHT';
+"gauche"              return 'LEFT';
+"DEBUT SOURCE"        return 'DEBUT';
+"FIN SOURCE"          return 'FIN';
 
 /lex
 
@@ -39,6 +49,11 @@
 %token ALORS
 %token SINON
 %token FINSI
+%token MOVE
+%token UP
+%token DOWN
+%token LEFT
+%token RIGHT
 
 
 %start bloc
@@ -46,22 +61,32 @@
 
 %% /* language grammar */
 
+
 bloc:
     |instruction bloc
 
     ;
 
-instruction :
-    e ';' {console.log($1);test();}
-    |e ';' EOF {console.log($1);console.log("non");}
+instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
-	|SI '(' e SUP e ')' '\n'
-		ALORS '\n'
-			bloc
-		SINON '\n'
-			bloc
-		FINSI            { console.log("ici");  }
-    ;
+            |'}' 'FIN' EOF {console.log("-----Fin du programme-----");}
+
+            |MOVE '(' UP ')' ';' {console.log("move haut"); addInstruction(0,"MOVEUP");}
+            |MOVE '(' DOWN ')' ';' {console.log("move bas");addInstruction(0,"MOVEDOWN");}
+            |MOVE '(' LEFT ')' ';' {console.log("move gauche");addInstruction(0,"MOVELEFT");}
+            |MOVE '(' RIGHT ')' ';' {console.log("move droite");addInstruction(0,"MOVERIGHT");}
+
+            |SI '('  ')' ':'    
+                ALORS ':'       
+                    bloc
+                SINON ':'       
+                    bloc
+                FINSI ';'   { console.log("Sinon");  }
+
+            |e ';' {console.log($1);test();}
+
+            |e ';' EOF {console.log($1);console.log("non");}
+            ;
 
 
 

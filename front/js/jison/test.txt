@@ -1,0 +1,5 @@
+DEBUT SOURCE {
+
+    move(haut);   
+
+}FIN SOURCE
