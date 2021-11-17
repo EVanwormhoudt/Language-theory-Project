@@ -73,15 +73,14 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
             |MOVE '(' UP ')' ';' {console.log("move haut"); addInstruction(0,"MOVEUP");}
             |MOVE '(' DOWN ')' ';' {console.log("move bas");addInstruction(0,"MOVEDOWN");}
-            |MOVE '(' LEFT ')' ';' {console.log("move gauche");addInstruction(0,"MOVELEFT");}
-            |MOVE '(' RIGHT ')' ';' {console.log("move droite");addInstruction(0,"MOVERIGHT");}
+            |MOVE '(' LEFT ')' ';' {console.log("move gauche");}
+            |MOVE '(' RIGHT ')' ';' {console.log("move droite");}
 
-            |SI '('  ')' ':'    
-                ALORS ':'       
-                    bloc
-                SINON ':'       
-                    bloc
-                FINSI ';'   { console.log("Sinon");  }
+
+            |SI '('  ')' ':'   {console.log("SI");} 
+            |ALORS ':' %prec SI {console.log("ALORS");} 
+            |SINON ':' %prec ALORS {console.log("SINON");} 
+            |FINSI ';' %prec SINON {console.log("ENDSI");} 
 
             |e ';' {console.log($1);test();}
 

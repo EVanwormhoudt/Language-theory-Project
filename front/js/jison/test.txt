@@ -1,5 +1,14 @@
 DEBUT SOURCE {
 
-    move(haut);   
+    move(haut);
+    
+
+    Si ( ) :
+        Alors :
+        Sinon :
+    FinSi ;
+
+    move(haut);
+    
 
 }FIN SOURCE
