@@ -80,12 +80,15 @@ function create() {
         
         this.cameras.main.setZoom(0.5);
 
-        player.children.entries[0].setAnim(player.children.entries[0],'left','right','back','face');
+        player.children.entries[0].setAnim('left','right','back','face');
+
+
+
     }
 }
 
 function update() {
-    
+    player.children.entries[0].move('down',2,player.children.entries[0].x,player.children.entries[0].y);
 }
 
 function movePlayer(player) {
