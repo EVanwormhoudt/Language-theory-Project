@@ -21,27 +21,24 @@ let map, tilesets;
 let cursors;
 
 function preload() {
-    /*
-    this.load.setPath("assets");
-    this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
-    */
 
-    this.load.tilemapTiledJSON("testmap", "asset/testmap.json");
-    this.load.tilemapTiledJSON('testmap2', 'asset/testmap2.json');
+    this.load.setPath("../asset");
+    //this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
 
-    this.load.image('tiles', 'asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
 
-    this.load.spritesheet('face', 'asset/sprite_face.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('right', 'asset/sprite_right.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('left', 'asset/sprite_left.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('back', 'asset/sprite_back.png', {frameWidth: 64, frameHeight: 32});
+    this.load.tilemapTiledJSON("testmap", "testmap.json");
+    this.load.tilemapTiledJSON('testmap2', 'testmap2.json');
+
+    this.load.image('tiles', 'imgbin_prison-architect-landscape-architecture-sprite-png.png');
+
+    this.load.spritesheet('face', 'sprite_face.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('right', 'sprite_right.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('left', 'sprite_left.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('back', 'sprite_back.png', {frameWidth: 64, frameHeight: 32});
 }
 
 function create() {
-
-    socket.emit('partie', '');
-
-    socket.on('choixlvl', (lvl) => {
+    let lvl = 1;
         switch (lvl) {
             case 1:
                 map = this.add.tilemap('testmap');
@@ -63,7 +60,7 @@ function create() {
                 break;
             default:
         }
-    });
+    ;
 
     let controlConfig = {
         camera: this.cameras.main,

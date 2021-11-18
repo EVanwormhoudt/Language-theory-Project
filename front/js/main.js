@@ -2,9 +2,7 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
 
 
-let socket = io();  
-
-socket.on('choixlvl', (lvl) => {
+let lvl = 1
 
     console.log("level : ",lvl);
     
@@ -32,7 +30,7 @@ socket.on('choixlvl', (lvl) => {
             break;
     }
 
-});
+
 
 class Instruction {
     constructor(code, name) {

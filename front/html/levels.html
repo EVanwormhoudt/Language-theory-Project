@@ -5,72 +5,88 @@
     <title>Escap'ISEN</title>
     <link rel="stylesheet" href="../css/levels.css">
     <link rel="stylesheet"
-        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <script src="/socket.io/socket.io.js"></script>
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
 </head>
 
 <body>
-    <script> let socket = io();</script>
-    <div id="title">
-        <h1>Levels</h1>
-    </div>
-    
-    <div id="lvls">
-        <a id="lvl1" value="1">
+<div id="title">
+    <h1>Levels</h1>
+</div>
+
+<div id="lvls">
+    <form method="GET" action="./lvl1.html">
+        <button id="lvl1" value="1" name="niveau">
             <div>
                 <p>1. Niveau 1</p>
                 <div id="etoiles">
-                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
-                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
-                    <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+                    <img id="etoilevide" style="width: 36px; height: 50px" src="../asset/etoile.png">
+                    <img id="etoilevide" style="width: 36px; height: 50px" src="../asset/etoilevide.png">
+                    <img id="etoilevide" style="width: 36px; height: 50px" src="../asset/etoilevide.png">
                 </div>
 
             </div>
-        </a>
-        <a id="lvl2" value="2">
+        </button>
+    </form>
+    <form method="GET" action="./lvl2.html">
+        <button id="lvl2" value="2" name="niveau">
             <div>
                 <p>2. Niveau 2</p>
                 <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl3" value="3">
+        </button>
+    </form>
+    <form method="GET" action="./lvl3.html">
+        <button id="lvl3" value="3" name="niveau">
             <div>
                 <p>3. Niveau 3</p>
                 <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl4" value="4">
+        </button>
+    </form>
+    <form method="GET" action="./lvl4.html">
+        <button id="lvl4" value="4" name="niveau">
             <div>
                 <p>4. Niveau 4</p>
                 <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl5" value="5">
+        </button>
+    </form>
+    <form method="GET" action="./lvl5.html">
+        <button id="lvl5" value="5" name="niveau">
             <div>
                 <p>5. Niveau 5</p>
-                <img  id="cadena"style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl6" value="6">
+        </button>
+    </form>
+    <form method="GET" action="./lvl6.html">
+        <button id="lvl6" value="6" name="niveau">
             <div>
                 <p>6. Niveau 6</p>
-                <img  id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
+                <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl7" value="7">
+        </button>
+    </form>
+    <form method="GET" action="./lvl7.html">
+        <button id="lvl7" value="7" name="niveau">
             <div>
                 <p>7. Niveau 7</p>
                 <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-        <a id="lvl8" value="8">
+        </button>
+    </form>
+    <form method="GET" action="./lvl8.html">
+        <button id="lvl8" value="8" name="niveau">
             <div>
                 <p>8. Niveau 8</p>
                 <img id="cadena" style="height: 90px" src="../asset/CADENAS-BLOQUE.png">
             </div>
-        </a>
-    </div>
-    <script src="../js/levels.js"></script>
+        </button>
+    </form>
+
+</div>
+<script src="../js/levels.js"></script>
 </body>
 
 </html>

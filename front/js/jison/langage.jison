@@ -1,4 +1,4 @@
-
+```
 /* description: Parses end executes mathematical expressions. */
 
 /* lexical grammar */
@@ -77,16 +77,27 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
             |MOVE '(' RIGHT ')' ';' {console.log("move droite");}
 
 
-            |SI '('  ')' ':'   {console.log("SI");} 
-            |ALORS ':' %prec SI {console.log("ALORS");} 
-            |SINON ':' %prec ALORS {console.log("SINON");} 
-            |FINSI ';' %prec SINON {console.log("ENDSI");} 
+            
+            |IF ALORS ':' %prec IF {console.log("ALORS");}
+            |THEN SINON ':' %prec THEN {console.log("SINON");}
+
+
 
             |e ';' {console.log($1);test();}
 
             |e ';' EOF {console.log($1);console.log("non");}
             ;
 
+IF : SI '('  ')' ':'   {console.log("SI");} 
+    ;
+
+THEN : ALORS ':'
+        bloc {console.log("ALORS");}
+    ;
+
+ELSE : SINON ':'
+        bloc {console.log("SINON");}
+    ;
 
 
 e
@@ -111,3 +122,4 @@ e
     | PI
         {$$ = Math.PI;}
     ;
+```
