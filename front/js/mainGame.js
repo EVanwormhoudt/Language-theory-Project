@@ -75,7 +75,7 @@ function create() {
         //player = new Player(this, 0, 0, 'face', 'right', 'left', 'back');
         cursors = this.input.keyboard;
         player = this.physics.add.group({classType : Player});
-        player.create(0,0);
+        player.create(0,0,'face');
         movePlayer(player);
         
         this.cameras.main.setZoom(0.5);
