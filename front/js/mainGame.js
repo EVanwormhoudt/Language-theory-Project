@@ -80,32 +80,7 @@ function create() {
         
         this.cameras.main.setZoom(0.5);
 
-        player.children.entries[0].anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNames('left', { start: 0, end: 1 }),
-            frameRate: 3.5,
-            repeat: -1
-        })
-
-        player.children.entries[0].anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNames('right', { start: 0, end: 1 }),
-            frameRate: 3.5,
-            repeat: -1
-        })
-        player.children.entries[0].anims.create({
-            key: 'back',
-            frames: this.anims.generateFrameNames('back', { start: 0, end: 1 }),
-            frameRate: 3.5,
-            repeat: -1
-        });
-
-        player.children.entries[0].anims.create({
-            key: 'face',
-            frames: this.anims.generateFrameNames('face', { start: 0, end: 1 }),
-            frameRate: 3.5,
-            repeat: -1
-        });
+        player.children.entries[0].setAnim(player.children.entries[0],'left','right','back','face');
     }
 }
 
