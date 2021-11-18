@@ -6,7 +6,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 }
+            gravity: { y: 0 }
         }
     },
     scene: {
@@ -21,20 +21,15 @@ let map, tilesets;
 let cursors;
 
 function preload() {
-    /*
-    this.load.setPath("assets");
-    this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
-    */
-
     this.load.tilemapTiledJSON("testmap", "../asset/testmap.json");
     this.load.tilemapTiledJSON('testmap2', '../asset/testmap2.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
 
-    this.load.spritesheet('face', '../asset/sprite_face.png', { frameWidth: 64, frameHeight: 32 });
-    this.load.spritesheet('right', '../asset/sprite_right.png', { frameWidth: 64, frameHeight: 32 });
-    this.load.spritesheet('left', '../asset/sprite_left.png', { frameWidth: 64, frameHeight: 32 });
-    this.load.spritesheet('back', '../asset/sprite_back.png', { frameWidth: 64, frameHeight: 32 });
+    this.load.spritesheet('face', '../asset/sprite_face.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('right', '../asset/sprite_right.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('left', '../asset/sprite_left.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('back', '../asset/sprite_back.png', { frameWidth: 32, frameHeight: 32 });
 }
 
 function create() {
@@ -47,8 +42,6 @@ function create() {
         fin_url = fin_url.replace(/-/g, " ");
 
         lvl = fin_url.substr(7);
-        
-        console.log(lvl);
 
         switch (lvl) {
             case '1':
@@ -79,15 +72,64 @@ function create() {
             maxSpeed: 3
         };
 
-        player = new Player(this, 0, 0, 'face', 'right', 'left', 'back');
-        cursors = this.input.keyboard.createCursorKeys();
-
+        //player = new Player(this, 0, 0, 'face', 'right', 'left', 'back');
+        cursors = this.input.keyboard;
+        player = this.physics.add.group({classType : Player});
+        player.create(0,0);
+        movePlayer(player);
+        
         this.cameras.main.setZoom(0.5);
 
+        player.children.entries[0].anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNames('left', { start: 0, end: 1 }),
+            frameRate: 3.5,
+            repeat: -1
+        })
 
+        player.children.entries[0].anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNames('right', { start: 0, end: 1 }),
+            frameRate: 3.5,
+            repeat: -1
+        })
+        player.children.entries[0].anims.create({
+            key: 'back',
+            frames: this.anims.generateFrameNames('back', { start: 0, end: 1 }),
+            frameRate: 3.5,
+            repeat: -1
+        });
+
+        player.children.entries[0].anims.create({
+            key: 'face',
+            frames: this.anims.generateFrameNames('face', { start: 0, end: 1 }),
+            frameRate: 3.5,
+            repeat: -1
+        });
     }
 }
 
 function update() {
-    player.movePlayer(player, cursors);
+    
+}
+
+function movePlayer(player) {
+        
+    cursors.on('keydown-Q', () => {
+        player.children.entries[0].setVelocity(-150, 0);
+        player.children.entries[0].anims.play('left');
+    });
+    cursors.on('keydown-D', () => {
+        player.children.entries[0].setVelocity(150, 0);
+        player.children.entries[0].anims.play('right');
+    });
+    cursors.on('keydown-S', () => {
+        player.children.entries[0].setVelocity(0, 150);
+        player.children.entries[0].anims.play('face');
+    });
+    cursors.on('keydown-Z', () => {
+        player.children.entries[0].setVelocity(0, -150);
+        player.children.entries[0].anims.play('back');
+    });
+    return 0;
 }
