@@ -9,6 +9,7 @@
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
 ";"                   return ';';
 ":"                   return ':';
+">"                   return SUP;
 "*"                   return '*';
 "/"                   return '/';
 "-"                   return '-';
@@ -65,6 +66,7 @@
 %token FINPOUR
 %token MOVE
 %token UP
+%token SUP
 %token DOWN
 %token LEFT
 %token RIGHT
@@ -78,18 +80,18 @@
 
 %% /* language grammar */
 
-IF : SI '(' condition ')' ':'   {console.log("SI");addInstruction(0,"SI");} 
+IF : SI '(' condition ')' ':'   {console.log("SI");addInstruction(0,"JMPCOND", 0); jc = ic} 
     ;
 
 THEN : ALORS ':'
-         {console.log("ALORS");addInstruction(0,"ALORS")}
+         {console.log("ALORS");}
     ;
 
 ELSE :bloc SINON ':'
-         {console.log("SINON");addInstruction(0,"SINON")}
+         {console.log("SINON");addInstruction(0,"JMP",0);jmp = ic;code_genere[jc-1].value = ic;}
     ;
 
-ENDIF : bloc  FINSI {console.log("FINSI");addInstruction(0,"FINSI")};
+ENDIF : bloc  FINSI {console.log("FINSI");code_genere[jmp-1].value = ic;addInstruction(0,"FINSIF", 0)};
 
 
 FOR : POUR NUMBER ALLANT NUMBER A NUMBER ':' 
@@ -104,10 +106,8 @@ bloc:
 
     ;
 
-condition:TEST '(' UP ')' {console.log("test haut"); addInstruction(0,"TESTUP");}
-        |TEST '(' DOWN ')' {console.log("test bas");addInstruction(0,"TESTDOWN");}
-        |TEST '(' LEFT ')' {console.log("test gauche"); addInstruction(0,"TESTLEFT");}
-        |TEST '(' RIGHT ')' {console.log("test droite"); addInstruction(0,"TESTRIGHT");}
+condition:e      {}
+        |e SUP e {}
         ;
 
 instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
@@ -118,10 +118,10 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
             |FOR bloc FINPOUR {console.log("FINPOUR");addInstruction(0,"FINPOUR")}
             |WHILE bloc FINTANTQUE {console.log("FINTANTQUE");addInstruction(0,"FINTANTQUE")}
 
-            |MOVE '(' UP ')' ';' {console.log("move haut"); addInstruction(0,"MOVEUP");}
-            |MOVE '(' DOWN ')' ';' {console.log("move bas");addInstruction(0,"MOVEDOWN");}
-            |MOVE '(' LEFT ')' ';' {console.log("move gauche");}
-            |MOVE '(' RIGHT ')' ';' {console.log("move droite");}
+            |MOVE '(' UP ')' ';' {addInstruction(0,"MH",0);}
+            |MOVE '(' DOWN ')' ';' {addInstruction(0,"MB",0);}
+            |MOVE '(' LEFT ')' ';' {addInstruction(0,"MG",0);}
+            |MOVE '(' RIGHT ')' ';' {addInstruction(0,"MD,0");}
 
             |e ';' {console.log($1);test();}
 
@@ -144,8 +144,7 @@ e
         {$$ = -$2;}
     | '(' e ')'
         {$$ = $2;}
-    | NUMBER
-        {$$ = Number(yytext);}
+    | NUMBER {$$ = Number(yytext);addInstruction(0,"NUM", $1);}
     | E
         {$$ = Math.E;}
     | PI
