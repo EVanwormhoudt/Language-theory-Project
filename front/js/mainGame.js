@@ -71,7 +71,9 @@ function create() {
         //mur.setCollisionByProperty({estSolide: true});
 
 
-
+        //rendu de la scène
+        this.cameras.main.setZoom(0.5);
+        cursors = this.input.keyboard;
 
         //Création du personnage avec animation
         player = this.physics.add.group({classType : Player});
@@ -81,9 +83,7 @@ function create() {
         //permet de bouger le personnage
         movePlayer(player);
 
-        //rendu de la scène
-        this.cameras.main.setZoom(0.5);
-        cursors = this.input.keyboard;
+
 
 
     }
