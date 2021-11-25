@@ -1,14 +1,7 @@
 DEBUT SOURCE {
 
     move(haut);
-    
 
-    Si ( ) :
-        Alors :
-        Sinon :
-    FinSi ;
-
-    move(haut);
     
 
 }FIN SOURCE

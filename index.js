@@ -29,28 +29,70 @@ io.use(sharedsession(session, {
 }));
 
 /**** Code ****/
+
+//===========GET=============
 app.get('/', (req, res, next) => {
   res.sendFile(__dirname + '/front/html/accueil.html');
 });
-
 app.get('/levels', (req, res, next) => {
   res.sendFile(__dirname + '/front/html/levels.html');
 });
-app.get('/game', (req, res, next) => {
-  res.sendFile(__dirname + '/front/html/index.html');
+app.get('/lvl1', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl1.html');
 });
-
+app.get('/lvl2', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl2.html');
+});
+app.get('/lvl3', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl3.html');
+});
+app.get('/lvl4', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl4.html');
+});
+app.get('/lvl5', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl5.html');
+});
+app.get('/lvl6', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl6.html');
+});
+app.get('/lvl7', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl7.html');
+});
+app.get('/lvl8', (req, res, next) => {
+  res.sendFile(__dirname + '/front/html/lvl8.html');
+});
+//===========POST=============
 app.post('/', (req, res) => {
   res.sendFile(__dirname + '/front/views/index.html');
 });
-
 app.post('/levels', (req, res) => {
   res.sendFile(__dirname + '/front/html/levels.html');
 });
-
-app.post('/game', (req, res) => {
-  res.sendFile(__dirname + '/front/html/index.html');
+app.post('/lvl1', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl1.html');
 });
+app.post('/lvl2', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl2.html');
+});
+app.post('/lvl3', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl3.html');
+});
+app.post('/lvl4', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl4.html');
+});
+app.post('/lvl5', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl5.html');
+});
+app.post('/lvl6', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl6.html');
+});
+app.post('/lvl7', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl7.html');
+});
+app.post('/lvl8', (req, res) => {
+  res.sendFile(__dirname + '/front/html/lvl8.html');
+});
+
 
 let nblvl;
 

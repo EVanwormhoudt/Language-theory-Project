@@ -6,7 +6,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 }
+            gravity: { y: 0 }
         }
     },
     scene: {
@@ -17,66 +17,99 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-let map, tilesets;
+let map, tilesets, mur, sol;
 let cursors;
 
 function preload() {
+    this.load.tilemapTiledJSON("testmap", "../asset/testmap.json");
+    this.load.tilemapTiledJSON('testmap2', '../asset/testmap2.json');
 
-    this.load.setPath("../asset");
-    //this.load.image("imgbin_prison-architect-landscape-architecture-sprite-png");
+    this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
 
-
-    this.load.tilemapTiledJSON("testmap", "testmap.json");
-    this.load.tilemapTiledJSON('testmap2', 'testmap2.json');
-
-    this.load.image('tiles', 'imgbin_prison-architect-landscape-architecture-sprite-png.png');
-
-    this.load.spritesheet('face', 'sprite_face.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('right', 'sprite_right.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('left', 'sprite_left.png', {frameWidth: 64, frameHeight: 32});
-    this.load.spritesheet('back', 'sprite_back.png', {frameWidth: 64, frameHeight: 32});
+    this.load.spritesheet('face', '../asset/sprite_face.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('right', '../asset/sprite_right.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('left', '../asset/sprite_left.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('back', '../asset/sprite_back.png', { frameWidth: 32, frameHeight: 32 });
 }
 
 function create() {
-    let lvl = 1;
+
+    var position = window.location.href.indexOf('?');
+
+    if (position != -1) {
+        let lvl = "";
+        var fin_url = window.location.href.substr(position + 1);
+        fin_url = fin_url.replace(/-/g, " ");
+
+        lvl = fin_url.substr(7);
+
         switch (lvl) {
-            case 1:
+            case '1':
                 map = this.add.tilemap('testmap');
 
-                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
-
-                map.createLayer('sol', tilesets);
-                map.createLayer('walls', tilesets);
-
                 break;
-            case 2:
+            case '2':
                 map = this.add.tilemap('testmap2');
-
-                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
-
-                map.createLayer('sol', tilesets);
-                map.createLayer('walls', tilesets);
 
                 break;
             default:
         }
-    ;
 
-    let controlConfig = {
-        camera: this.cameras.main,
-        acceleration: 0.8,
-        drag: 0.005,
-        maxSpeed: 3
-    };
+        let controlConfig = {
+            camera: this.cameras.main,
+            acceleration: 0.8,
+            drag: 0.005,
+            maxSpeed: 3
+        };
 
-    player = new Player(this, 0, 0, 'face', 'right','left','back');
-    cursors = this.input.keyboard.createCursorKeys();
+        tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
 
-    this.cameras.main.setZoom(0.5);
-    
-    
+        sol = map.createLayer('sol', tilesets);
+        map.createLayer('walls', tilesets);
+
+        //collision avec les personnages
+        //mur.setCollisionByProperty({estSolide: true});
+
+
+        //rendu de la scène
+        this.cameras.main.setZoom(0.5);
+        cursors = this.input.keyboard;
+
+        //Création du personnage avec animation
+        player = this.physics.add.group({classType : Player});
+        player.create(0,0,'face');
+        player.children.entries[0].setAnim('left','right','back','face');
+
+        //permet de bouger le personnage
+        movePlayer(player);
+
+
+
+
+    }
 }
 
 function update() {
-    player.movePlayer(player,cursors);
+    //player.children.entries[0].move('down',2,player.children.entries[0].x,player.children.entries[0].y);
+}
+
+function movePlayer(player) {
+
+    cursors.on('keydown-Q', () => {
+        player.children.entries[0].setVelocity(-150, 0);
+        player.children.entries[0].anims.play('left');
+    });
+    cursors.on('keydown-D', () => {
+        player.children.entries[0].setVelocity(150, 0);
+        player.children.entries[0].anims.play('right');
+    });
+    cursors.on('keydown-S', () => {
+        player.children.entries[0].setVelocity(0, 150);
+        player.children.entries[0].anims.play('face');
+    });
+    cursors.on('keydown-Z', () => {
+        player.children.entries[0].setVelocity(0, -150);
+        player.children.entries[0].anims.play('back');
+    });
+    return 0;
 }
