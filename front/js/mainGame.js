@@ -74,6 +74,8 @@ function create() {
 
         //rendu de la scène
         this.cameras.main.setZoom(0.5);
+        this.cameras.main.setZoom(0.72);
+        this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
         //Création du personnage avec animation
