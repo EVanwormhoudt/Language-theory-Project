@@ -78,11 +78,11 @@ function create() {
 
         //Création du personnage avec animation
         player = this.physics.add.group({classType : Player});
-        player.create(window.innerWidth * 2 / 3/2,window.innerHeight - 200/1.5 ,'face');
+        player.create(window.innerWidth * 2.5 / 3/2,window.innerHeight - 250/1.5 ,'face');
         player.children.entries[0].setAnim('left','right','back','face');
 
         //Creation function collider
-        this.physics.add.collider( player.children.entries[0], mur);
+        //this.physics.add.collider( player.children.entries[0], mur,()=>console.log("collision"));
 
         //permet de bouger le personnage
         movePlayer(player);
