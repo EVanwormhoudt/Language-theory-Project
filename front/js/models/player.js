@@ -3,12 +3,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x2, y2, sprite);
 
 
-            this.x= x2;
-            this.y= y2;
-            this.previousX = x2;
-            this.previousY = y2;
+            this.x= Math.trunc(x2 - x2%32);
+            this.y= Math.trunc(y2 - y2%32);
+            this.direction = 'none';
 
-
+            console.log(this.x / 32)
+            console.log(this.y / 32)
+            console.log(this.x);
+            console.log(this.y)
+            console.log(this)
         scene.add.existing(this);
         this.setScale(2);
         this.started = false;
@@ -45,48 +48,36 @@ class Player extends Phaser.Physics.Arcade.Sprite {
        });
    }
 
-   move(direction, nbCase,posx,posy){
+   preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+
+   }
+
+   async move(direction, nbCase){
         nbCase++;
-       if(!this.started){
-         this.previousX = posx;
-         this.previousY = posy;
-         this.started = true;
-       }
-
-
+       console.log(this.x)
+       console.log(this.y)
         switch (direction){
             case 'up':
-                if((Math.trunc(this.y) >= Math.trunc(this.previousY-nbCase*32-2)) && (Math.trunc(this.y) <= Math.trunc(this.previousY-nbCase*32+2)) ){
-                    this.setVelocity(0,0);
-                }else{
-                    this.setVelocity(0,-150);
-                }
+
+                this.y -= 32;
                 break;
 
             case 'down':
-                if((Math.trunc(this.y) >= Math.trunc(this.previousY+nbCase*32-2)) && (Math.trunc(this.y) <= Math.trunc(this.previousY+nbCase*32+2)) ){
-                    this.setVelocity(0,0);
-                }else{
-                    this.setVelocity(0,+150);
-                }
+                this.y += 32;
                 break;
 
 
             case 'left':
-                if((Math.trunc(this.x) >= Math.trunc(this.previousX-nbCase*32-2)) && (Math.trunc(this.x) <= Math.trunc(this.previousX-nbCase*32+2)) ){
-                    this.setVelocity(0,0);
-                }else{
-                    this.setVelocity(-150,0);
-                }
+                this.x-= 32;
+
                 break;
 
 
             case 'right':
-                if((Math.trunc(this.x) >= Math.trunc(this.previousX+nbCase*32-2)) && (Math.trunc(this.x) <= Math.trunc(this.previousX+nbCase*32+2)) ){
-                    this.setVelocity(0,0);
-                }else{
-                    this.setVelocity(150,0);
-                }
+                this.x += 32;
+
                 break;
 
         }

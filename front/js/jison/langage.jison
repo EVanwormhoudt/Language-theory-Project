@@ -7,30 +7,39 @@
 \s+                   /* skip whitespace */
 "\n"                   return '\n';
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
+"Afficher"          return 'PRINT';
 ";"                   return ';';
+","                   return ',';
 ":"                   return ':';
-">"                   return SUP;
-"*"                   return '*';
-"/"                   return '/';
-"-"                   return '-';
-"+"                   return '+';
+"=="                 return 'EGAL';
+"="                   return '=';
+">"                   return 'SUP';
+"*"                   return 'MULT';
+"/"                   return 'DIV';
+"-"                   return 'SUB';
+"++"                   return 'INC';
+"+"                   return 'ADD';
+"!="                  return 'NOTEGAL';
+">="                   return 'SUPEGAL';
+"<="                   return 'INFEGAL';
 "^"                   return '^';
 "{"                   return '{';
 "}"                   return '}';
 "("                   return '(';
 ")"                   return ')';
 "PI"                  return 'PI';
-">"                        return 'SUP';
-"Si"                   return 'SI';
-"Alors"                  return 'ALORS';
-"Sinon"                  return 'SINON';
-"FinSi"                  return 'FINSI';
+">"                   return 'SUP';
+"<"                   return 'INF';
+"FinTantque"        return 'FINTANTQUE';
+"FinPour"             return 'FINPOUR';
+"Si"                  return 'SI';
+"Alors"               return 'ALORS';
+"Sinon"               return 'SINON';
+"FinSi"               return 'FINSI';
 "Pour"                return 'POUR';
 "Faire"               return 'FAIRE';
-"FinPour"             return 'FINPOUR';
-"Fin Tant Que"             return 'FINTANTQUE';
 "Allant De"           return 'ALLANT';
-"A"                   return 'A';    
+"A"                   return 'A';
 "E"                   return 'E';
 <<EOF>>               return 'EOF';
 "move"                return 'MOVE';
@@ -40,21 +49,27 @@
 "gauche"              return 'LEFT';
 "DEBUT SOURCE"        return 'DEBUT';
 "FIN SOURCE"          return 'FIN';
-"Tant que"            return 'TANTQUE';
+"Tantque"            return 'TANTQUE';
 "test"                return 'TEST';
-
+[A-Za-z_][A-Za-z_0-9]* return 'VAR';
 /lex
 
 /* operator associations and precedence */
 
-%left '+' '-'
-%left '*' '/'
-%left '^'
-%left UMINUS
-
-
+%right ADD SUB   // N'oubliez pas de remettre left !
+%left MULT DIV
 
 %token SUP
+%token PRINT
+%token INF
+%token INFEGAL
+%token SUPEGAL
+%token EGAL
+%token NOTEGAL
+%token ADD
+%token SUB
+%token MULT
+%token DIV
 %token SI
 %token ALORS
 %token SINON
@@ -73,6 +88,7 @@
 %token FINTANTQUE
 %token TANTQUE
 %token TEST
+%token VAR
 
 
 %start bloc
@@ -80,7 +96,7 @@
 
 %% /* language grammar */
 
-IF : SI '(' condition ')' ':'   {console.log("SI");addInstruction(0,"JMPCOND", 0); jc = ic} 
+IF : SI '(' condition ')' ':'   {console.log("SI");addInstruction(0,"JMPCOND", 0);addTmpIf();tabTmpIf[CurseurIf].jc = ic;}
     ;
 
 THEN : ALORS ':'
@@ -88,65 +104,73 @@ THEN : ALORS ':'
     ;
 
 ELSE :bloc SINON ':'
-         {console.log("SINON");addInstruction(0,"JMP",0);jmp = ic;code_genere[jc-1].value = ic;}
+         {console.log("SINON");addInstruction(0,"JMP",0);tabTmpIf[CurseurIf].jmp = ic;code_genere[tabTmpIf[CurseurIf].jc-1].value = ic;}
     ;
 
-ENDIF : bloc  FINSI {console.log("FINSI");code_genere[jmp-1].value = ic;addInstruction(0,"FINSIF", 0)};
+ENDIF : bloc  FINSI {console.log("FINSI");code_genere[tabTmpIf[CurseurIf].jmp-1].value = ic;addInstruction(0,"FINSIF", 0);CurseurIf=CurseurIf-1;};
+
+VARFOR : | VAR  {addInstruction($1,"VARFOR", 0);};
 
 
-FOR : POUR NUMBER ALLANT NUMBER A NUMBER ':' 
-         {console.log("POUR");addInstruction(0,"POUR")}
+FOR : POUR VARFOR ALLANT '(' e ',' e ',' e ')' ':'
+         {console.log("POUR");addTmpFor();console.log(CurseurFor);addInstruction(0,"POUR",0);tabTmpFor[CurseurFor].jc = ic-1;}
     ;
 
-WHILE : TANTQUE '(' condition ')' ':' {console.log("TANT QUE");addInstruction(0,"TANTQUE")}
+
+INC : bloc FINPOUR {console.log("INC");addInstruction(0,"INCFOR",0); code_genere[ic-1].value=tabTmpFor[CurseurFor].jc+1;code_genere[tabTmpFor[CurseurFor].jc].value=ic;}
+        ;
+
+ENDFOR : INC {console.log("INC");addInstruction(0,"FINPOUR",0);CurseurFor=CurseurFor-1;};
+
+WHILE : WHILEFIRST '(' condition ')' ':' {console.log("TANT QUE");addInstruction(0,"JMPCONDWHILE",0);tabTmpWhile[CurseurWhile].jmp = ic-1;}
+      ;
+
+WHILEFIRST : TANTQUE {addTmpWhile();addInstruction(0,"WHILEFIRST",0);addTmpWhile(); tabTmpWhile[CurseurWhile].jc = ic;}
+            ;
+ENDWHILE :  bloc FINTANTQUE {console.log("Fin TANT QUE");addInstruction(0,"JMPENDWHILE",0);code_genere[ic-1].value = tabTmpWhile[CurseurWhile].jc-1;code_genere[tabTmpWhile[CurseurWhile].jmp].value = ic;CurseurWhile=CurseurWhile-1;}
       ;
 
 bloc:
     |instruction bloc
-
     ;
 
 condition:e      {}
-        |e SUP e {}
+        |e SUP e {addInstruction(0,"SUP", 0);}
+        |e INF e {addInstruction(0,"INF", 0);}
+        |e SUPEGAL e {addInstruction(0,"SUPEGAL", 0);}
+        |e INFEGAL e {addInstruction(0,"INFEGAL", 0);}
+        |e EGAL e {addInstruction(0,"EGAL", 0);}
+        |e NOTEGAL e {addInstruction(0,"NOTEGAL", 0);}
         ;
 
 instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
             |'}' 'FIN' EOF {console.log("-----Fin du programme-----");}
-            
+
             |IF THEN ELSE ENDIF {}
-            |FOR bloc FINPOUR {console.log("FINPOUR");addInstruction(0,"FINPOUR")}
-            |WHILE bloc FINTANTQUE {console.log("FINTANTQUE");addInstruction(0,"FINTANTQUE")}
+            |WHILE ENDWHILE {}
+            |FOR ENDFOR {}
 
             |MOVE '(' UP ')' ';' {addInstruction(0,"MH",0);}
             |MOVE '(' DOWN ')' ';' {addInstruction(0,"MB",0);}
             |MOVE '(' LEFT ')' ';' {addInstruction(0,"MG",0);}
-            |MOVE '(' RIGHT ')' ';' {addInstruction(0,"MD,0");}
+            |MOVE '(' RIGHT ')' ';' {addInstruction(0,"MD",0);}
+
+            |PRINT '(' e ')' ';' {addInstruction(0,"PRINT",0);}
 
             |e ';' {console.log($1);test();}
+            |VAR '=' e ';' {addInstruction($1,"ASSIGN",0 ); }
+            |VAR INC ';'{addInstruction($1,"INC", 0);}
 
             |e ';' EOF {console.log($1);console.log("non");}
             ;
 
 
-e
-    : e '+' e
-        {$$ = $1+$3;}
-    | e '-' e
-        {$$ = $1-$3;}
-    | e '*' e
-        {$$ = $1*$3;}
-    | e '/' e
-        {$$ = $1/$3;}
-    | e '^' e
-        {$$ = Math.pow($1, $3);}
-    | '-' e %prec UMINUS
-        {$$ = -$2;}
-    | '(' e ')'
-        {$$ = $2;}
-    | NUMBER {$$ = Number(yytext);addInstruction(0,"NUM", $1);}
-    | E
-        {$$ = Math.E;}
-    | PI
-        {$$ = Math.PI;}
+e   : e ADD e {addInstruction(0,"ADD", 0);}
+    | NUMBER {$$ = Number(yytext);addInstruction(0,"NUM", yytext);}
+    | VAR  {addInstruction($1,"VAR", 0);}
+    | '(' e ')' {}
+    | e SUB e {addInstruction(0,"SUB", 0);}
+    | e MULT e    {addInstruction(0,"MULT", 0);}
+    | e DIV e    {addInstruction(0,"DIV", 0);}
     ;

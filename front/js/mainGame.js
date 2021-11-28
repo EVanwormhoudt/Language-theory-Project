@@ -21,8 +21,8 @@ let map, tilesets, mur, sol;
 let cursors;
 
 function preload() {
-    this.load.tilemapTiledJSON("testmap", "../asset/testmap.json");
-    this.load.tilemapTiledJSON('testmap2', '../asset/testmap2.json');
+    this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
+    this.load.tilemapTiledJSON('testmap2', '../asset/testmap2Lvl2estSolide.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
 
@@ -42,10 +42,10 @@ function create() {
         fin_url = fin_url.replace(/-/g, " ");
 
         lvl = fin_url.substr(7);
-
+        
         switch (lvl) {
             case '1':
-                map = this.add.tilemap('testmap');
+                map = this.add.tilemap('mapLvl1');
 
                 break;
             case '2':
@@ -65,27 +65,29 @@ function create() {
         tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
 
         sol = map.createLayer('sol', tilesets);
-        map.createLayer('walls', tilesets);
+        mur = map.createLayer('murs', tilesets);
 
+        console.log(mur);
         //collision avec les personnages
-        //mur.setCollisionByProperty({estSolide: true});
+        mur.setCollisionByProperty({estSolide: true});
 
 
         //rendu de la scène
         this.cameras.main.setZoom(0.5);
+        this.cameras.main.setZoom(0.72);
+        this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
         //Création du personnage avec animation
         player = this.physics.add.group({classType : Player});
-        player.create(0,0,'face');
+        player.create(window.innerWidth * 2.5 / 3/2,window.innerHeight - 250/1.5 ,'face');
         player.children.entries[0].setAnim('left','right','back','face');
+
+        //Creation function collider
+        //this.physics.add.collider( player.children.entries[0], mur,()=>console.log("collision"));
 
         //permet de bouger le personnage
         movePlayer(player);
-
-
-
-
     }
 }
 
@@ -94,7 +96,6 @@ function update() {
 }
 
 function movePlayer(player) {
-
     cursors.on('keydown-Q', () => {
         player.children.entries[0].setVelocity(-150, 0);
         player.children.entries[0].anims.play('left');

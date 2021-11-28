@@ -37,7 +37,7 @@ function addInstruction(code,name,value){
 }
 
 
-function execution(){
+async function execution(){
     console.log(code_genere);
     let ic = 0;
     let pile = [];
@@ -45,26 +45,23 @@ function execution(){
         let ins = code_genere[ic];
         switch (ins.name) {
             case 'NUM':
-              console.log("On rentre un chiffre dans la pile")
+              console.log("On rentre un chiffre dans la pile");
               pile.push(ins.value);
               ic++;
               break;
-            case 'MH':
-              console.log("Ins : On anvance le personnage vers le haut")
-              ic++;
-              break;
+
             case 'JMPCOND':
                 //Teste de la condition
                 r1 = pile.pop();
                 if( r1 != 0){
                     console.log("Condition Vrai")
-                    ic++;     
+                    ic++;
                 }
                 else {
                     console.log("Condition fausse")
                     ic = ins.value;
                 }
-                console.log
+
                 break;
             case 'JMP':
                 // je récupère l'adresse à partir de la table
@@ -74,16 +71,28 @@ function execution(){
                     // je récupère l'adresse à partir de la table
                     ic++;
                     break;
+            case 'MH':
+                console.log("Ins : On anvance le personnage vers le haut");
+                player.children.entries[0].move("up")
+                await new Promise(r => setTimeout(r, 200));
+                ic++;
+                break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
+                player.children.entries[0].move("down")
+                await new Promise(r => setTimeout(r, 1000));
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
+                player.children.entries[0].move("right")
+                await new Promise(r => setTimeout(r, 1000));
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
+                player.children.entries[0].move("left")
+                await new Promise(r => setTimeout(r, 1000));
                 ic++;
                 break;
           }
