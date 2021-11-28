@@ -58,29 +58,32 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         nbCase++;
        console.log(this.x)
        console.log(this.y)
-        switch (direction){
-            case 'up':
+       for(let i =0;i<32;i++) {
+           await new Promise(r => setTimeout(r, 10));
+           switch (direction) {
+               case 'up':
 
-                this.y -= 32;
-                break;
+                   this.y -= 1;
+                   break;
 
-            case 'down':
-                this.y += 32;
-                break;
-
-
-            case 'left':
-                this.x-= 32;
-
-                break;
+               case 'down':
+                   this.y += 1;
+                   break;
 
 
-            case 'right':
-                this.x += 32;
+               case 'left':
+                   this.x -= 1;
 
-                break;
+                   break;
 
-        }
+
+               case 'right':
+                   this.x += 1;
+
+                   break;
+
+           }
+       }
    }
 
     
