@@ -2,6 +2,17 @@ DEBUT SOURCE {
 
     move(haut);
 
+    Choix (var) : I = SWITCH Initialise la classe, 
+        cas (e): // remplir le tableaux d'adresse
+            bloc
+            Pause; // ALLER FIN SWITCH
+        cas (e):
+            bloc
+            Pause;
+        Defaut:
+            bloc
+            Pause;
+    FinChoix;
     
 
 }FIN SOURCE

@@ -30,6 +30,11 @@
 "PI"                  return 'PI';
 ">"                   return 'SUP';
 "<"                   return 'INF';
+"Choix"               return 'CHOIX';
+"Cas"               return 'CAS';
+"Defaut"               return 'DEFAUT';
+"Pause"               return 'PAUSE';
+"FinChoix"               return 'FINCHOIX';
 "FinTantque"        return 'FINTANTQUE';
 "FinPour"             return 'FINPOUR';
 "Si"                  return 'SI';
@@ -59,6 +64,11 @@
 %right ADD SUB   // N'oubliez pas de remettre left !
 %left MULT DIV
 
+%token CHOIX
+%token PAUSE
+%token DEFAUT
+%token CAS
+%token FINCHOIX
 %token SUP
 %token PRINT
 %token INF
@@ -130,6 +140,30 @@ WHILEFIRST : TANTQUE {addTmpWhile();addInstruction(0,"WHILEFIRST",0);addTmpWhile
 ENDWHILE :  bloc FINTANTQUE {console.log("Fin TANT QUE");addInstruction(0,"JMPENDWHILE",0);code_genere[ic-1].value = tabTmpWhile[CurseurWhile].jc-1;code_genere[tabTmpWhile[CurseurWhile].jmp].value = ic;CurseurWhile=CurseurWhile-1;}
       ;
 
+SWITCH : CHOIX '(' VARFOR ')' ':' {console.log("CHOIX");addInstruction(0,"SWITCH",0);addTmpSwitch();}
+        ;
+
+CASE : CAS '('e ')' ':' {console.log("CASE");addInstruction(0,"CASE",tabTmpSwitch[CurseurSwitch].nbCase);tabTmpSwitch[CurseurSwitch].tabCase.push(ic-2);tabTmpSwitch[CurseurSwitch].nbCase++;}
+    ;
+
+DEFAULT : DEFAUT ':' {console.log("DEFAULT");addInstruction(0,"SWITCHDEFAULT",0);tabTmpSwitch[CurseurSwitch].default=ic-1}
+        ;
+
+ENDCASE :
+        |PAUSE ';' {console.log("PAUSE");addInstruction(0,"PAUSE",0);}
+        ;
+
+ENDSWITCH : BLOCSWITCH DEFAULT bloc FINCHOIX {addInstruction(0,"ENDSWITCH",0);tabTmpSwitch[CurseurSwitch].FinSwitch = ic;CurseurSwitch=CurseurSwitch-1;}
+            |BLOCSWITCH FINCHOIX {addInstruction(0,"ENDSWITCH",0);tabTmpSwitch[CurseurSwitch].FinSwitch = ic;CurseurSwitch=CurseurSwitch-1;}
+            ;
+
+INSTRUCTIONSWITCH : CASE bloc ENDCASE {}
+                ;
+BLOCSWITCH : 
+            |INSTRUCTIONSWITCH BLOCSWITCH
+            ;
+
+
 bloc:
     |instruction bloc
     ;
@@ -150,6 +184,7 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
             |IF THEN ELSE ENDIF {}
             |WHILE ENDWHILE {}
             |FOR ENDFOR {}
+            |SWITCH ENDSWITCH{}
 
             |MOVE '(' UP ')' ';' {addInstruction(0,"MH",0);}
             |MOVE '(' DOWN ')' ';' {addInstruction(0,"MB",0);}

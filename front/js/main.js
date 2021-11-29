@@ -33,6 +33,16 @@ class tmpFor {
     }
 }
 
+class tmpSwitch {
+    constructor(var_,NbCase_, FinSwitch_) {
+        this.var = var_;
+        this.nbCase = NbCase_;
+        this.tabCase = [];
+        this.FinSwitch = FinSwitch_;
+        this.default = -1;
+    }
+}
+
 let code_genere = [];
 let ic=0;
 let r1 = 0;
@@ -43,7 +53,14 @@ let tabTmpWhile = []
 let CurseurWhile = -1;
 let tabTmpFor = []
 let CurseurFor = -1;
+let tabTmpSwitch = []
+let CurseurSwitch = -1;
 let variables = new Map();
+
+function addTmpSwitch(){
+    tabTmpSwitch.push(new tmpSwitch(0,0,0))
+    CurseurSwitch++;
+}
 
 function addTmpIf(){
     tabTmpIf.push(new tmpIf(0,0))
@@ -51,7 +68,7 @@ function addTmpIf(){
 }
 
 function addTmpWhile(){
-    tabTmpWhile.push(new tmpWhyles(0,0))
+    tabTmpWhile.push(new tmpWhiles(0,0))
     CurseurWhile++;
 }
 
@@ -68,10 +85,10 @@ document.getElementById("compilation").addEventListener('click', async () => {
     console.clear()
     langage.parse(editor.getValue());
     console.log(code_genere);
-    await execution();
-    console.log("loool")
-    console.log(variables)
-     InitCompilation();
+    console.log(tabTmpSwitch);
+    console.log(CurseurSwitch);
+    await execution(); 
+    InitCompilation();
 })
 
 document.getElementById("clear").addEventListener('click', () => {
@@ -86,7 +103,6 @@ function addInstruction(code,name,value){
 
 
 async function execution(){
-    console.log(code_genere);
     let ic = 0;
     let pile = [];
     let pileVar = [];
@@ -324,6 +340,41 @@ async function execution(){
                 CurseurFor--;
                 ic++;
                 break;
+            case 'SWITCH' :
+                CurseurSwitch++;
+                tabTmpSwitch[CurseurSwitch].var =variables.get(pileVar.pop());
+                ic++;
+                break;
+            case 'PAUSE' :
+                ic = tabTmpSwitch[CurseurSwitch].FinSwitch;
+                break;
+            case 'CASE' :
+                r1 = pile.pop();
+                if(tabTmpSwitch[CurseurSwitch].var==r1){
+                    console.log("on rentre dans le case ",ins.value )
+                    ic++;
+                }
+                else {
+                    console.log("on saute le case ",ins.value )
+                    if(ins.value < (tabTmpSwitch[CurseurSwitch].nbCase-1)){
+                        console.log("on va au switch d'apres");
+                        ic=tabTmpSwitch[CurseurSwitch].tabCase[ins.value+1];
+                    }
+                    else{
+                        console.log("son sort de switch");
+                        if(tabTmpSwitch[CurseurSwitch].default!=-1){
+                            ic = tabTmpSwitch[CurseurSwitch].default;
+                        }
+                        else{
+                            ic = tabTmpSwitch[CurseurSwitch].FinSwitch;
+                        }
+                    }
+                }
+                break;
+            case 'ENDSWITCH':
+                CurseurSwitch=CurseurSwitch-1;
+            default :
+                ic++;
         }
 
     }
@@ -341,6 +392,8 @@ function InitCompilation(){
     tabTmpFor = []
     CurseurFor = -1;
     variables.clear();
+    tabTmpSwitch = []
+    CurseurSwitch = -1;
 }
 
 /** instructions :
