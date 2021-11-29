@@ -87,7 +87,7 @@ document.getElementById("compilation").addEventListener('click', async () => {
     console.log(code_genere);
     console.log(tabTmpSwitch);
     console.log(CurseurSwitch);
-    await execution(); 
+    await execution();
     InitCompilation();
 })
 
@@ -181,23 +181,23 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                await player.children.entries[0].move("up")
+                await game.scene.scenes[0].player.children.entries[0].move("up")
 
                 ic++;
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                await player.children.entries[0].move("down")
+                await game.scene.scenes[0].player.children.entries[0].move("down")
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                await player.children.entries[0].move("right")
+                await game.scene.scenes[0].player.children.entries[0].move("right")
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                await player.children.entries[0].move("left")
+                await game.scene.scenes[0].player.children.entries[0].move("left")
                 ic++;
                 break;
             case 'ADD':

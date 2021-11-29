@@ -6,7 +6,8 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }
+            gravity: { y: 0 },
+            debug: true
         }
     },
     scene: {
@@ -17,7 +18,7 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-let map, tilesets, mur, sol;
+let map, tilesets;
 let cursors;
 
 function preload() {
@@ -42,7 +43,7 @@ function create() {
         fin_url = fin_url.replace(/-/g, " ");
 
         lvl = fin_url.substr(7);
-        
+
         switch (lvl) {
             case '1':
                 map = this.add.tilemap('mapLvl1');
@@ -64,30 +65,31 @@ function create() {
 
         tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
 
-        sol = map.createLayer('sol', tilesets);
-        mur = map.createLayer('murs', tilesets);
+        this.sol = map.createLayer('sol', tilesets);
+        this.mur = map.createLayer('murs', tilesets);
 
-        console.log(mur);
+        console.log(this.mur);
         //collision avec les personnages
-        mur.setCollisionByProperty({estSolide: true});
+        this.mur.setCollisionByProperty({estSolide: true});
 
 
         //rendu de la scène
-        this.cameras.main.setZoom(0.5);
+
         this.cameras.main.setZoom(0.72);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
         //Création du personnage avec animation
-        player = this.physics.add.group({classType : Player});
-        player.create(window.innerWidth * 2.5 / 3/2,window.innerHeight - 250/1.5 ,'face');
-        player.children.entries[0].setAnim('left','right','back','face');
+        this.player = this.physics.add.group({classType : Player});
+        this.player.create(window.innerWidth * 2.5 / 3/2,window.innerHeight - 250/1.5 ,'face');
+        this.player.children.entries[0].setAnim('left','right','back','face');
 
         //Creation function collider
-        this.physics.add.collider( player.children.entries[0], mur,()=>console.log("collision"));
+        this.physics.add.collider( this.player.children.entries[0], this.mur,()=>console.log(this.player.children.entries[0].testCollision("up")));
 
         //permet de bouger le personnage
-        movePlayer(player);
+        movePlayer(this.player);
+
     }
 }
 
@@ -97,19 +99,19 @@ function update() {
 
 function movePlayer(player) {
     cursors.on('keydown-Q', () => {
-        player.children.entries[0].setVelocity(-150, 0);
+        player.children.entries[0].x -=32;
         player.children.entries[0].anims.play('left');
     });
     cursors.on('keydown-D', () => {
-        player.children.entries[0].setVelocity(150, 0);
+        player.children.entries[0].x +=32;
         player.children.entries[0].anims.play('right');
     });
     cursors.on('keydown-S', () => {
-        player.children.entries[0].setVelocity(0, 150);
+        player.children.entries[0].y +=32;
         player.children.entries[0].anims.play('face');
     });
     cursors.on('keydown-Z', () => {
-        player.children.entries[0].setVelocity(0, -150);
+        player.children.entries[0].y -=32;
         player.children.entries[0].anims.play('back');
     });
     return 0;
