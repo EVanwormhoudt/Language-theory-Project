@@ -49,6 +49,7 @@ p {
 button {
     background-color: transparent;
     border-color: transparent;
+    cursor: pointer;
     display: block;
     margin-left: auto;
     margin-right: auto;

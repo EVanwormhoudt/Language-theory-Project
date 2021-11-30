@@ -71,7 +71,7 @@ function create() {
         console.log(this.mur);
         //collision avec les personnages
         this.mur.setCollisionByProperty({estSolide: true});
-
+        this.sol.setCollisionByProperty({estFini: true});
 
         //rendu de la scène
 
@@ -86,6 +86,7 @@ function create() {
 
         //Creation function collider
         this.physics.add.collider( this.player.children.entries[0], this.mur,()=>console.log(this.player.children.entries[0].testCollision("up")));
+        this.physics.add.collider( this.player.children.entries[0], this.sol,()=>console.log("FIN DU NIVEAU"));
 
         //permet de bouger le personnage
         movePlayer(this.player);
@@ -99,19 +100,19 @@ function update() {
 
 function movePlayer(player) {
     cursors.on('keydown-Q', () => {
-        player.children.entries[0].x -=32;
+        player.children.entries[0].x -=64;
         player.children.entries[0].anims.play('left');
     });
     cursors.on('keydown-D', () => {
-        player.children.entries[0].x +=32;
+        player.children.entries[0].x +=64;
         player.children.entries[0].anims.play('right');
     });
     cursors.on('keydown-S', () => {
-        player.children.entries[0].y +=32;
+        player.children.entries[0].y +=64;
         player.children.entries[0].anims.play('face');
     });
     cursors.on('keydown-Z', () => {
-        player.children.entries[0].y -=32;
+        player.children.entries[0].y -=64;
         player.children.entries[0].anims.play('back');
     });
     return 0;
