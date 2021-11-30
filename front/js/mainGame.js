@@ -103,20 +103,23 @@ function update() {
 
 function movePlayer(player) {
     cursors.on('keydown-Q', () => {
-        player.children.entries[0].x -=64;
         player.children.entries[0].anims.play('left');
+        player.children.entries[0].move("left")
     });
     cursors.on('keydown-D', () => {
-        player.children.entries[0].x +=64;
+
         player.children.entries[0].anims.play('right');
+        player.children.entries[0].move("right")
     });
     cursors.on('keydown-S', () => {
-        player.children.entries[0].y +=64;
+
         player.children.entries[0].anims.play('face');
+        player.children.entries[0].move("down")
     });
     cursors.on('keydown-Z', () => {
-        player.children.entries[0].y -=64;
+
         player.children.entries[0].anims.play('back');
+        player.children.entries[0].move("up")
     });
     return 0;
 }
