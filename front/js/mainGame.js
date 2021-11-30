@@ -18,7 +18,7 @@ const config = {
 }
 
 const game = new Phaser.Game(config)
-let map, tilesets;
+let map, tilesets, tilesetsdeco;
 let cursors;
 
 function preload() {
@@ -26,6 +26,7 @@ function preload() {
     this.load.tilemapTiledJSON('testmap2', '../asset/testmap2Lvl2estSolide.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
+    this.load.image('tilesdeco', '../asset/deco.png');
 
     this.load.spritesheet('face', '../asset/sprite_face.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('right', '../asset/sprite_right.png', { frameWidth: 32, frameHeight: 32 });
@@ -64,9 +65,11 @@ function create() {
         };
 
         tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+        tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
 
         this.sol = map.createLayer('sol', tilesets);
         this.mur = map.createLayer('murs', tilesets);
+        this.deco = map.createLayer('deco', tilesetsdeco);
 
         console.log(this.mur);
         //collision avec les personnages
@@ -81,7 +84,7 @@ function create() {
 
         //Création du personnage avec animation
         this.player = this.physics.add.group({classType : Player});
-        this.player.create(window.innerWidth * 2.5 / 3/2,window.innerHeight - 250/1.5 ,'face');
+        this.player.create(500,300,'face');
         this.player.children.entries[0].setAnim('left','right','back','face');
 
         //Creation function collider
