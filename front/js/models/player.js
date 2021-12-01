@@ -56,7 +56,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     async move(direction, nbCase) {
         nbCase++;
         console.log(this.testCollision(direction))
-        if(this.testCollision(direction)) return;
+        if(this.testCollision(direction)) {
+            GameOver();
+            return;
+        }
         switch (direction) {
             case 'up':
 

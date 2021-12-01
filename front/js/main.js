@@ -1,6 +1,7 @@
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
 
+
 class Instruction {
     constructor(code_, name_,value_) {
         this.code = code_;
@@ -56,6 +57,17 @@ let CurseurFor = -1;
 let tabTmpSwitch = []
 let CurseurSwitch = -1;
 let variables = new Map();
+
+var position = window.location.href.indexOf('?');
+
+if (position != -1) {
+    var lvl = "";
+    var fin_url = window.location.href.substr(position + 1);
+    fin_url = fin_url.replace(/-/g, " ");
+
+    lvl = fin_url.substr(7);
+}
+
 
 function addTmpSwitch(){
     tabTmpSwitch.push(new tmpSwitch(0,0,0))
@@ -181,23 +193,27 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                await game.scene.scenes[0].player.children.entries[0].move("up")
-
+                await game.scene.scenes[0].player.children.entries[0].move("up",1)
+                //victory(lvl,game);
                 ic++;
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                await game.scene.scenes[0].player.children.entries[0].move("down")
+                await game.scene.scenes[0].player.children.entries[0].move("down",1)
+                //victory(lvl,game);
+
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                await game.scene.scenes[0].player.children.entries[0].move("right")
+                await game.scene.scenes[0].player.children.entries[0].move("right",1)
+                //victory(lvl,game);
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                await game.scene.scenes[0].player.children.entries[0].move("left")
+                await game.scene.scenes[0].player.children.entries[0].move("left",1)
+                //victory(lvl,game);
                 ic++;
                 break;
             case 'ADD':

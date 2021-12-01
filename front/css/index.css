@@ -90,3 +90,13 @@ canvas {
     display: block;
     margin: auto;
 }
+
+#popupGameOver {
+    position: absolute;
+    top: 50%;  /* position the top  Edge of the element at the middle of the parent /
+    left: 50%; / position the left Edge of the element at the middle of the parent /
+
+    transform: translate(-50%, -50%); / This is a shorthand of
+                                         translateX(-50%) and translateY(-50%) */
+    background-color: white;
+}

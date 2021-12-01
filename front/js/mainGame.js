@@ -78,7 +78,7 @@ function create() {
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.72);
+        this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
@@ -98,28 +98,26 @@ function create() {
 }
 
 function update() {
-    //player.children.entries[0].move('down',2,player.children.entries[0].x,player.children.entries[0].y);
+
 }
 
-function movePlayer(player) {
-    cursors.on('keydown-Q', () => {
-        player.children.entries[0].anims.play('left');
-        player.children.entries[0].move("left")
-    });
-    cursors.on('keydown-D', () => {
 
-        player.children.entries[0].anims.play('right');
-        player.children.entries[0].move("right")
-    });
-    cursors.on('keydown-S', () => {
+function victory(lvl){
+    console.log(game);
+    console.log(game.player);
+    switch(lvl) {
+        case '1':
 
-        player.children.entries[0].anims.play('face');
-        player.children.entries[0].move("down")
-    });
-    cursors.on('keydown-Z', () => {
+            if(game.player.children.entries[0].y <= 0 && (game.player.children.entries[0].x < 1215 && game.player.children.entries[0].x > 900)){
+                alert("gagner");
+            }
 
-        player.children.entries[0].anims.play('back');
-        player.children.entries[0].move("up")
-    });
-    return 0;
+            break;
+        case '2':
+
+
+            break;
+
+        default:
+    }
 }
