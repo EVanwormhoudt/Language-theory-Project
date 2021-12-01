@@ -91,27 +91,24 @@ function create() {
         this.physics.add.collider( this.player.children.entries[0], this.mur,()=>console.log(this.player.children.entries[0].testCollision("up")));
         this.physics.add.collider( this.player.children.entries[0], this.sol,()=>console.log("FIN DU NIVEAU"));
 
-        //permet de bouger le personnage
-        movePlayer(this.player);
+
 
     }
 }
 
 function update() {
 
+    victory('1')
 }
 
 
 function victory(lvl){
-    console.log(game);
-    console.log(game.player);
+
     switch(lvl) {
         case '1':
-
-            if(game.player.children.entries[0].y <= 0 && (game.player.children.entries[0].x < 1215 && game.player.children.entries[0].x > 900)){
+            if(game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 900)){
                 alert("gagner");
             }
-
             break;
         case '2':
 

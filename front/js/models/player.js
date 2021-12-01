@@ -122,7 +122,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
 
         }
-        console.log(typeof false)
         return false;
     }
 }
