@@ -41,6 +41,7 @@ canvas {
     background-color: rgb(128, 125, 125, 0.4);
     color: white;
     font-family: 'pixel-custom';
+    font-size : 80%;
 }
 #editor { 
     display: block;
