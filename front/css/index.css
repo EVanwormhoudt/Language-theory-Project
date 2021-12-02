@@ -90,7 +90,38 @@ canvas {
     display: block;
     margin: auto;
 }
-
+#example {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    display: block;
+    margin: auto;
+}
+#back {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    display: block;
+    margin: auto;
+}
 #popupGameOver {
     position: absolute;
     top: 25%;
