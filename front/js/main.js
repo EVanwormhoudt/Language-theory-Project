@@ -470,10 +470,13 @@ async function execution(){
     console.log(code_genere)
     while(ic < code_genere.length) {
 
-        await new Promise(r => setTimeout(r, 400));
+
+        let ins = code_genere[ic];
+        if(!(ins.name =="MH"||ins.name =="MD"||ins.name =="MG"||ins.name =="MD"))
+            await new Promise(r => setTimeout(r, 400));
         if(retourhiglight[ic] !== -1)
             editor.getSession().removeMarker(marker);
-        let ins = code_genere[ic];
+
         console.log("pointeur :" + ic)
         console.log(ins)
         if(retourhiglight[ic] !== -1) {
@@ -552,7 +555,10 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                game.scene.scenes[0].player.children.entries[0].move("up",1)
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("up",1) ))
+                    return;
+
+
                 //victory(lvl,game);
                 ic++;
                 break;
