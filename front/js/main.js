@@ -388,13 +388,42 @@ function adaptIndex(){
     let instruction = 0;
     for(let i in code_genere){
         if(code_genere[i].name =="NUM" || code_genere[i].name =="INCFOR" || code_genere[i].name =="VARFOR" ||code_genere[i].name =="SUP" || code_genere[i].name =="INF" || code_genere[i].name =="SUPEGAL" || code_genere[i].name =="INFEGAL" || code_genere[i].name =="EGAL" || code_genere[i].name =="NOTEGAL" ||code_genere[i].name =="VAR" ||code_genere[i].name =="SUB" || code_genere[i].name =="ADD" ||code_genere[i].name =="MULT" ||code_genere[i].name =="DIV" ){
-            retourhiglight.push(0);
+            retourhiglight.push(-1);
         }
         else{
             retourhiglight.push(instruction)
             instruction++;
         }
     }
+    for(let i in code_genere){
+        if(code_genere[i].name =="INCFOR"){
+            console.log(i)
+            console.log(retourhiglight[parseInt(i)+1]);
+            retourhiglight[i] = retourhiglight[parseInt(i)+1];
+        }
+        if(code_genere[i].name =="VARFOR"){
+
+            retourhiglight[i] = retourhiglight[parseInt(i)+4];
+            retourhiglight[parseInt(i)+1] = retourhiglight[parseInt(i)+3];
+            retourhiglight[parseInt(i)+2] = retourhiglight[parseInt(i)+2];
+            retourhiglight[parseInt(i)+3] = retourhiglight[parseInt(i)+1];
+        }
+
+    }
+
+    for(let i in code_genere){
+        let j = 1;
+        while(j <= 3  && j< code_genere.length-i-j){
+            if(code_genere[i].name =="NUM" && code_genere[i+j]){
+
+                retourhiglight[i] = retourhiglight[parseInt(i)+parseInt(j)];
+            }
+            j++;
+        }
+
+
+    }
+
 }
 
 document.getElementById("compilation").addEventListener('click', async () => {
@@ -402,7 +431,7 @@ document.getElementById("compilation").addEventListener('click', async () => {
 
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
-    ClearConsole();
+    //ClearConsole();
     parseCodeHighlight();
     langage.parse(editor.getValue());
     adaptIndex();
@@ -433,10 +462,17 @@ async function execution(){
     let pileVar = [];
     console.log(code_genere)
     while(ic < code_genere.length) {
+
+        await new Promise(r => setTimeout(r, 400));
+        if(retourhiglight[ic] != -1)
+            editor.getSession().removeMarker(marker);
         let ins = code_genere[ic];
+        console.log("pointeur :" + ic)
+        console.log(ins)
+        if(retourhiglight[ic] != -1) {
 
-        marker = editor.getSession().addMarker(tableRange[ic],"ace_active-line","screenLine");
-
+            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "ace_active-line", "screenLine");
+        }
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
@@ -510,26 +546,26 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                await game.scene.scenes[0].player.children.entries[0].move("up",1)
+                game.scene.scenes[0].player.children.entries[0].move("up",1)
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                await game.scene.scenes[0].player.children.entries[0].move("down",1)
+                game.scene.scenes[0].player.children.entries[0].move("down",1)
                 //victory(lvl,game);
 
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                await game.scene.scenes[0].player.children.entries[0].move("right",1)
+                game.scene.scenes[0].player.children.entries[0].move("right",1)
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                await game.scene.scenes[0].player.children.entries[0].move("left",1)
+                game.scene.scenes[0].player.children.entries[0].move("left",1)
                 //victory(lvl,game);
                 ic++;
                 break;
@@ -711,9 +747,11 @@ async function execution(){
                 ic++;
 
         }
-        editor.getSession().removeMarker(marker);
+
 
     }
+    if(retourhiglight[ic] != -1)
+        editor.getSession().removeMarker(marker);
     GameOver();
 }
 
@@ -741,6 +779,7 @@ function InitCompilation(){
  * MD move(gauche)
  * MG move(droite)
  */
+
 
 
 
