@@ -17,10 +17,13 @@ body {
 }
 
 #logo {
+    width : 25%;
+    height: 15%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 8%;
+    padding-bottom: 0;
+
 }
 p {
     font-size: xx-large;
