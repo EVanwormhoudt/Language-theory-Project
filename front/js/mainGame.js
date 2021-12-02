@@ -75,11 +75,13 @@ function create() {
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
+                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
                 basket = map.addTilesetImage('basket', 'basket');
 
                 this.sol = map.createLayer('sol', tilesets);
                 this.mur = map.createLayer('mur', tilesets);
                 this.deco = map.createLayer('deco', tilesetsdeco2);
+                this.prisonnier = map.createLayer('prisonner',tilesetsdeco);
                 this.basket = map.createLayer('basket', basket);
                 break;
             case '5':
@@ -87,11 +89,13 @@ function create() {
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
+                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
                 basket = map.addTilesetImage('basket', 'basket');
 
                 this.sol = map.createLayer('sol', tilesets);
                 this.mur = map.createLayer('mur', tilesets);
                 this.deco = map.createLayer('deco', tilesetsdeco2);
+                this.prisonnier = map.createLayer('prisonner',tilesetsdeco);
                 this.basket = map.createLayer('basket', basket);
                 break;
             default:
@@ -104,11 +108,9 @@ function create() {
             maxSpeed: 3
         };
 
-
-
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.72);
+        this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
@@ -140,6 +142,10 @@ function victory(lvl) {
 
             break;
         case '4':
+
+            break;
+
+        case '5':
 
             break;
         default:
