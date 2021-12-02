@@ -161,3 +161,7 @@ button {
     grid-column: 8;
     grid-row: 2;
 }
+
+#soon {
+    font-size: x-large;
+}
