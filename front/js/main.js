@@ -10,12 +10,13 @@ let examples = ['DEBUT SOURCE {\n' + '\n' +'move(bas);'+ '\n' + 'move(droite);' 
 
 let liste = "\n"+"\n" + "\n" + "Liste des fonctions :" +"\n" +"Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
     "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
-    "\n" + "test(haut) //fonction qui renvoie 0 si le personnage ne peut pas aller dans la direction souhaitée sinon 1";
+    "\n" + "test(haut) //fonction qui renvoie 0 si le personnage" + "\n" + " ne peut pas aller dans la direction souhaitée sinon 1";
 
 document.getElementById("example").addEventListener('click', ()=>{
     document.getElementById('back').style.visibility = 'visible';
     document.getElementById("clear").disabled = true;
     document.getElementById("compilation").disabled = true;
+    document.getElementById("example").disabled = true;
     let tmp = editor.getValue();
     editor.setValue(examples[lvl-1] + liste);
 
@@ -23,7 +24,7 @@ document.getElementById("example").addEventListener('click', ()=>{
         document.getElementById('back').style.visibility = 'hidden';
         document.getElementById("clear").disabled = false;
         document.getElementById("compilation").disabled = false;
-
+        document.getElementById("example").disabled = false;
         editor.setValue(tmp);
     })
 

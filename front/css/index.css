@@ -332,6 +332,22 @@ h4 {
     cursor: pointer;
     margin-left: 20%;
 }
+#leave3 {
+    position: absolute;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    cursor: pointer;
+    margin-left: -18px;
+}
 #popupRULES {
     position: absolute;
     top: 25%;

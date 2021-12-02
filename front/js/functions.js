@@ -46,7 +46,7 @@ function GameOver() {
         }
     });
 
-    let leave = document.getElementById('leave');
+    let leave = document.getElementById('leave3');
     leave.addEventListener('click', () => {
         document.location.href = "../html/accueil.html";
     });
@@ -100,7 +100,7 @@ function Win() {
         }
     });
 
-    let leave = document.getElementById('leave');
+    let leave = document.getElementById('leave3');
     leave.addEventListener('click', () => {
         document.location.href = "../html/accueil.html";
     });

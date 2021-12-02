@@ -24,6 +24,7 @@ let cursors;
 function preload() {
     this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
     this.load.tilemapTiledJSON('mapLvl4', '../asset/mapLvl2.json');
+    this.load.tilemapTiledJSON('mapEntrainement', '../asset/mapEntrainement.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
     this.load.image('tilesdeco', '../asset/deco.png');
@@ -97,6 +98,21 @@ function create() {
                 this.deco = map.createLayer('deco', tilesetsdeco2);
                 this.prisonnier = map.createLayer('prisonner',tilesetsdeco);
                 this.basket = map.createLayer('basket', basket);
+                break;
+            case '8':
+                map = this.add.tilemap('mapEntrainement');
+
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+               
+                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
+                tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
+
+                this.sol = map.createLayer('sol', tilesets);
+                this.mur = map.createLayer('murs', tilesets);
+
+                this.deco = map.createLayer('deco', tilesetsdeco);
+                this.deco = map.createLayer('deco2', tilesetsdeco2);
+                this.prisonnier = map.createLayer('prisonniers',tilesetsdeco);
                 break;
             default:
         }
