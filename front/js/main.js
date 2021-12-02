@@ -1,5 +1,35 @@
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
+document.getElementById('back').style.visibility = 'hidden';
+
+let examples = ['DEBUT SOURCE {\n' + '\n' +'move(bas);'+ '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE' ,
+    'DEBUT SOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour' + '\n' + '}FIN SOURCE',
+    'DEBUT SOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' +'FinSi;' +'\n' + '}FIN SOURCE',
+    'DEBUT SOURCE {\n' + 'nbPas = 16;'+ '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' +'\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n'+ '\t'  +'move(haut);' +'\n' +'FinPour' + '\n' +'}FIN SOURCE',
+    'DEBUT SOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' +'\n\tnbPas = 2;' +'\n\tPause;'+'\nDefaut: //si var  ne vaut ni 1 ni 2'+'\n\tnbPas = 6;' +'\n\tPause;' +'\nFinSelon;' +'\nAfficher(nbPas);' +'\n}FIN SOURCE']
+
+let liste = "\n"+"\n" + "\n" + "Liste des fonctions :" +"\n" +"Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
+    "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
+    "\n" + "test(haut) //fonction qui renvoie 0 si le personnage ne peut pas aller dans la direction souhaitée sinon 1";
+
+document.getElementById("example").addEventListener('click', ()=>{
+    document.getElementById('back').style.visibility = 'visible';
+    document.getElementById("clear").disabled = true;
+    document.getElementById("compilation").disabled = true;
+    let tmp = editor.getValue();
+    editor.setValue(examples[lvl-1] + liste);
+
+    document.getElementById("back").addEventListener('click', ()=>{
+        document.getElementById('back').style.visibility = 'hidden';
+        document.getElementById("clear").disabled = false;
+        document.getElementById("compilation").disabled = false;
+
+        editor.setValue(tmp);
+    })
+
+
+})
+
 
 var Range = function(startRow, startColumn, endRow, endColumn) {
     this.start = {
@@ -287,14 +317,16 @@ let CurseurFor = -1;
 let tabTmpSwitch = []
 let CurseurSwitch = -1;
 let variables = new Map();
-
+let tableCode =[];
+let tableRange = [];
+let marker;
+let retourhiglight = [];
 var position = window.location.href.indexOf('?');
 
 if (position != -1) {
     var lvl = "";
     var fin_url = window.location.href.substr(position + 1);
     fin_url = fin_url.replace(/-/g, " ");
-
     lvl = fin_url.substr(7);
 }
 
@@ -323,14 +355,64 @@ function test() {
     console.log("test");
 }
 
-document.getElementById("compilation").addEventListener('click', async () => {
+function parseCodeHighlight(){
+    let tmp = editor.getValue().replace("DEBUT SOURCE {","").replace("}FIN SOURCE","")
+    let tmpTable;
+    let length = 0;
+    let ligne = 0;
+    tmpTable = tmp.split(":");
+    for(let i of tmpTable){
+        tableCode = [...tableCode,...i.split(";")];
+    }
+    console.log(tableCode)
 
+    tmpTable = tableCode;tableCode=[];
+    for(let i of tmpTable){
+        tableCode = [...tableCode,...i.split("\n")];
+    }
+    console.log(tableCode)
+    for(let i of tableCode){
+        if(i == ""){
+            ligne++;
+            length = 0;
+        }
+        else{
+            tableRange.push(new Range(ligne,length,ligne,length + i.length +1));
+            length = i.length+1;
+        }
+    }
+
+}
+
+function adaptIndex(){
+    let instruction = 0;
+    for(let i in code_genere){
+        if(code_genere[i].name =="NUM" || code_genere[i].name =="INCFOR" || code_genere[i].name =="VARFOR" ||code_genere[i].name =="SUP" || code_genere[i].name =="INF" || code_genere[i].name =="SUPEGAL" || code_genere[i].name =="INFEGAL" || code_genere[i].name =="EGAL" || code_genere[i].name =="NOTEGAL" ||code_genere[i].name =="VAR" ||code_genere[i].name =="SUB" || code_genere[i].name =="ADD" ||code_genere[i].name =="MULT" ||code_genere[i].name =="DIV" ){
+            retourhiglight.push(0);
+        }
+        else{
+            retourhiglight.push(instruction)
+            instruction++;
+        }
+    }
+}
+
+document.getElementById("compilation").addEventListener('click', async () => {
+    document.getElementById("compilation").disabled = true;
+
+    let btnStyle = document.getElementById("compilation");
+    btnStyle.style.color = 'grey';
+    ClearConsole();
+    parseCodeHighlight();
     langage.parse(editor.getValue());
-    console.log(code_genere);
-    console.log(tabTmpSwitch);
-    console.log(CurseurSwitch);
+    adaptIndex();
+    console.log(code_genere)
+    console.log(retourhiglight)
+    console.log(tableRange)
     await execution();
     InitCompilation();
+    document.getElementById("compilation").disabled = false;
+    btnStyle.style.color = 'white';
 })
 
 document.getElementById("clear").addEventListener('click', () => {
@@ -349,8 +431,12 @@ async function execution(){
     let ic = 0;
     let pile = [];
     let pileVar = [];
+    console.log(code_genere)
     while(ic < code_genere.length) {
         let ins = code_genere[ic];
+
+        marker = editor.getSession().addMarker(tableRange[ic],"ace_active-line","screenLine");
+
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
@@ -555,6 +641,7 @@ async function execution(){
             case 'PRINT':
                 r1 = pile.pop();
                 console.log("PRINT : ", r1);
+                PrintConsole(r1);
                 ic++;
                 break;
             case 'POUR' :
@@ -622,9 +709,12 @@ async function execution(){
                 CurseurSwitch=CurseurSwitch-1;
             default :
                 ic++;
+
         }
+        editor.getSession().removeMarker(marker);
 
     }
+    GameOver();
 }
 
 function InitCompilation(){
@@ -641,6 +731,8 @@ function InitCompilation(){
     variables.clear();
     tabTmpSwitch = []
     CurseurSwitch = -1;
+    tableRange = [];
+    retourhiglight = [];
 }
 
 /** instructions :
@@ -650,6 +742,5 @@ function InitCompilation(){
  * MG move(droite)
  */
 
-let range = new Range(0, 0, 2, 1000);
-editor.getSession().addMarker(range,"ace_active-line","screenLine");
-console.log(editor.getSession())
+
+
