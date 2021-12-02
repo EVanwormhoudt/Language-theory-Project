@@ -373,7 +373,7 @@ function parseCodeHighlight(){
     }
     console.log(tableCode)
     for(let i of tableCode){
-        if(i == ""){
+        if(i === "" || i === "\r"){
             ligne++;
             length = 0;
         }
@@ -382,6 +382,7 @@ function parseCodeHighlight(){
             length = i.length+1;
         }
     }
+    console.log(tableRange)
 
 }
 
@@ -434,7 +435,12 @@ document.getElementById("compilation").addEventListener('click', async () => {
     btnStyle.style.color = 'grey';
     //ClearConsole();
     parseCodeHighlight();
-    langage.parse(editor.getValue());
+    try{
+        langage.parse(editor.getValue());
+    }
+    catch (err){
+        console.log(err)
+    }
     adaptIndex();
     console.log(code_genere)
     console.log(retourhiglight)
@@ -465,14 +471,13 @@ async function execution(){
     while(ic < code_genere.length) {
 
         await new Promise(r => setTimeout(r, 400));
-        if(retourhiglight[ic] != -1)
+        if(retourhiglight[ic] !== -1)
             editor.getSession().removeMarker(marker);
         let ins = code_genere[ic];
         console.log("pointeur :" + ic)
         console.log(ins)
-        if(retourhiglight[ic] != -1) {
-
-            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "ace_active-line", "screenLine");
+        if(retourhiglight[ic] !== -1) {
+            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
         }
         switch (ins.name) {
             case 'NUM':
