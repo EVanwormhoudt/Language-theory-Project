@@ -12,16 +12,26 @@
 <body>
 
     <div id="infos">
-        <div>
-            <h3 id="title_target"> Objectif - Sortir le prisonnier du couloir </h3>
-            <p id="desc_target">Vous avez pour mission de déplacer votre prisonnier en utilisant les boucles for et
+        <h3 id="title_target">Objectif - Sortir le prisonnier du couloir</h3>
+        <button id="objBTN">CLIQUEZ ICI</button>
+
+        <h3 id="rules">Règles - Astuces</h2>
+            <button id="rulesBTN">CLIQUEZ ICI</button>
+    </div>
+
+    <div id="popupOBJ" hidden>
+        <h1 id="title_popupOBJ">Objectif - Sortir le prisonnier du couloir</h1>
+        <p id="desc_popupOBJ">Vous avez pour mission de déplacer votre prisonnier en utilisant les boucles for et
             if tout en vérifiant les collisions grâce à la fonction test</p>
-        </div>
-        <div>
-            <h2 id="rules">Règles - Astuces</h2>
-            <p id="txt_rules">En appuyant sur le bouton "EXAMPLE", vous aurez un exemple de code pour vous aider à utiliser
-                la boucle if et la fonction test. En appuyant sur le bouton "BACK", vous pouvez revenir à votre code.</p>
-        </div>
+        <button id="leave">Quitter</button>
+    </div>
+
+    <div id="popupRULES" hidden>
+        <h1 id="title_popupRULES">Règles - Astuces</h1>
+        <p id="desc_popupRULES">En appuyant sur le bouton "EXAMPLE", vous aurez un exemple de code pour vous aider à
+            utiliser
+            la boucle if et la fonction test. En appuyant sur le bouton "BACK", vous pouvez revenir à votre code.</p>
+        <button id="leave2">Quitter</button>
     </div>
 
     <div id="code">
@@ -36,7 +46,7 @@
     </div>
     <div id="consoles">
         <div class="scroller">
-            <h4 id="title_target"> Console :</h4>
+            <h4 id="console"> Console :</h4>
             <ul id="list">
 
             </ul>
@@ -77,7 +87,7 @@
     <script src="../js/mainGame.js"></script>
     <script src="../js/jison/langage.js"></script>
     <script src="../js/main.js" defer></script>
-
+    <script src="../js/help.js"></script>
 </body>
 
 </html>
