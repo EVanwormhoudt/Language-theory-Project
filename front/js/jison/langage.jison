@@ -30,7 +30,7 @@
 "PI"                  return 'PI';
 ">"                   return 'SUP';
 "<"                   return 'INF';
-"Choix"               return 'CHOIX';
+"Selon"               return 'CHOIX';
 "Cas"               return 'CAS';
 "Defaut"               return 'DEFAUT';
 "Pause"               return 'PAUSE';
@@ -181,10 +181,10 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
             |'}' 'FIN' EOF {console.log("-----Fin du programme-----");}
 
-            |IF THEN ELSE ENDIF {}
-            |WHILE ENDWHILE {}
-            |FOR ENDFOR {}
-            |SWITCH ENDSWITCH{}
+            |IF THEN ELSE ENDIF ';'{}
+            |WHILE ENDWHILE ';'{}
+            |FOR ENDFOR ';'{}
+            |SWITCH ENDSWITCH';'{}
 
             |MOVE '(' UP ')' ';' {addInstruction(0,"MH",0);}
             |MOVE '(' DOWN ')' ';' {addInstruction(0,"MB",0);}

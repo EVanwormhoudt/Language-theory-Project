@@ -35,12 +35,13 @@ canvas {
 
 #infos {
     width: 100%;
-    grid-column: 1 / 3;
+    grid-column: 1 / 2;
     margin-top: 15px;
     margin-left: 15px;
     background-color: rgb(128, 125, 125, 0.4);
     color: white;
     font-family: 'pixel-custom';
+    font-size : 80%;
 }
 #editor { 
     display: block;
@@ -90,13 +91,148 @@ canvas {
     display: block;
     margin: auto;
 }
-
+#example {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    display: block;
+    margin: auto;
+}
+#back {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    display: block;
+    margin: auto;
+}
 #popupGameOver {
     position: absolute;
-    top: 50%;  /* position the top  Edge of the element at the middle of the parent /
-    left: 50%; / position the left Edge of the element at the middle of the parent /
-
-    transform: translate(-50%, -50%); / This is a shorthand of
-                                         translateX(-50%) and translateY(-50%) */
-    background-color: white;
+    top: 25%;
+    left: 25%;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
 }
+
+#popupWin {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-image: url("../asset/fondlvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 331px;
+    height: 241px;
+}
+
+#fin {
+    color: white;
+    font-size: x-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    padding-top: 7px;
+}
+
+#etoiles {
+    background-image: url("../asset/fondetoiles.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 217.5px;
+    height: 73.5px;
+    margin-left: 50px;
+}
+
+#etoilevide {
+    padding-top: 5px;
+    margin-left: 18px;
+}
+
+#tryAgain {
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    cursor: pointer;
+}
+
+#next {
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    cursor: pointer;
+}
+
+#leave {
+    position: absolute;
+    background-image: url("../asset/lvl.png");
+    background-repeat:no-repeat;
+    -webkit-background-size: cover;
+    width: 174px;
+    height: 69px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: xx-large;
+    font-family: 'pixel-custom';
+    text-align: center;
+    cursor: pointer;
+    margin-left: -17px;
+}
+
+#consoles {
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgb(0, 0, 0, 0.4);
+    color: white;
+    font-family: 'pixel-custom';
+    margin : 10px;
+} 
+
+.scroller {
+    width: 100%;
+    height: 180px;
+    overflow-y: scroll;
+  }
+
+  li {
+    line-height: 0.5;
+  }
+  ul {
+    padding-left: 10px;
+  }

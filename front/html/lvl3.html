@@ -13,31 +13,70 @@
 
     <div id="infos">
         <div>
-            <h3 id="title_target"></h3>
-            <p id="desc_target"></p>
+            <h3 id="title_target"> Objectif - Sortir le prisonnier du couloir </h3>
+            <p id="desc_target">Vous avez pour mission de déplacer votre prisonnier en utilisant les boucles for et
+            if tout en vérifiant les collisions grâce à la fonction test</p>
         </div>
         <div>
-            <h2 id="rules"></h2>
-            <p id="txt_rules"></p>
+            <h2 id="rules">Règles - Astuces</h2>
+            <p id="txt_rules">En appuyant sur le bouton "EXAMPLE", vous aurez un exemple de code pour vous aider à utiliser
+                la boucle if et la fonction test. En appuyant sur le bouton "BACK", vous pouvez revenir à votre code.</p>
         </div>
     </div>
 
     <div id="code">
         <div id="editorText">
-            <pre id="editor"></pre>
+            <pre id="editor">DEBUT SOURCE {
+
+
+
+}FIN SOURCE</pre>
         </div>
 
     </div>
+    <div id="consoles">
+        <div class="scroller">
+            <h4 id="title_target"> Console :</h4>
+            <ul id="list">
+
+            </ul>
+        </div>
+    </div>
     <div id="buttons">
+        <button id="example">EXAMPLE</button>
+        <button id="back">BACK </button>
         <button id="clear">RESET</button>
         <button id="compilation">SUBMIT</button>
     </div>
 
+    <div id="popupGameOver" hidden>
+        <h1 id="fin">Défaite</h1>
+        <div id="etoiles">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoilevide.png">
+        </div>
+        <button id="tryAgain">Rejouer</button>
+        <button id="leave">Quitter</button>
+    </div>
+
+    <div id="popupWin" hidden>
+        <h1 id="fin">Victoire !</h1>
+        <div id="etoiles">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoile.png">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoile.png">
+            <img id="etoilevide" style="width: 36; height: 50px" src="../asset/etoile.png">
+        </div>
+        <button id="next">Suivant</button>
+        <button id="leave">Quitter</button>
+    </div>
+
     <script src="../docAce/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/models/Player.js"></script>
+    <script src="../js/functions.js"></script>
+    <script type="text/javascript" src="../js/models/player.js"></script>
     <script src="../js/mainGame.js"></script>
-    <script src="../js/langage.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/jison/langage.js"></script>
+    <script src="../js/main.js" defer></script>
 
 </body>
 

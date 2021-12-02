@@ -23,10 +23,12 @@ let cursors;
 
 function preload() {
     this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
-    this.load.tilemapTiledJSON('testmap2', '../asset/testmap2Lvl2estSolide.json');
+    this.load.tilemapTiledJSON('mapLvl4', '../asset/mapLvl2.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
     this.load.image('tilesdeco', '../asset/deco.png');
+    this.load.image('basket', '../asset/basket.png');
+    this.load.image('tilesdeco2', '../asset/deco2.png');
 
     this.load.spritesheet('face', '../asset/sprite_face.png', { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet('right', '../asset/sprite_right.png', { frameWidth: 32, frameHeight: 32 });
@@ -49,10 +51,48 @@ function create() {
             case '1':
                 map = this.add.tilemap('mapLvl1');
 
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+                tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
+
+                this.sol = map.createLayer('sol', tilesets);
+                this.mur = map.createLayer('murs', tilesets);
+                this.deco = map.createLayer('deco', tilesetsdeco);
+
                 break;
             case '2':
-                map = this.add.tilemap('testmap2');
+                map = this.add.tilemap('mapLvl1');
 
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+                tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
+
+                this.sol = map.createLayer('sol', tilesets);
+                this.mur = map.createLayer('murs', tilesets);
+                this.deco = map.createLayer('deco', tilesetsdeco);
+
+                break;
+            case '4':
+                map = this.add.tilemap('mapLvl4');
+
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+                tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
+                basket = map.addTilesetImage('basket', 'basket');
+
+                this.sol = map.createLayer('sol', tilesets);
+                this.mur = map.createLayer('mur', tilesets);
+                this.deco = map.createLayer('deco', tilesetsdeco2);
+                this.basket = map.createLayer('basket', basket);
+                break;
+            case '5':
+                map = this.add.tilemap('mapLvl4');
+
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+                tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
+                basket = map.addTilesetImage('basket', 'basket');
+
+                this.sol = map.createLayer('sol', tilesets);
+                this.mur = map.createLayer('mur', tilesets);
+                this.deco = map.createLayer('deco', tilesetsdeco2);
+                this.basket = map.createLayer('basket', basket);
                 break;
             default:
         }
@@ -64,57 +104,44 @@ function create() {
             maxSpeed: 3
         };
 
-        tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
-        tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
 
-        this.sol = map.createLayer('sol', tilesets);
-        this.mur = map.createLayer('murs', tilesets);
-        this.deco = map.createLayer('deco', tilesetsdeco);
-
-        console.log(this.mur);
-        //collision avec les personnages
-        this.mur.setCollisionByProperty({estSolide: true});
-        this.sol.setCollisionByProperty({estFini: true});
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.50);
+        this.cameras.main.setZoom(0.72);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
         //Création du personnage avec animation
-        this.player = this.physics.add.group({classType : Player});
-        this.player.create(500,300,'face');
-        this.player.children.entries[0].setAnim('left','right','back','face');
-
-        //Creation function collider
-        this.physics.add.collider( this.player.children.entries[0], this.mur,()=>console.log(this.player.children.entries[0].testCollision("up")));
-        this.physics.add.collider( this.player.children.entries[0], this.sol,()=>console.log("FIN DU NIVEAU"));
-
-
-
+        this.player = this.physics.add.group({ classType: Player });
+        this.player.create(500, 800, 'face');
+        this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
     }
 }
 
 function update() {
-
     victory('1')
 }
 
 
-function victory(lvl){
-
-    switch(lvl) {
+function victory(lvl) {
+    switch (lvl) {
         case '1':
-            if(game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 900)){
-                alert("gagner");
+            if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
+                Win();
             }
             break;
         case '2':
-
+            if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
+                Win();
+            }
+            break;
+        case '3':
 
             break;
+        case '4':
 
+            break;
         default:
     }
 }
