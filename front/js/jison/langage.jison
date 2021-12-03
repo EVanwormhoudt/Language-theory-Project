@@ -4,7 +4,7 @@
 %lex
 
 %%
-\s+                   /* skip whitespace */
+
 "\n"                   return '\n';
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
 "Afficher"          return 'PRINT';
@@ -57,6 +57,7 @@
 "Tantque"            return 'TANTQUE';
 "test"                return 'TEST';
 [A-Za-z_][A-Za-z_0-9]* return 'VAR';
+\s+                   /* skip whitespace */
 /lex
 
 /* operator associations and precedence */
@@ -159,7 +160,7 @@ ENDSWITCH : BLOCSWITCH DEFAULT bloc FINCHOIX {addInstruction(0,"ENDSWITCH",0);ta
 
 INSTRUCTIONSWITCH : CASE bloc ENDCASE {}
                 ;
-BLOCSWITCH : 
+BLOCSWITCH :
             |INSTRUCTIONSWITCH BLOCSWITCH
             ;
 

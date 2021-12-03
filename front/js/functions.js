@@ -8,11 +8,11 @@ function GameOver() {
 
     let tryAgain = document.getElementById('tryAgain');
     tryAgain.addEventListener('click', () => {
-        var position = window.location.href.indexOf('?');
+        let position = window.location.href.indexOf('?');
 
         if (position != -1) {
             let lvl = "";
-            var fin_url = window.location.href.substr(position + 1);
+            let fin_url = window.location.href.substr(position + 1);
             fin_url = fin_url.replace(/-/g, " ");
 
             lvl = fin_url.substr(7);
@@ -62,11 +62,11 @@ function Win() {
 
     let next = document.getElementById('next');
     next.addEventListener('click', () => {
-        var position = window.location.href.indexOf('?');
+        let position = window.location.href.indexOf('?');
 
         if (position != -1) {
             let lvl = "";
-            var fin_url = window.location.href.substr(position + 1);
+            let fin_url = window.location.href.substr(position + 1);
             fin_url = fin_url.replace(/-/g, " ");
 
             lvl = fin_url.substr(7);
@@ -107,9 +107,9 @@ function Win() {
 }
 
 function PrintConsole(variable) {
-    var ul = document.getElementById("list");
-    var li = document.createElement("li");
-    var p = document.createElement("p");
+    let ul = document.getElementById("list");
+    let li = document.createElement("li");
+    let p = document.createElement("p");
     p.innerHTML=variable.toString();
     li.appendChild(p);
     ul.appendChild(li);
@@ -120,10 +120,20 @@ function ClearConsole() {
 }
 
 function CollisionConsole() {
-    var ul = document.getElementById("list");
-    var li = document.createElement("li");
-    var p = document.createElement("p");
+    let ul = document.getElementById("list");
+    let li = document.createElement("li");
+    let p = document.createElement("p");
     p.innerHTML="ERROR : Collision area";
+    li.appendChild(p);
+    ul.appendChild(li);
+}
+
+function ErrorConsole(err){
+    err = err.split("\n")
+    let ul = document.getElementById("list");
+    let li = document.createElement("li");
+    let p = document.createElement("p");
+    p.innerHTML=`Erreur ligne: ${err[28]}<br><br>` +err[1] + "<br><br>"+err[2] + "<br><br>"+err[3];
     li.appendChild(p);
     ul.appendChild(li);
 }

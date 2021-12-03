@@ -439,7 +439,10 @@ document.getElementById("compilation").addEventListener('click', async () => {
         langage.parse(editor.getValue());
     }
     catch (err){
-        console.log(err)
+        ErrorConsole(err.toString())
+        console.log( (err.toString())[27])
+        marker = editor.getSession().addMarker(new Range(err.toString()[27],0,err.toString()[27],100000), "errorHighlight", "screenLine");
+        return;
     }
     adaptIndex();
     console.log(code_genere)
@@ -480,7 +483,7 @@ async function execution(){
         console.log("pointeur :" + ic)
         console.log(ins)
         if(retourhiglight[ic] !== -1) {
-            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "currentHighlight", "screenLine");
         }
         switch (ins.name) {
             case 'NUM':
@@ -555,29 +558,44 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                if(!(await game.scene.scenes[0].player.children.entries[0].move("up",1) ))
-                    return;
-
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("up",1) )) {
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
 
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                game.scene.scenes[0].player.children.entries[0].move("down",1)
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("down",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
+
                 //victory(lvl,game);
 
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                game.scene.scenes[0].player.children.entries[0].move("right",1)
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("right",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                game.scene.scenes[0].player.children.entries[0].move("left",1)
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("left",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
                 //victory(lvl,game);
                 ic++;
                 break;
