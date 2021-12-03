@@ -59,7 +59,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.testCollision(direction)) {
             GameOver();
             CollisionConsole();
-            return;
+            return 0;
         }
         switch (direction) {
             case 'up':
@@ -94,7 +94,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     break;
             }
         }
-
+        return 1;
     }
     testCollision(direction) {
         for (let i of this.scene.mur.culledTiles) {
