@@ -24,9 +24,11 @@ let cursors;
 function preload() {
     this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
     this.load.tilemapTiledJSON('mapLvl4', '../asset/mapLvl2.json');
+    this.load.tilemapTiledJSON('mapLvl3','../asset/mapLvl3.json');
     this.load.tilemapTiledJSON('mapEntrainement', '../asset/mapEntrainement.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
+    this.load.image('tilestuyau','../asset/aerationn.png');
     this.load.image('tilesdeco', '../asset/deco.png');
     this.load.image('basket', '../asset/basket.png');
     this.load.image('tilesdeco2', '../asset/deco2.png');
@@ -71,6 +73,17 @@ function create() {
                 this.deco = map.createLayer('deco', tilesetsdeco);
 
                 break;
+            case '3':
+                map = this.add.tilemap('mapLvl3');
+
+                tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
+                tuyau = map.addTilesetImage('aerationn', 'tilestuyau');
+
+                this.mur = map.createLayer('mur', tilesets);
+                this.tuyau = map.createLayer('aeration',tuyau);
+
+                break;
+
             case '4':
                 map = this.add.tilemap('mapLvl4');
 
@@ -126,19 +139,21 @@ function create() {
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.72);
+        this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
         //Création du personnage avec animation
         this.player = this.physics.add.group({ classType: Player });
-        this.player.create(500, 800, 'face');
+        this.player.create(400, 800, 'face');
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
     }
 }
 
 function update() {
-    victory('1')
+
+    victory(lvl);
+
 }
 
 
