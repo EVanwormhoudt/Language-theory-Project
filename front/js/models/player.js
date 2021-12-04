@@ -147,6 +147,31 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
 
         }
+        for (let i of this.scene.deco.culledTiles) {
+            switch (direction) {
+                case 'up':
+                    if (this.y - 32 == i.pixelY && (this.x == i.pixelX || this.x + 32 == i.pixelX)) {
+                        return true;
+                    }
+                    break;
+                case 'down':
+                    if (this.y + 64 == i.pixelY && (this.x == i.pixelX || this.x + 32 == i.pixelX)) {
+                        return true;
+                    }
+                    break;
+                case 'left':
+                    if (this.x - 32 == i.pixelX && (this.y == i.pixelY || this.y + 32 == i.pixelY)) {
+                        return true;
+                    }
+                    break;
+                case 'right':
+                    if (this.x + 64 == i.pixelX && (this.y == i.pixelY || this.y + 32 == i.pixelY)) {
+                        return true;
+                    }
+                    break;
+            }
+
+        }
         return false;
     }
 }

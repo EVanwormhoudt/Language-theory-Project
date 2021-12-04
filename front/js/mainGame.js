@@ -139,13 +139,21 @@ function create() {
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.72);
+        this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
+    
+
 
         //Création du personnage avec animation
         this.player = this.physics.add.group({ classType: Player });
-        this.player.create(400, 800, 'face');
+        if(lvl=='8'){
+            this.player.create(800, 500, 'face');
+        }else{
+            this.player.create(400, 800, 'face');
+
+        }
+
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
     }
 }
@@ -153,9 +161,24 @@ function create() {
 function update() {
 
     victory(lvl);
+    isInArea();
 
 }
 
+
+function isInArea(){
+    if(lvl == '4' || lvl =='5'){
+        if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
+            if(lvl=='4'){
+                return 34;
+            }else{
+               return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
+            }
+
+        }
+        return;
+    }
+}
 
 function victory(lvl) {
     switch (lvl) {
