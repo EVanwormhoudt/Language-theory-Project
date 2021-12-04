@@ -373,13 +373,20 @@ function parseCodeHighlight(){
     }
     console.log(tableCode)
     for(let i of tableCode){
-        if(i === "" || i === "\r"){
+
+        if(i === "" || i === "\r" ){
             ligne++;
             length = 0;
         }
+        else if(i === "Alors"){
+
+        }
         else{
+            console.log(i)
+            console.log(ligne)
             tableRange.push(new Range(ligne,length,ligne,length + i.length +1));
             length = i.length+1;
+            console.log(tableRange)
         }
     }
     console.log(tableRange)
@@ -399,7 +406,6 @@ function adaptIndex(){
     }
     for(let i in code_genere){
         if(code_genere[i].name =="INCFOR"){
-            console.log(i)
             console.log(retourhiglight[parseInt(i)+1]);
             retourhiglight[i] = retourhiglight[parseInt(i)+1];
         }
@@ -410,19 +416,6 @@ function adaptIndex(){
             retourhiglight[parseInt(i)+2] = retourhiglight[parseInt(i)+2];
             retourhiglight[parseInt(i)+3] = retourhiglight[parseInt(i)+1];
         }
-
-    }
-
-    for(let i in code_genere){
-        let j = 1;
-        while(j <= 3  && j< code_genere.length-i-j){
-            if(code_genere[i].name =="NUM" && code_genere[i+j]){
-
-                retourhiglight[i] = retourhiglight[parseInt(i)+parseInt(j)];
-            }
-            j++;
-        }
-
 
     }
 
@@ -475,16 +468,17 @@ async function execution(){
 
 
         let ins = code_genere[ic];
-        if(!(ins.name =="MH"||ins.name =="MD"||ins.name =="MG"||ins.name =="MD"))
-            await new Promise(r => setTimeout(r, 400));
-        if(retourhiglight[ic] !== -1)
-            editor.getSession().removeMarker(marker);
 
-        console.log("pointeur :" + ic)
-        console.log(ins)
+
+
+
         if(retourhiglight[ic] !== -1) {
+            editor.getSession().removeMarker(marker);
             marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "currentHighlight", "screenLine");
         }
+
+
+
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
@@ -777,7 +771,8 @@ async function execution(){
                 ic++;
 
         }
-
+        if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
+            await new Promise(r => setTimeout(r, 500));
 
     }
     if(retourhiglight[ic] != -1)

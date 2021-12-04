@@ -72,747 +72,747 @@
   }
 */
 var langage = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[2,23],$V1=[1,13],$V2=[1,18],$V3=[1,12],$V4=[1,15],$V5=[1,19],$V6=[1,16],$V7=[1,3],$V8=[1,4],$V9=[1,9],$Va=[1,10],$Vb=[1,17],$Vc=[1,13,15,24,30,34,36,38,42],$Vd=[36,42],$Ve=[2,21],$Vf=[1,34],$Vg=[1,38],$Vh=[1,39],$Vi=[1,40],$Vj=[1,41],$Vk=[2,49],$Vl=[1,47],$Vm=[2,5],$Vn=[7,22,39,45,46,47,48,49,50,63,65,66,67],$Vo=[1,50],$Vp=[1,4,5,13,15,17,19,24,28,30,32,34,36,38,42,51,53,56,61,64],$Vq=[34,36,42],$Vr=[7,22,39,45,46,47,48,49,50];
-var parser = {trace: function trace () { },
-yy: {},
-symbols_: {"error":2,"IF":3,"SI":4,"(":5,"condition":6,")":7,":":8,"THEN":9,"ALORS":10,"ELSE":11,"bloc":12,"SINON":13,"ENDIF":14,"FINSI":15,"VARFOR":16,"VAR":17,"FOR":18,"POUR":19,"ALLANT":20,"e":21,",":22,"INC":23,"FINPOUR":24,"ENDFOR":25,"WHILE":26,"WHILEFIRST":27,"TANTQUE":28,"ENDWHILE":29,"FINTANTQUE":30,"SWITCH":31,"CHOIX":32,"CASE":33,"CAS":34,"DEFAULT":35,"DEFAUT":36,"ENDCASE":37,"PAUSE":38,";":39,"ENDSWITCH":40,"BLOCSWITCH":41,"FINCHOIX":42,"INSTRUCTIONSWITCH":43,"instruction":44,"SUP":45,"INF":46,"SUPEGAL":47,"INFEGAL":48,"EGAL":49,"NOTEGAL":50,"DEBUT":51,"{":52,"}":53,"FIN":54,"EOF":55,"MOVE":56,"UP":57,"DOWN":58,"LEFT":59,"RIGHT":60,"PRINT":61,"=":62,"ADD":63,"NUMBER":64,"SUB":65,"MULT":66,"DIV":67,"$accept":0,"$end":1},
-terminals_: {2:"error",4:"SI",5:"(",7:")",8:":",10:"ALORS",13:"SINON",15:"FINSI",17:"VAR",19:"POUR",20:"ALLANT",22:",",24:"FINPOUR",28:"TANTQUE",30:"FINTANTQUE",32:"CHOIX",34:"CAS",36:"DEFAUT",38:"PAUSE",39:";",42:"FINCHOIX",45:"SUP",46:"INF",47:"SUPEGAL",48:"INFEGAL",49:"EGAL",50:"NOTEGAL",51:"DEBUT",52:"{",53:"}",54:"FIN",55:"EOF",56:"MOVE",57:"UP",58:"DOWN",59:"LEFT",60:"RIGHT",61:"PRINT",62:"=",63:"ADD",64:"NUMBER",65:"SUB",66:"MULT",67:"DIV"},
-productions_: [0,[3,5],[9,2],[11,3],[14,2],[16,0],[16,1],[18,11],[23,2],[25,1],[26,5],[27,1],[29,2],[31,5],[33,5],[35,2],[37,0],[37,2],[40,4],[40,2],[43,3],[41,0],[41,2],[12,0],[12,2],[6,1],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[44,2],[44,3],[44,5],[44,3],[44,3],[44,3],[44,5],[44,5],[44,5],[44,5],[44,5],[44,2],[44,4],[44,3],[44,3],[21,3],[21,1],[21,1],[21,3],[21,3],[21,3],[21,3]],
-performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
-/* this == yyval */
+    var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[2,23],$V1=[1,13],$V2=[1,18],$V3=[1,12],$V4=[1,15],$V5=[1,19],$V6=[1,16],$V7=[1,3],$V8=[1,4],$V9=[1,9],$Va=[1,10],$Vb=[1,17],$Vc=[1,13,15,24,30,34,36,38,42],$Vd=[36,42],$Ve=[2,21],$Vf=[1,34],$Vg=[1,38],$Vh=[1,39],$Vi=[1,40],$Vj=[1,41],$Vk=[2,49],$Vl=[1,47],$Vm=[2,5],$Vn=[7,22,39,45,46,47,48,49,50,63,65,66,67],$Vo=[1,50],$Vp=[1,4,5,13,15,17,19,24,28,30,32,34,36,38,42,51,53,56,61,64],$Vq=[34,36,42],$Vr=[7,22,39,45,46,47,48,49,50];
+    var parser = {trace: function trace () { },
+        yy: {},
+        symbols_: {"error":2,"IF":3,"SI":4,"(":5,"condition":6,")":7,":":8,"THEN":9,"ALORS":10,"ELSE":11,"bloc":12,"SINON":13,"ENDIF":14,"FINSI":15,"VARFOR":16,"VAR":17,"FOR":18,"POUR":19,"ALLANT":20,"e":21,",":22,"INC":23,"FINPOUR":24,"ENDFOR":25,"WHILE":26,"WHILEFIRST":27,"TANTQUE":28,"ENDWHILE":29,"FINTANTQUE":30,"SWITCH":31,"CHOIX":32,"CASE":33,"CAS":34,"DEFAULT":35,"DEFAUT":36,"ENDCASE":37,"PAUSE":38,";":39,"ENDSWITCH":40,"BLOCSWITCH":41,"FINCHOIX":42,"INSTRUCTIONSWITCH":43,"instruction":44,"SUP":45,"INF":46,"SUPEGAL":47,"INFEGAL":48,"EGAL":49,"NOTEGAL":50,"DEBUT":51,"{":52,"}":53,"FIN":54,"EOF":55,"MOVE":56,"UP":57,"DOWN":58,"LEFT":59,"RIGHT":60,"PRINT":61,"=":62,"ADD":63,"NUMBER":64,"SUB":65,"MULT":66,"DIV":67,"$accept":0,"$end":1},
+        terminals_: {2:"error",4:"SI",5:"(",7:")",8:":",10:"ALORS",13:"SINON",15:"FINSI",17:"VAR",19:"POUR",20:"ALLANT",22:",",24:"FINPOUR",28:"TANTQUE",30:"FINTANTQUE",32:"CHOIX",34:"CAS",36:"DEFAUT",38:"PAUSE",39:";",42:"FINCHOIX",45:"SUP",46:"INF",47:"SUPEGAL",48:"INFEGAL",49:"EGAL",50:"NOTEGAL",51:"DEBUT",52:"{",53:"}",54:"FIN",55:"EOF",56:"MOVE",57:"UP",58:"DOWN",59:"LEFT",60:"RIGHT",61:"PRINT",62:"=",63:"ADD",64:"NUMBER",65:"SUB",66:"MULT",67:"DIV"},
+        productions_: [0,[3,5],[9,2],[11,3],[14,2],[16,0],[16,1],[18,11],[23,2],[25,1],[26,5],[27,1],[29,2],[31,5],[33,5],[35,2],[37,0],[37,2],[40,4],[40,2],[43,3],[41,0],[41,2],[12,0],[12,2],[6,1],[6,3],[6,3],[6,3],[6,3],[6,3],[6,3],[44,2],[44,3],[44,5],[44,3],[44,3],[44,3],[44,5],[44,5],[44,5],[44,5],[44,5],[44,2],[44,4],[44,3],[44,3],[21,3],[21,1],[21,1],[21,3],[21,3],[21,3],[21,3]],
+        performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
+            /* this == yyval */
 
-var $0 = $$.length - 1;
-switch (yystate) {
-case 1:
-console.log("SI");addInstruction(0,"JMPCOND", 0);addTmpIf();tabTmpIf[CurseurIf].jc = ic;
-break;
-case 2:
-console.log("ALORS");
-break;
-case 3:
-console.log("SINON");addInstruction(0,"JMP",0);tabTmpIf[CurseurIf].jmp = ic;code_genere[tabTmpIf[CurseurIf].jc-1].value = ic;
-break;
-case 4:
-console.log("FINSI");code_genere[tabTmpIf[CurseurIf].jmp-1].value = ic;addInstruction(0,"FINSIF", 0);CurseurIf=CurseurIf-1;
-break;
-case 6:
-addInstruction($$[$0],"VARFOR", 0);
-break;
-case 7:
-console.log("POUR");addTmpFor();console.log(CurseurFor);addInstruction(0,"POUR",0);tabTmpFor[CurseurFor].jc = ic-1;
-break;
-case 8:
-console.log("INC");addInstruction(0,"INCFOR",0); code_genere[ic-1].value=tabTmpFor[CurseurFor].jc+1;code_genere[tabTmpFor[CurseurFor].jc].value=ic;
-break;
-case 9:
-console.log("INC");addInstruction(0,"FINPOUR",0);CurseurFor=CurseurFor-1;
-break;
-case 10:
-console.log("TANT QUE");addInstruction(0,"JMPCONDWHILE",0);tabTmpWhile[CurseurWhile].jmp = ic-1;
-break;
-case 11:
-addTmpWhile();addInstruction(0,"WHILEFIRST",0);addTmpWhile(); tabTmpWhile[CurseurWhile].jc = ic;
-break;
-case 12:
-console.log("Fin TANT QUE");addInstruction(0,"JMPENDWHILE",0);code_genere[ic-1].value = tabTmpWhile[CurseurWhile].jc-1;code_genere[tabTmpWhile[CurseurWhile].jmp].value = ic;CurseurWhile=CurseurWhile-1;
-break;
-case 13:
-console.log("CHOIX");addInstruction(0,"SWITCH",0);addTmpSwitch();
-break;
-case 14:
-console.log("CASE");addInstruction(0,"CASE",tabTmpSwitch[CurseurSwitch].nbCase);tabTmpSwitch[CurseurSwitch].tabCase.push(ic-2);tabTmpSwitch[CurseurSwitch].nbCase++;
-break;
-case 15:
-console.log("DEFAULT");addInstruction(0,"SWITCHDEFAULT",0);tabTmpSwitch[CurseurSwitch].default=ic-1
-break;
-case 17:
-console.log("PAUSE");addInstruction(0,"PAUSE",0);
-break;
-case 18: case 19:
-addInstruction(0,"ENDSWITCH",0);tabTmpSwitch[CurseurSwitch].FinSwitch = ic;CurseurSwitch=CurseurSwitch-1;
-break;
-case 26:
-addInstruction(0,"SUP", 0);
-break;
-case 27:
-addInstruction(0,"INF", 0);
-break;
-case 28:
-addInstruction(0,"SUPEGAL", 0);
-break;
-case 29:
-addInstruction(0,"INFEGAL", 0);
-break;
-case 30:
-addInstruction(0,"EGAL", 0);
-break;
-case 31:
-addInstruction(0,"NOTEGAL", 0);
-break;
-case 32:
-console.log("-----Debut du programme-----");
-break;
-case 33:
-console.log("-----Fin du programme-----");
-break;
-case 38:
-addInstruction(0,"MH",0);
-break;
-case 39:
-addInstruction(0,"MB",0);
-break;
-case 40:
-addInstruction(0,"MG",0);
-break;
-case 41:
-addInstruction(0,"MD",0);
-break;
-case 42:
-addInstruction(0,"PRINT",0);
-break;
-case 43:
-console.log($$[$0-1]);test();
-break;
-case 44:
-addInstruction($$[$0-3],"ASSIGN",0 ); 
-break;
-case 45:
-addInstruction($$[$0-2],"INC", 0);
-break;
-case 46:
-console.log($$[$0-2]);console.log("non");
-break;
-case 47:
-addInstruction(0,"ADD", 0);
-break;
-case 48:
-this.$ = Number(yytext);addInstruction(0,"NUM", yytext);
-break;
-case 49:
-addInstruction($$[$0],"VAR", 0);
-break;
-case 51:
-addInstruction(0,"SUB", 0);
-break;
-case 52:
-addInstruction(0,"MULT", 0);
-break;
-case 53:
-addInstruction(0,"DIV", 0);
-break;
-}
-},
-table: [{1:$V0,3:5,4:$V1,5:$V2,12:1,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{1:[3]},o($Vc,$V0,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:20,4:$V1,5:$V2,17:$V3,19:$V4,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb}),{52:[1,21]},{54:[1,22]},{9:23,10:[1,24]},{3:5,4:$V1,5:$V2,12:26,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,29:25,30:$V0,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{3:5,4:$V1,5:$V2,12:29,17:$V3,18:7,19:$V4,21:11,23:28,24:$V0,25:27,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},o($Vd,$Ve,{40:30,41:31,43:32,33:33,34:$Vf}),{5:[1,35]},{5:[1,36]},{39:[1,37],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o([39,63,65,66,67],$Vk,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:29,23:43,4:$V1,5:$V2,17:$V3,19:$V4,24:$V0,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,62:[1,42],64:$Vb}),{5:[1,44]},{5:[1,45]},{16:46,17:$Vl,20:$Vm},{5:[1,48]},o($Vn,[2,48]),{5:$V2,17:$Vo,21:49,64:$Vb},{5:[2,11]},o($Vc,[2,24]),o($Vp,[2,32]),{55:[1,51]},{3:5,4:$V1,5:$V2,11:52,12:53,13:$V0,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{8:[1,54]},{39:[1,55]},{30:[1,56]},{39:[1,57]},{39:[2,9]},{24:[1,58]},{39:[1,59]},{35:60,36:[1,62],42:[1,61]},o($Vd,$Ve,{43:32,33:33,41:63,34:$Vf}),o([34,36,38,42],$V0,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:64,4:$V1,5:$V2,17:$V3,19:$V4,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb}),{5:[1,65]},{57:[1,66],58:[1,67],59:[1,68],60:[1,69]},{5:$V2,17:$Vo,21:70,64:$Vb},o($Vp,[2,43],{55:[1,71]}),{5:$V2,17:$Vo,21:72,64:$Vb},{5:$V2,17:$Vo,21:73,64:$Vb},{5:$V2,17:$Vo,21:74,64:$Vb},{5:$V2,17:$Vo,21:75,64:$Vb},{5:$V2,17:$Vo,21:76,64:$Vb},{39:[1,77]},{5:$V2,6:78,17:$Vo,21:79,64:$Vb},{5:$V2,6:80,17:$Vo,21:79,64:$Vb},{20:[1,81]},o([7,20],[2,6]),{7:$Vm,16:82,17:$Vl},{7:[1,83],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vn,$Vk),o($Vp,[2,33]),{3:5,4:$V1,5:$V2,12:85,14:84,15:$V0,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{13:[1,86]},o([4,5,13,17,19,28,32,51,53,56,61,64],[2,2]),o($Vp,[2,35]),{39:[2,12]},o($Vp,[2,36]),{39:[2,8]},o($Vp,[2,37]),{3:5,4:$V1,5:$V2,12:87,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,42:$V0,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{39:[2,19]},{8:[1,88]},o($Vd,[2,22]),o($Vq,[2,16],{37:89,38:[1,90]}),{5:$V2,17:$Vo,21:91,64:$Vb},{7:[1,92]},{7:[1,93]},{7:[1,94]},{7:[1,95]},{7:[1,96],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vp,[2,46]),o($Vr,[2,47],{63:$Vg,65:$Vh,66:$Vi,67:$Vj}),o($Vr,[2,51],{63:$Vg,65:$Vh,66:$Vi,67:$Vj}),o($Vn,[2,52]),o($Vn,[2,53]),{39:[1,97],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vp,[2,45]),{7:[1,98]},{7:[2,25],45:[1,99],46:[1,100],47:[1,101],48:[1,102],49:[1,103],50:[1,104],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[1,105]},{5:[1,106]},{7:[1,107]},o($Vn,[2,50]),{39:[1,108]},{15:[1,109]},{8:[1,110]},{42:[1,111]},o([4,5,17,19,28,32,42,51,53,56,61,64],[2,15]),o($Vq,[2,20]),{39:[1,112]},{7:[1,113],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{39:[1,114]},{39:[1,115]},{39:[1,116]},{39:[1,117]},{39:[1,118]},o($Vp,[2,44]),{8:[1,119]},{5:$V2,17:$Vo,21:120,64:$Vb},{5:$V2,17:$Vo,21:121,64:$Vb},{5:$V2,17:$Vo,21:122,64:$Vb},{5:$V2,17:$Vo,21:123,64:$Vb},{5:$V2,17:$Vo,21:124,64:$Vb},{5:$V2,17:$Vo,21:125,64:$Vb},{8:[1,126]},{5:$V2,17:$Vo,21:127,64:$Vb},{8:[1,128]},o($Vp,[2,34]),{39:[2,4]},o([4,5,15,17,19,28,32,51,53,56,61,64],[2,3]),{39:[2,18]},o($Vq,[2,17]),{8:[1,129]},o($Vp,[2,38]),o($Vp,[2,39]),o($Vp,[2,40]),o($Vp,[2,41]),o($Vp,[2,42]),{10:[2,1]},{7:[2,26],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,27],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,28],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,29],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,30],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,31],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o([4,5,17,19,28,30,32,51,53,56,61,64],[2,10]),{22:[1,130],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vq,[2,13]),o([4,5,17,19,28,32,34,36,38,42,51,53,56,61,64],[2,14]),{5:$V2,17:$Vo,21:131,64:$Vb},{22:[1,132],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{5:$V2,17:$Vo,21:133,64:$Vb},{7:[1,134],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{8:[1,135]},o([4,5,17,19,24,28,32,51,53,56,61,64],[2,7])],
-defaultActions: {19:[2,11],28:[2,9],56:[2,12],58:[2,8],61:[2,19],109:[2,4],111:[2,18],119:[2,1]},
-parseError: function parseError (str, hash) {
-    if (hash.recoverable) {
-        this.trace(str);
-    } else {
-        var error = new Error(str);
-        error.hash = hash;
-        throw error;
-    }
-},
-parse: function parse(input) {
-    var self = this, stack = [0], tstack = [], vstack = [null], lstack = [], table = this.table, yytext = '', yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
-    var args = lstack.slice.call(arguments, 1);
-    var lexer = Object.create(this.lexer);
-    var sharedState = { yy: {} };
-    for (var k in this.yy) {
-        if (Object.prototype.hasOwnProperty.call(this.yy, k)) {
-            sharedState.yy[k] = this.yy[k];
-        }
-    }
-    lexer.setInput(input, sharedState.yy);
-    sharedState.yy.lexer = lexer;
-    sharedState.yy.parser = this;
-    if (typeof lexer.yylloc == 'undefined') {
-        lexer.yylloc = {};
-    }
-    var yyloc = lexer.yylloc;
-    lstack.push(yyloc);
-    var ranges = lexer.options && lexer.options.ranges;
-    if (typeof sharedState.yy.parseError === 'function') {
-        this.parseError = sharedState.yy.parseError;
-    } else {
-        this.parseError = Object.getPrototypeOf(this).parseError;
-    }
-    function popStack(n) {
-        stack.length = stack.length - 2 * n;
-        vstack.length = vstack.length - n;
-        lstack.length = lstack.length - n;
-    }
-    _token_stack:
-        var lex = function () {
-            var token;
-            token = lexer.lex() || EOF;
-            if (typeof token !== 'number') {
-                token = self.symbols_[token] || token;
+            var $0 = $$.length - 1;
+            switch (yystate) {
+                case 1:
+                    console.log("SI");addInstruction(0,"JMPCOND", 0);addTmpIf();tabTmpIf[CurseurIf].jc = ic;
+                    break;
+                case 2:
+                    console.log("ALORS");
+                    break;
+                case 3:
+                    console.log("SINON");addInstruction(0,"JMP",0);tabTmpIf[CurseurIf].jmp = ic;code_genere[tabTmpIf[CurseurIf].jc-1].value = ic;
+                    break;
+                case 4:
+                    console.log("FINSI");code_genere[tabTmpIf[CurseurIf].jmp-1].value = ic;addInstruction(0,"FINSIF", 0);CurseurIf=CurseurIf-1;
+                    break;
+                case 6:
+                    addInstruction($$[$0],"VARFOR", 0);
+                    break;
+                case 7:
+                    console.log("POUR");addTmpFor();console.log(CurseurFor);addInstruction(0,"POUR",0);tabTmpFor[CurseurFor].jc = ic-1;
+                    break;
+                case 8:
+                    console.log("INC");addInstruction(0,"INCFOR",0); code_genere[ic-1].value=tabTmpFor[CurseurFor].jc+1;code_genere[tabTmpFor[CurseurFor].jc].value=ic;
+                    break;
+                case 9:
+                    console.log("INC");addInstruction(0,"FINPOUR",0);CurseurFor=CurseurFor-1;
+                    break;
+                case 10:
+                    console.log("TANT QUE");addInstruction(0,"JMPCONDWHILE",0);tabTmpWhile[CurseurWhile].jmp = ic-1;
+                    break;
+                case 11:
+                    addTmpWhile();addInstruction(0,"WHILEFIRST",0);addTmpWhile(); tabTmpWhile[CurseurWhile].jc = ic;
+                    break;
+                case 12:
+                    console.log("Fin TANT QUE");addInstruction(0,"JMPENDWHILE",0);code_genere[ic-1].value = tabTmpWhile[CurseurWhile].jc-1;code_genere[tabTmpWhile[CurseurWhile].jmp].value = ic;CurseurWhile=CurseurWhile-1;
+                    break;
+                case 13:
+                    console.log("CHOIX");addInstruction(0,"SWITCH",0);addTmpSwitch();
+                    break;
+                case 14:
+                    console.log("CASE");addInstruction(0,"CASE",tabTmpSwitch[CurseurSwitch].nbCase);tabTmpSwitch[CurseurSwitch].tabCase.push(ic-2);tabTmpSwitch[CurseurSwitch].nbCase++;
+                    break;
+                case 15:
+                    console.log("DEFAULT");addInstruction(0,"SWITCHDEFAULT",0);tabTmpSwitch[CurseurSwitch].default=ic-1
+                    break;
+                case 17:
+                    console.log("PAUSE");addInstruction(0,"PAUSE",0);
+                    break;
+                case 18: case 19:
+                    addInstruction(0,"ENDSWITCH",0);tabTmpSwitch[CurseurSwitch].FinSwitch = ic;CurseurSwitch=CurseurSwitch-1;
+                    break;
+                case 26:
+                    addInstruction(0,"SUP", 0);
+                    break;
+                case 27:
+                    addInstruction(0,"INF", 0);
+                    break;
+                case 28:
+                    addInstruction(0,"SUPEGAL", 0);
+                    break;
+                case 29:
+                    addInstruction(0,"INFEGAL", 0);
+                    break;
+                case 30:
+                    addInstruction(0,"EGAL", 0);
+                    break;
+                case 31:
+                    addInstruction(0,"NOTEGAL", 0);
+                    break;
+                case 32:
+                    console.log("-----Debut du programme-----");
+                    break;
+                case 33:
+                    console.log("-----Fin du programme-----");
+                    break;
+                case 38:
+                    addInstruction(0,"MH",0);
+                    break;
+                case 39:
+                    addInstruction(0,"MB",0);
+                    break;
+                case 40:
+                    addInstruction(0,"MG",0);
+                    break;
+                case 41:
+                    addInstruction(0,"MD",0);
+                    break;
+                case 42:
+                    addInstruction(0,"PRINT",0);
+                    break;
+                case 43:
+                    console.log($$[$0-1]);test();
+                    break;
+                case 44:
+                    addInstruction($$[$0-3],"ASSIGN",0 );
+                    break;
+                case 45:
+                    addInstruction($$[$0-2],"INC", 0);
+                    break;
+                case 46:
+                    console.log($$[$0-2]);console.log("non");
+                    break;
+                case 47:
+                    addInstruction(0,"ADD", 0);
+                    break;
+                case 48:
+                    this.$ = Number(yytext);addInstruction(0,"NUM", yytext);
+                    break;
+                case 49:
+                    addInstruction($$[$0],"VAR", 0);
+                    break;
+                case 51:
+                    addInstruction(0,"SUB", 0);
+                    break;
+                case 52:
+                    addInstruction(0,"MULT", 0);
+                    break;
+                case 53:
+                    addInstruction(0,"DIV", 0);
+                    break;
             }
-            return token;
-        };
-    var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
-    while (true) {
-        state = stack[stack.length - 1];
-        if (this.defaultActions[state]) {
-            action = this.defaultActions[state];
-        } else {
-            if (symbol === null || typeof symbol == 'undefined') {
-                symbol = lex();
-            }
-            action = table[state] && table[state][symbol];
-        }
-                    if (typeof action === 'undefined' || !action.length || !action[0]) {
-                var errStr = '';
-                expected = [];
-                for (p in table[state]) {
-                    if (this.terminals_[p] && p > TERROR) {
-                        expected.push('\'' + this.terminals_[p] + '\'');
-                    }
-                }
-                if (lexer.showPosition) {
-                    errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
-                } else {
-                    errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
-                }
-                this.parseError(errStr, {
-                    text: lexer.match,
-                    token: this.terminals_[symbol] || symbol,
-                    line: lexer.yylineno,
-                    loc: yyloc,
-                    expected: expected
-                });
-            }
-        if (action[0] instanceof Array && action.length > 1) {
-            throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
-        }
-        switch (action[0]) {
-        case 1:
-            stack.push(symbol);
-            vstack.push(lexer.yytext);
-            lstack.push(lexer.yylloc);
-            stack.push(action[1]);
-            symbol = null;
-            if (!preErrorSymbol) {
-                yyleng = lexer.yyleng;
-                yytext = lexer.yytext;
-                yylineno = lexer.yylineno;
-                yyloc = lexer.yylloc;
-                if (recovering > 0) {
-                    recovering--;
-                }
+        },
+        table: [{1:$V0,3:5,4:$V1,5:$V2,12:1,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{1:[3]},o($Vc,$V0,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:20,4:$V1,5:$V2,17:$V3,19:$V4,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb}),{52:[1,21]},{54:[1,22]},{9:23,10:[1,24]},{3:5,4:$V1,5:$V2,12:26,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,29:25,30:$V0,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{3:5,4:$V1,5:$V2,12:29,17:$V3,18:7,19:$V4,21:11,23:28,24:$V0,25:27,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},o($Vd,$Ve,{40:30,41:31,43:32,33:33,34:$Vf}),{5:[1,35]},{5:[1,36]},{39:[1,37],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o([39,63,65,66,67],$Vk,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:29,23:43,4:$V1,5:$V2,17:$V3,19:$V4,24:$V0,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,62:[1,42],64:$Vb}),{5:[1,44]},{5:[1,45]},{16:46,17:$Vl,20:$Vm},{5:[1,48]},o($Vn,[2,48]),{5:$V2,17:$Vo,21:49,64:$Vb},{5:[2,11]},o($Vc,[2,24]),o($Vp,[2,32]),{55:[1,51]},{3:5,4:$V1,5:$V2,11:52,12:53,13:$V0,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{8:[1,54]},{39:[1,55]},{30:[1,56]},{39:[1,57]},{39:[2,9]},{24:[1,58]},{39:[1,59]},{35:60,36:[1,62],42:[1,61]},o($Vd,$Ve,{43:32,33:33,41:63,34:$Vf}),o([34,36,38,42],$V0,{44:2,3:5,26:6,18:7,31:8,21:11,27:14,12:64,4:$V1,5:$V2,17:$V3,19:$V4,28:$V5,32:$V6,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb}),{5:[1,65]},{57:[1,66],58:[1,67],59:[1,68],60:[1,69]},{5:$V2,17:$Vo,21:70,64:$Vb},o($Vp,[2,43],{55:[1,71]}),{5:$V2,17:$Vo,21:72,64:$Vb},{5:$V2,17:$Vo,21:73,64:$Vb},{5:$V2,17:$Vo,21:74,64:$Vb},{5:$V2,17:$Vo,21:75,64:$Vb},{5:$V2,17:$Vo,21:76,64:$Vb},{39:[1,77]},{5:$V2,6:78,17:$Vo,21:79,64:$Vb},{5:$V2,6:80,17:$Vo,21:79,64:$Vb},{20:[1,81]},o([7,20],[2,6]),{7:$Vm,16:82,17:$Vl},{7:[1,83],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vn,$Vk),o($Vp,[2,33]),{3:5,4:$V1,5:$V2,12:85,14:84,15:$V0,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{13:[1,86]},o([4,5,13,17,19,28,32,51,53,56,61,64],[2,2]),o($Vp,[2,35]),{39:[2,12]},o($Vp,[2,36]),{39:[2,8]},o($Vp,[2,37]),{3:5,4:$V1,5:$V2,12:87,17:$V3,18:7,19:$V4,21:11,26:6,27:14,28:$V5,31:8,32:$V6,42:$V0,44:2,51:$V7,53:$V8,56:$V9,61:$Va,64:$Vb},{39:[2,19]},{8:[1,88]},o($Vd,[2,22]),o($Vq,[2,16],{37:89,38:[1,90]}),{5:$V2,17:$Vo,21:91,64:$Vb},{7:[1,92]},{7:[1,93]},{7:[1,94]},{7:[1,95]},{7:[1,96],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vp,[2,46]),o($Vr,[2,47],{63:$Vg,65:$Vh,66:$Vi,67:$Vj}),o($Vr,[2,51],{63:$Vg,65:$Vh,66:$Vi,67:$Vj}),o($Vn,[2,52]),o($Vn,[2,53]),{39:[1,97],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vp,[2,45]),{7:[1,98]},{7:[2,25],45:[1,99],46:[1,100],47:[1,101],48:[1,102],49:[1,103],50:[1,104],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[1,105]},{5:[1,106]},{7:[1,107]},o($Vn,[2,50]),{39:[1,108]},{15:[1,109]},{8:[1,110]},{42:[1,111]},o([4,5,17,19,28,32,42,51,53,56,61,64],[2,15]),o($Vq,[2,20]),{39:[1,112]},{7:[1,113],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{39:[1,114]},{39:[1,115]},{39:[1,116]},{39:[1,117]},{39:[1,118]},o($Vp,[2,44]),{8:[1,119]},{5:$V2,17:$Vo,21:120,64:$Vb},{5:$V2,17:$Vo,21:121,64:$Vb},{5:$V2,17:$Vo,21:122,64:$Vb},{5:$V2,17:$Vo,21:123,64:$Vb},{5:$V2,17:$Vo,21:124,64:$Vb},{5:$V2,17:$Vo,21:125,64:$Vb},{8:[1,126]},{5:$V2,17:$Vo,21:127,64:$Vb},{8:[1,128]},o($Vp,[2,34]),{39:[2,4]},o([4,5,15,17,19,28,32,51,53,56,61,64],[2,3]),{39:[2,18]},o($Vq,[2,17]),{8:[1,129]},o($Vp,[2,38]),o($Vp,[2,39]),o($Vp,[2,40]),o($Vp,[2,41]),o($Vp,[2,42]),{10:[2,1]},{7:[2,26],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,27],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,28],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,29],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,30],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{7:[2,31],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o([4,5,17,19,28,30,32,51,53,56,61,64],[2,10]),{22:[1,130],63:$Vg,65:$Vh,66:$Vi,67:$Vj},o($Vq,[2,13]),o([4,5,17,19,28,32,34,36,38,42,51,53,56,61,64],[2,14]),{5:$V2,17:$Vo,21:131,64:$Vb},{22:[1,132],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{5:$V2,17:$Vo,21:133,64:$Vb},{7:[1,134],63:$Vg,65:$Vh,66:$Vi,67:$Vj},{8:[1,135]},o([4,5,17,19,24,28,32,51,53,56,61,64],[2,7])],
+        defaultActions: {19:[2,11],28:[2,9],56:[2,12],58:[2,8],61:[2,19],109:[2,4],111:[2,18],119:[2,1]},
+        parseError: function parseError (str, hash) {
+            if (hash.recoverable) {
+                this.trace(str);
             } else {
-                symbol = preErrorSymbol;
-                preErrorSymbol = null;
+                var error = new Error(str);
+                error.hash = hash;
+                throw error;
             }
-            break;
-        case 2:
-            len = this.productions_[action[1]][1];
-            yyval.$ = vstack[vstack.length - len];
-            yyval._$ = {
-                first_line: lstack[lstack.length - (len || 1)].first_line,
-                last_line: lstack[lstack.length - 1].last_line,
-                first_column: lstack[lstack.length - (len || 1)].first_column,
-                last_column: lstack[lstack.length - 1].last_column
-            };
-            if (ranges) {
-                yyval._$.range = [
-                    lstack[lstack.length - (len || 1)].range[0],
-                    lstack[lstack.length - 1].range[1]
-                ];
+        },
+        parse: function parse(input) {
+            var self = this, stack = [0], tstack = [], vstack = [null], lstack = [], table = this.table, yytext = '', yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
+            var args = lstack.slice.call(arguments, 1);
+            var lexer = Object.create(this.lexer);
+            var sharedState = { yy: {} };
+            for (var k in this.yy) {
+                if (Object.prototype.hasOwnProperty.call(this.yy, k)) {
+                    sharedState.yy[k] = this.yy[k];
+                }
             }
-            r = this.performAction.apply(yyval, [
-                yytext,
-                yyleng,
-                yylineno,
-                sharedState.yy,
-                action[1],
-                vstack,
-                lstack
-            ].concat(args));
-            if (typeof r !== 'undefined') {
-                return r;
+            lexer.setInput(input, sharedState.yy);
+            sharedState.yy.lexer = lexer;
+            sharedState.yy.parser = this;
+            if (typeof lexer.yylloc == 'undefined') {
+                lexer.yylloc = {};
             }
-            if (len) {
-                stack = stack.slice(0, -1 * len * 2);
-                vstack = vstack.slice(0, -1 * len);
-                lstack = lstack.slice(0, -1 * len);
+            var yyloc = lexer.yylloc;
+            lstack.push(yyloc);
+            var ranges = lexer.options && lexer.options.ranges;
+            if (typeof sharedState.yy.parseError === 'function') {
+                this.parseError = sharedState.yy.parseError;
+            } else {
+                this.parseError = Object.getPrototypeOf(this).parseError;
             }
-            stack.push(this.productions_[action[1]][0]);
-            vstack.push(yyval.$);
-            lstack.push(yyval._$);
-            newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
-            stack.push(newState);
-            break;
-        case 3:
+            function popStack(n) {
+                stack.length = stack.length - 2 * n;
+                vstack.length = vstack.length - n;
+                lstack.length = lstack.length - n;
+            }
+            _token_stack:
+                var lex = function () {
+                    var token;
+                    token = lexer.lex() || EOF;
+                    if (typeof token !== 'number') {
+                        token = self.symbols_[token] || token;
+                    }
+                    return token;
+                };
+            var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
+            while (true) {
+                state = stack[stack.length - 1];
+                if (this.defaultActions[state]) {
+                    action = this.defaultActions[state];
+                } else {
+                    if (symbol === null || typeof symbol == 'undefined') {
+                        symbol = lex();
+                    }
+                    action = table[state] && table[state][symbol];
+                }
+                if (typeof action === 'undefined' || !action.length || !action[0]) {
+                    var errStr = '';
+                    expected = [];
+                    for (p in table[state]) {
+                        if (this.terminals_[p] && p > TERROR) {
+                            expected.push('\'' + this.terminals_[p] + '\'');
+                        }
+                    }
+                    if (lexer.showPosition) {
+                        errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
+                    } else {
+                        errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
+                    }
+                    this.parseError(errStr, {
+                        text: lexer.match,
+                        token: this.terminals_[symbol] || symbol,
+                        line: lexer.yylineno,
+                        loc: yyloc,
+                        expected: expected
+                    });
+                }
+                if (action[0] instanceof Array && action.length > 1) {
+                    throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
+                }
+                switch (action[0]) {
+                    case 1:
+                        stack.push(symbol);
+                        vstack.push(lexer.yytext);
+                        lstack.push(lexer.yylloc);
+                        stack.push(action[1]);
+                        symbol = null;
+                        if (!preErrorSymbol) {
+                            yyleng = lexer.yyleng;
+                            yytext = lexer.yytext;
+                            yylineno = lexer.yylineno;
+                            yyloc = lexer.yylloc;
+                            if (recovering > 0) {
+                                recovering--;
+                            }
+                        } else {
+                            symbol = preErrorSymbol;
+                            preErrorSymbol = null;
+                        }
+                        break;
+                    case 2:
+                        len = this.productions_[action[1]][1];
+                        yyval.$ = vstack[vstack.length - len];
+                        yyval._$ = {
+                            first_line: lstack[lstack.length - (len || 1)].first_line,
+                            last_line: lstack[lstack.length - 1].last_line,
+                            first_column: lstack[lstack.length - (len || 1)].first_column,
+                            last_column: lstack[lstack.length - 1].last_column
+                        };
+                        if (ranges) {
+                            yyval._$.range = [
+                                lstack[lstack.length - (len || 1)].range[0],
+                                lstack[lstack.length - 1].range[1]
+                            ];
+                        }
+                        r = this.performAction.apply(yyval, [
+                            yytext,
+                            yyleng,
+                            yylineno,
+                            sharedState.yy,
+                            action[1],
+                            vstack,
+                            lstack
+                        ].concat(args));
+                        if (typeof r !== 'undefined') {
+                            return r;
+                        }
+                        if (len) {
+                            stack = stack.slice(0, -1 * len * 2);
+                            vstack = vstack.slice(0, -1 * len);
+                            lstack = lstack.slice(0, -1 * len);
+                        }
+                        stack.push(this.productions_[action[1]][0]);
+                        vstack.push(yyval.$);
+                        lstack.push(yyval._$);
+                        newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
+                        stack.push(newState);
+                        break;
+                    case 3:
+                        return true;
+                }
+            }
             return true;
-        }
-    }
-    return true;
-}};
-/* generated by jison-lex 0.3.4 */
-var lexer = (function(){
-var lexer = ({
+        }};
+    /* generated by jison-lex 0.3.4 */
+    var lexer = (function(){
+        var lexer = ({
 
-EOF:1,
+            EOF:1,
 
-parseError:function parseError(str, hash) {
-        if (this.yy.parser) {
-            this.yy.parser.parseError(str, hash);
-        } else {
-            throw new Error(str);
-        }
-    },
+            parseError:function parseError(str, hash) {
+                if (this.yy.parser) {
+                    this.yy.parser.parseError(str, hash);
+                } else {
+                    throw new Error(str);
+                }
+            },
 
 // resets the lexer, sets new input
-setInput:function (input, yy) {
-        this.yy = yy || this.yy || {};
-        this._input = input;
-        this._more = this._backtrack = this.done = false;
-        this.yylineno = this.yyleng = 0;
-        this.yytext = this.matched = this.match = '';
-        this.conditionStack = ['INITIAL'];
-        this.yylloc = {
-            first_line: 1,
-            first_column: 0,
-            last_line: 1,
-            last_column: 0
-        };
-        if (this.options.ranges) {
-            this.yylloc.range = [0,0];
-        }
-        this.offset = 0;
-        return this;
-    },
+            setInput:function (input, yy) {
+                this.yy = yy || this.yy || {};
+                this._input = input;
+                this._more = this._backtrack = this.done = false;
+                this.yylineno = this.yyleng = 0;
+                this.yytext = this.matched = this.match = '';
+                this.conditionStack = ['INITIAL'];
+                this.yylloc = {
+                    first_line: 1,
+                    first_column: 0,
+                    last_line: 1,
+                    last_column: 0
+                };
+                if (this.options.ranges) {
+                    this.yylloc.range = [0,0];
+                }
+                this.offset = 0;
+                return this;
+            },
 
 // consumes and returns one char from the input
-input:function () {
-        var ch = this._input[0];
-        this.yytext += ch;
-        this.yyleng++;
-        this.offset++;
-        this.match += ch;
-        this.matched += ch;
-        var lines = ch.match(/(?:\r\n?|\n).*/g);
-        if (lines) {
-            this.yylineno++;
-            this.yylloc.last_line++;
-        } else {
-            this.yylloc.last_column++;
-        }
-        if (this.options.ranges) {
-            this.yylloc.range[1]++;
-        }
+            input:function () {
+                var ch = this._input[0];
+                this.yytext += ch;
+                this.yyleng++;
+                this.offset++;
+                this.match += ch;
+                this.matched += ch;
+                var lines = ch.match(/(?:\r\n?|\n).*/g);
+                if (lines) {
+                    this.yylineno++;
+                    this.yylloc.last_line++;
+                } else {
+                    this.yylloc.last_column++;
+                }
+                if (this.options.ranges) {
+                    this.yylloc.range[1]++;
+                }
 
-        this._input = this._input.slice(1);
-        return ch;
-    },
+                this._input = this._input.slice(1);
+                return ch;
+            },
 
 // unshifts one char (or a string) into the input
-unput:function (ch) {
-        var len = ch.length;
-        var lines = ch.split(/(?:\r\n?|\n)/g);
+            unput:function (ch) {
+                var len = ch.length;
+                var lines = ch.split(/(?:\r\n?|\n)/g);
 
-        this._input = ch + this._input;
-        this.yytext = this.yytext.substr(0, this.yytext.length - len);
-        //this.yyleng -= len;
-        this.offset -= len;
-        var oldLines = this.match.split(/(?:\r\n?|\n)/g);
-        this.match = this.match.substr(0, this.match.length - 1);
-        this.matched = this.matched.substr(0, this.matched.length - 1);
+                this._input = ch + this._input;
+                this.yytext = this.yytext.substr(0, this.yytext.length - len);
+                //this.yyleng -= len;
+                this.offset -= len;
+                var oldLines = this.match.split(/(?:\r\n?|\n)/g);
+                this.match = this.match.substr(0, this.match.length - 1);
+                this.matched = this.matched.substr(0, this.matched.length - 1);
 
-        if (lines.length - 1) {
-            this.yylineno -= lines.length - 1;
-        }
-        var r = this.yylloc.range;
+                if (lines.length - 1) {
+                    this.yylineno -= lines.length - 1;
+                }
+                var r = this.yylloc.range;
 
-        this.yylloc = {
-            first_line: this.yylloc.first_line,
-            last_line: this.yylineno + 1,
-            first_column: this.yylloc.first_column,
-            last_column: lines ?
-                (lines.length === oldLines.length ? this.yylloc.first_column : 0)
-                 + oldLines[oldLines.length - lines.length].length - lines[0].length :
-              this.yylloc.first_column - len
-        };
+                this.yylloc = {
+                    first_line: this.yylloc.first_line,
+                    last_line: this.yylineno + 1,
+                    first_column: this.yylloc.first_column,
+                    last_column: lines ?
+                        (lines.length === oldLines.length ? this.yylloc.first_column : 0)
+                        + oldLines[oldLines.length - lines.length].length - lines[0].length :
+                        this.yylloc.first_column - len
+                };
 
-        if (this.options.ranges) {
-            this.yylloc.range = [r[0], r[0] + this.yyleng - len];
-        }
-        this.yyleng = this.yytext.length;
-        return this;
-    },
+                if (this.options.ranges) {
+                    this.yylloc.range = [r[0], r[0] + this.yyleng - len];
+                }
+                this.yyleng = this.yytext.length;
+                return this;
+            },
 
 // When called from action, caches matched text and appends it on next action
-more:function () {
-        this._more = true;
-        return this;
-    },
+            more:function () {
+                this._more = true;
+                return this;
+            },
 
 // When called from action, signals the lexer that this rule fails to match the input, so the next matching rule (regex) should be tested instead.
-reject:function () {
-        if (this.options.backtrack_lexer) {
-            this._backtrack = true;
-        } else {
-            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. You can only invoke reject() in the lexer when the lexer is of the backtracking persuasion (options.backtrack_lexer = true).\n' + this.showPosition(), {
-                text: "",
-                token: null,
-                line: this.yylineno
-            });
+            reject:function () {
+                if (this.options.backtrack_lexer) {
+                    this._backtrack = true;
+                } else {
+                    return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. You can only invoke reject() in the lexer when the lexer is of the backtracking persuasion (options.backtrack_lexer = true).\n' + this.showPosition(), {
+                        text: "",
+                        token: null,
+                        line: this.yylineno
+                    });
 
-        }
-        return this;
-    },
+                }
+                return this;
+            },
 
 // retain first n characters of the match
-less:function (n) {
-        this.unput(this.match.slice(n));
-    },
+            less:function (n) {
+                this.unput(this.match.slice(n));
+            },
 
 // displays already matched input, i.e. for error messages
-pastInput:function () {
-        var past = this.matched.substr(0, this.matched.length - this.match.length);
-        return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
-    },
+            pastInput:function () {
+                var past = this.matched.substr(0, this.matched.length - this.match.length);
+                return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
+            },
 
 // displays upcoming input, i.e. for error messages
-upcomingInput:function () {
-        var next = this.match;
-        if (next.length < 20) {
-            next += this._input.substr(0, 20-next.length);
-        }
-        return (next.substr(0,20) + (next.length > 20 ? '...' : '')).replace(/\n/g, "");
-    },
+            upcomingInput:function () {
+                var next = this.match;
+                if (next.length < 20) {
+                    next += this._input.substr(0, 20-next.length);
+                }
+                return (next.substr(0,20) + (next.length > 20 ? '...' : '')).replace(/\n/g, "");
+            },
 
 // displays the character position where the lexing error occurred, i.e. for error messages
-showPosition:function () {
-        var pre = this.pastInput();
-        var c = new Array(pre.length + 1).join("-");
-        return pre + this.upcomingInput() + "\n" + c + "^";
-    },
+            showPosition:function () {
+                var pre = this.pastInput();
+                var c = new Array(pre.length + 1).join("-");
+                return pre + this.upcomingInput() + "\n" + c + "^";
+            },
 
 // test the lexed token: return FALSE when not a match, otherwise return token
-test_match:function(match, indexed_rule) {
-        var token,
-            lines,
-            backup;
+            test_match:function(match, indexed_rule) {
+                var token,
+                    lines,
+                    backup;
 
-        if (this.options.backtrack_lexer) {
-            // save context
-            backup = {
-                yylineno: this.yylineno,
-                yylloc: {
-                    first_line: this.yylloc.first_line,
-                    last_line: this.last_line,
-                    first_column: this.yylloc.first_column,
-                    last_column: this.yylloc.last_column
-                },
-                yytext: this.yytext,
-                match: this.match,
-                matches: this.matches,
-                matched: this.matched,
-                yyleng: this.yyleng,
-                offset: this.offset,
-                _more: this._more,
-                _input: this._input,
-                yy: this.yy,
-                conditionStack: this.conditionStack.slice(0),
-                done: this.done
-            };
-            if (this.options.ranges) {
-                backup.yylloc.range = this.yylloc.range.slice(0);
-            }
-        }
+                if (this.options.backtrack_lexer) {
+                    // save context
+                    backup = {
+                        yylineno: this.yylineno,
+                        yylloc: {
+                            first_line: this.yylloc.first_line,
+                            last_line: this.last_line,
+                            first_column: this.yylloc.first_column,
+                            last_column: this.yylloc.last_column
+                        },
+                        yytext: this.yytext,
+                        match: this.match,
+                        matches: this.matches,
+                        matched: this.matched,
+                        yyleng: this.yyleng,
+                        offset: this.offset,
+                        _more: this._more,
+                        _input: this._input,
+                        yy: this.yy,
+                        conditionStack: this.conditionStack.slice(0),
+                        done: this.done
+                    };
+                    if (this.options.ranges) {
+                        backup.yylloc.range = this.yylloc.range.slice(0);
+                    }
+                }
 
-        lines = match[0].match(/(?:\r\n?|\n).*/g);
-        if (lines) {
-            this.yylineno += lines.length;
-        }
-        this.yylloc = {
-            first_line: this.yylloc.last_line,
-            last_line: this.yylineno + 1,
-            first_column: this.yylloc.last_column,
-            last_column: lines ?
-                         lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length :
-                         this.yylloc.last_column + match[0].length
-        };
-        this.yytext += match[0];
-        this.match += match[0];
-        this.matches = match;
-        this.yyleng = this.yytext.length;
-        if (this.options.ranges) {
-            this.yylloc.range = [this.offset, this.offset += this.yyleng];
-        }
-        this._more = false;
-        this._backtrack = false;
-        this._input = this._input.slice(match[0].length);
-        this.matched += match[0];
-        token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
-        if (this.done && this._input) {
-            this.done = false;
-        }
-        if (token) {
-            return token;
-        } else if (this._backtrack) {
-            // recover context
-            for (var k in backup) {
-                this[k] = backup[k];
-            }
-            return false; // rule action called reject() implying the next rule should be tested instead.
-        }
-        return false;
-    },
+                lines = match[0].match(/(?:\r\n?|\n).*/g);
+                if (lines) {
+                    this.yylineno += lines.length;
+                }
+                this.yylloc = {
+                    first_line: this.yylloc.last_line,
+                    last_line: this.yylineno + 1,
+                    first_column: this.yylloc.last_column,
+                    last_column: lines ?
+                        lines[lines.length - 1].length - lines[lines.length - 1].match(/\r?\n?/)[0].length :
+                        this.yylloc.last_column + match[0].length
+                };
+                this.yytext += match[0];
+                this.match += match[0];
+                this.matches = match;
+                this.yyleng = this.yytext.length;
+                if (this.options.ranges) {
+                    this.yylloc.range = [this.offset, this.offset += this.yyleng];
+                }
+                this._more = false;
+                this._backtrack = false;
+                this._input = this._input.slice(match[0].length);
+                this.matched += match[0];
+                token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
+                if (this.done && this._input) {
+                    this.done = false;
+                }
+                if (token) {
+                    return token;
+                } else if (this._backtrack) {
+                    // recover context
+                    for (var k in backup) {
+                        this[k] = backup[k];
+                    }
+                    return false; // rule action called reject() implying the next rule should be tested instead.
+                }
+                return false;
+            },
 
 // return next match in input
-next:function () {
-        if (this.done) {
-            return this.EOF;
-        }
-        if (!this._input) {
-            this.done = true;
-        }
+            next:function () {
+                if (this.done) {
+                    return this.EOF;
+                }
+                if (!this._input) {
+                    this.done = true;
+                }
 
-        var token,
-            match,
-            tempMatch,
-            index;
-        if (!this._more) {
-            this.yytext = '';
-            this.match = '';
-        }
-        var rules = this._currentRules();
-        for (var i = 0; i < rules.length; i++) {
-            tempMatch = this._input.match(this.rules[rules[i]]);
-            if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
-                match = tempMatch;
-                index = i;
-                if (this.options.backtrack_lexer) {
-                    token = this.test_match(tempMatch, rules[i]);
+                var token,
+                    match,
+                    tempMatch,
+                    index;
+                if (!this._more) {
+                    this.yytext = '';
+                    this.match = '';
+                }
+                var rules = this._currentRules();
+                for (var i = 0; i < rules.length; i++) {
+                    tempMatch = this._input.match(this.rules[rules[i]]);
+                    if (tempMatch && (!match || tempMatch[0].length > match[0].length)) {
+                        match = tempMatch;
+                        index = i;
+                        if (this.options.backtrack_lexer) {
+                            token = this.test_match(tempMatch, rules[i]);
+                            if (token !== false) {
+                                return token;
+                            } else if (this._backtrack) {
+                                match = false;
+                                continue; // rule action called reject() implying a rule MISmatch.
+                            } else {
+                                // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+                                return false;
+                            }
+                        } else if (!this.options.flex) {
+                            break;
+                        }
+                    }
+                }
+                if (match) {
+                    token = this.test_match(match, rules[index]);
                     if (token !== false) {
                         return token;
-                    } else if (this._backtrack) {
-                        match = false;
-                        continue; // rule action called reject() implying a rule MISmatch.
-                    } else {
-                        // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
-                        return false;
                     }
-                } else if (!this.options.flex) {
-                    break;
+                    // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
+                    return false;
                 }
-            }
-        }
-        if (match) {
-            token = this.test_match(match, rules[index]);
-            if (token !== false) {
-                return token;
-            }
-            // else: this is a lexer rule which consumes input without producing a token (e.g. whitespace)
-            return false;
-        }
-        if (this._input === "") {
-            return this.EOF;
-        } else {
-            return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(), {
-                text: "",
-                token: null,
-                line: this.yylineno
-            });
-        }
-    },
+                if (this._input === "") {
+                    return this.EOF;
+                } else {
+                    return this.parseError('Lexical error on line ' + (this.yylineno + 1) + '. Unrecognized text.\n' + this.showPosition(), {
+                        text: "",
+                        token: null,
+                        line: this.yylineno
+                    });
+                }
+            },
 
 // return next match that has a token
-lex:function lex () {
-        var r = this.next();
-        if (r) {
-            return r;
-        } else {
-            return this.lex();
-        }
-    },
+            lex:function lex () {
+                var r = this.next();
+                if (r) {
+                    return r;
+                } else {
+                    return this.lex();
+                }
+            },
 
 // activates a new lexer condition state (pushes the new lexer condition state onto the condition stack)
-begin:function begin (condition) {
-        this.conditionStack.push(condition);
-    },
+            begin:function begin (condition) {
+                this.conditionStack.push(condition);
+            },
 
 // pop the previously active lexer condition state off the condition stack
-popState:function popState () {
-        var n = this.conditionStack.length - 1;
-        if (n > 0) {
-            return this.conditionStack.pop();
-        } else {
-            return this.conditionStack[0];
-        }
-    },
+            popState:function popState () {
+                var n = this.conditionStack.length - 1;
+                if (n > 0) {
+                    return this.conditionStack.pop();
+                } else {
+                    return this.conditionStack[0];
+                }
+            },
 
 // produce the lexer rule set which is active for the currently active lexer condition state
-_currentRules:function _currentRules () {
-        if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
-            return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
-        } else {
-            return this.conditions["INITIAL"].rules;
-        }
-    },
+            _currentRules:function _currentRules () {
+                if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
+                    return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
+                } else {
+                    return this.conditions["INITIAL"].rules;
+                }
+            },
 
 // return the currently active lexer condition state; when an index argument is provided it produces the N-th previous condition state, if available
-topState:function topState (n) {
-        n = this.conditionStack.length - 1 - Math.abs(n || 0);
-        if (n >= 0) {
-            return this.conditionStack[n];
-        } else {
-            return "INITIAL";
-        }
-    },
+            topState:function topState (n) {
+                n = this.conditionStack.length - 1 - Math.abs(n || 0);
+                if (n >= 0) {
+                    return this.conditionStack[n];
+                } else {
+                    return "INITIAL";
+                }
+            },
 
 // alias for begin(condition)
-pushState:function pushState (condition) {
-        this.begin(condition);
-    },
+            pushState:function pushState (condition) {
+                this.begin(condition);
+            },
 
 // return the number of states currently on the stack
-stateStackSize:function stateStackSize() {
-        return this.conditionStack.length;
-    },
-options: {},
-performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
-var YYSTATE=YY_START;
-switch($avoiding_name_collisions) {
-case 0:/* skip whitespace */
-break;
-case 1:return '\n';
-break;
-case 2:return 64;
-break;
-case 3:return 61;
-break;
-case 4:return 39;
-break;
-case 5:return 22;
-break;
-case 6:return 8;
-break;
-case 7:return 49;
-break;
-case 8:return 62;
-break;
-case 9:return 45;
-break;
-case 10:return 66;
-break;
-case 11:return 67;
-break;
-case 12:return 65;
-break;
-case 13:return 'INC';
-break;
-case 14:return 63;
-break;
-case 15:return 50;
-break;
-case 16:return 47;
-break;
-case 17:return 48;
-break;
-case 18:return '^';
-break;
-case 19:return 52;
-break;
-case 20:return 53;
-break;
-case 21:return 5;
-break;
-case 22:return 7;
-break;
-case 23:return 'PI';
-break;
-case 24:return 45;
-break;
-case 25:return 46;
-break;
-case 26:return 32;
-break;
-case 27:return 34;
-break;
-case 28:return 36;
-break;
-case 29:return 38;
-break;
-case 30:return 42;
-break;
-case 31:return 30;
-break;
-case 32:return 24;
-break;
-case 33:return 4;
-break;
-case 34:return 10;
-break;
-case 35:return 13;
-break;
-case 36:return 15;
-break;
-case 37:return 19;
-break;
-case 38:return 'FAIRE';
-break;
-case 39:return 20;
-break;
-case 40:return 'A';
-break;
-case 41:return 'E';
-break;
-case 42:return 55;
-break;
-case 43:return 56;
-break;
-case 44:return 57;
-break;
-case 45:return 58;
-break;
-case 46:return 60;
-break;
-case 47:return 59;
-break;
-case 48:return 51;
-break;
-case 49:return 54;
-break;
-case 50:return 28;
-break;
-case 51:return 'TEST';
-break;
-case 52:return 17;
-break;
-}
-},
-rules: [/^(?:\s+)/,/^(?:\\n)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:Afficher\b)/,/^(?:;)/,/^(?:,)/,/^(?::)/,/^(?:==)/,/^(?:=)/,/^(?:>)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+\+)/,/^(?:\+)/,/^(?:!=)/,/^(?:>=)/,/^(?:<=)/,/^(?:\^)/,/^(?:\{)/,/^(?:\})/,/^(?:\()/,/^(?:\))/,/^(?:PI\b)/,/^(?:>)/,/^(?:<)/,/^(?:Selon\b)/,/^(?:Cas\b)/,/^(?:Defaut\b)/,/^(?:Pause\b)/,/^(?:FinChoix\b)/,/^(?:FinTantque\b)/,/^(?:FinPour\b)/,/^(?:Si\b)/,/^(?:Alors\b)/,/^(?:Sinon\b)/,/^(?:FinSi\b)/,/^(?:Pour\b)/,/^(?:Faire\b)/,/^(?:Allant De\b)/,/^(?:A\b)/,/^(?:E\b)/,/^(?:$)/,/^(?:move\b)/,/^(?:haut\b)/,/^(?:bas\b)/,/^(?:droite\b)/,/^(?:gauche\b)/,/^(?:DEBUT SOURCE\b)/,/^(?:FIN SOURCE\b)/,/^(?:Tantque\b)/,/^(?:test\b)/,/^(?:[A-Za-z_][A-Za-z_0-9]*)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52],"inclusive":true}}
-});
-return lexer;
-})();
-parser.lexer = lexer;
-function Parser () {
-  this.yy = {};
-}
-Parser.prototype = parser;parser.Parser = Parser;
-return new Parser;
+            stateStackSize:function stateStackSize() {
+                return this.conditionStack.length;
+            },
+            options: {},
+            performAction: function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
+                var YYSTATE=YY_START;
+                switch($avoiding_name_collisions) {
+                    case 0:/* skip whitespace */
+                        break;
+                    case 1:return '\n';
+                        break;
+                    case 2:return 64;
+                        break;
+                    case 3:return 61;
+                        break;
+                    case 4:return 39;
+                        break;
+                    case 5:return 22;
+                        break;
+                    case 6:return 8;
+                        break;
+                    case 7:return 49;
+                        break;
+                    case 8:return 62;
+                        break;
+                    case 9:return 45;
+                        break;
+                    case 10:return 66;
+                        break;
+                    case 11:return 67;
+                        break;
+                    case 12:return 65;
+                        break;
+                    case 13:return 'INC';
+                        break;
+                    case 14:return 63;
+                        break;
+                    case 15:return 50;
+                        break;
+                    case 16:return 47;
+                        break;
+                    case 17:return 48;
+                        break;
+                    case 18:return '^';
+                        break;
+                    case 19:return 52;
+                        break;
+                    case 20:return 53;
+                        break;
+                    case 21:return 5;
+                        break;
+                    case 22:return 7;
+                        break;
+                    case 23:return 'PI';
+                        break;
+                    case 24:return 45;
+                        break;
+                    case 25:return 46;
+                        break;
+                    case 26:return 32;
+                        break;
+                    case 27:return 34;
+                        break;
+                    case 28:return 36;
+                        break;
+                    case 29:return 38;
+                        break;
+                    case 30:return 42;
+                        break;
+                    case 31:return 30;
+                        break;
+                    case 32:return 24;
+                        break;
+                    case 33:return 4;
+                        break;
+                    case 34:return 10;
+                        break;
+                    case 35:return 13;
+                        break;
+                    case 36:return 15;
+                        break;
+                    case 37:return 19;
+                        break;
+                    case 38:return 'FAIRE';
+                        break;
+                    case 39:return 20;
+                        break;
+                    case 40:return 'A';
+                        break;
+                    case 41:return 'E';
+                        break;
+                    case 42:return 55;
+                        break;
+                    case 43:return 56;
+                        break;
+                    case 44:return 57;
+                        break;
+                    case 45:return 58;
+                        break;
+                    case 46:return 60;
+                        break;
+                    case 47:return 59;
+                        break;
+                    case 48:return 51;
+                        break;
+                    case 49:return 54;
+                        break;
+                    case 50:return 28;
+                        break;
+                    case 51:return 'TEST';
+                        break;
+                    case 52:return 17;
+                        break;
+                }
+            },
+            rules: [/^(?:\s+)/,/^(?:\\n)/,/^(?:[0-9]+(\.[0-9]+)?\b)/,/^(?:Afficher\b)/,/^(?:;)/,/^(?:,)/,/^(?::)/,/^(?:==)/,/^(?:=)/,/^(?:>)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+\+)/,/^(?:\+)/,/^(?:!=)/,/^(?:>=)/,/^(?:<=)/,/^(?:\^)/,/^(?:\{)/,/^(?:\})/,/^(?:\()/,/^(?:\))/,/^(?:PI\b)/,/^(?:>)/,/^(?:<)/,/^(?:Selon\b)/,/^(?:Cas\b)/,/^(?:Defaut\b)/,/^(?:Pause\b)/,/^(?:FinChoix\b)/,/^(?:FinTantque\b)/,/^(?:FinPour\b)/,/^(?:Si\b)/,/^(?:Alors\b)/,/^(?:Sinon\b)/,/^(?:FinSi\b)/,/^(?:Pour\b)/,/^(?:Faire\b)/,/^(?:Allant De\b)/,/^(?:A\b)/,/^(?:E\b)/,/^(?:$)/,/^(?:move\b)/,/^(?:haut\b)/,/^(?:bas\b)/,/^(?:droite\b)/,/^(?:gauche\b)/,/^(?:DEBUT SOURCE\b)/,/^(?:FIN SOURCE\b)/,/^(?:Tantque\b)/,/^(?:test\b)/,/^(?:[A-Za-z_][A-Za-z_0-9]*)/],
+            conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52],"inclusive":true}}
+        });
+        return lexer;
+    })();
+    parser.lexer = lexer;
+    function Parser () {
+        this.yy = {};
+    }
+    Parser.prototype = parser;parser.Parser = Parser;
+    return new Parser;
 })();
 
 
 if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-exports.parser = langage;
-exports.Parser = langage.Parser;
-exports.parse = function () { return langage.parse.apply(langage, arguments); };
-exports.main = function commonjsMain (args) {
-    if (!args[1]) {
-        console.log('Usage: '+args[0]+' FILE');
-        process.exit(1);
+    exports.parser = langage;
+    exports.Parser = langage.Parser;
+    exports.parse = function () { return langage.parse.apply(langage, arguments); };
+    exports.main = function commonjsMain (args) {
+        if (!args[1]) {
+            console.log('Usage: '+args[0]+' FILE');
+            process.exit(1);
+        }
+        var source = require('fs').readFileSync(require('path').normalize(args[1]), "utf8");
+        return exports.parser.parse(source);
+    };
+    if (typeof module !== 'undefined' && require.main === module) {
+        exports.main(process.argv.slice(1));
     }
-    var source = require('fs').readFileSync(require('path').normalize(args[1]), "utf8");
-    return exports.parser.parse(source);
-};
-if (typeof module !== 'undefined' && require.main === module) {
-  exports.main(process.argv.slice(1));
-}
 }
