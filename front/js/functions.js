@@ -1,10 +1,19 @@
 function GameOver() {
     document.getElementById("popupGameOver").hidden = false;
 
-    let btnSubmit = document.getElementById("compilation");
-    btnSubmit.disabled = true;
+    document.getElementById("compilation").disabled = false;
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;
+
+    let objBTN = document.getElementById("objBTN");
+    objBTN.disabled = true;
+    let rulesBTN = document.getElementById("rulesBTN");
+    rulesBTN.disabled = true;
+
+    let example = document.getElementById("example");
+    example.disabled = true;
+    let back = document.getElementById("back");
+    back.disabled = true;
 
     let tryAgain = document.getElementById('tryAgain');
     tryAgain.addEventListener('click', () => {
@@ -59,6 +68,16 @@ function Win() {
     btnSubmit.disabled = true;
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;
+
+    let objBTN = document.getElementById("objBTN");
+    objBTN.disabled = true;
+    let rulesBTN = document.getElementById("rulesBTN");
+    rulesBTN.disabled = true;
+
+    let example = document.getElementById("example");
+    example.disabled = true;
+    let back = document.getElementById("back");
+    back.disabled = true;
 
     let next = document.getElementById('next');
     next.addEventListener('click', () => {

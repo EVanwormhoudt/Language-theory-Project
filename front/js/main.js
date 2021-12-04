@@ -2,25 +2,25 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
 document.getElementById('back').style.visibility = 'hidden';
 
-let examples = ['DEBUT SOURCE {\n' + '\n' +'move(bas);'+ '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE' ,
-    'DEBUT SOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour' + '\n' + '}FIN SOURCE',
-    'DEBUT SOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' +'FinSi;' +'\n' + '}FIN SOURCE',
-    'DEBUT SOURCE {\n' + 'nbPas = 16;'+ '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' +'\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n'+ '\t'  +'move(haut);' +'\n' +'FinPour' + '\n' +'}FIN SOURCE',
-    'DEBUT SOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' +'\n\tnbPas = 2;' +'\n\tPause;'+'\nDefaut: //si var  ne vaut ni 1 ni 2'+'\n\tnbPas = 6;' +'\n\tPause;' +'\nFinSelon;' +'\nAfficher(nbPas);' +'\n}FIN SOURCE']
+let examples = ['DEBUT SOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE',
+'DEBUT SOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FIN SOURCE',
+'DEBUT SOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '}FIN SOURCE',
+'DEBUT SOURCE {\n' + 'nbPas = 16;' + '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' + '\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n' + '\t' + 'move(haut);' + '\n' + 'FinPour' + '\n' + '}FIN SOURCE',
+'DEBUT SOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' + '\n\tnbPas = 2;' + '\n\tPause;' + '\nDefaut: //si var  ne vaut ni 1 ni 2' + '\n\tnbPas = 6;' + '\n\tPause;' + '\nFinSelon;' + '\nAfficher(nbPas);' + '\n}FIN SOURCE']
 
-let liste = "\n"+"\n" + "\n" + "Liste des fonctions :" +"\n" +"Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
+let liste = "\n" + "\n" + "\n" + "Liste des fonctions :" + "\n" + "Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
     "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
     "\n" + "test(haut) //fonction qui renvoie 0 si le personnage" + "\n" + " ne peut pas aller dans la direction souhaitée sinon 1";
 
-document.getElementById("example").addEventListener('click', ()=>{
+document.getElementById("example").addEventListener('click', () => {
     document.getElementById('back').style.visibility = 'visible';
     document.getElementById("clear").disabled = true;
     document.getElementById("compilation").disabled = true;
     document.getElementById("example").disabled = true;
     let tmp = editor.getValue();
-    editor.setValue(examples[lvl-1] + liste);
+    editor.setValue(examples[lvl - 1] + liste);
 
-    document.getElementById("back").addEventListener('click', ()=>{
+    document.getElementById("back").addEventListener('click', () => {
         document.getElementById('back').style.visibility = 'hidden';
         document.getElementById("clear").disabled = false;
         document.getElementById("compilation").disabled = false;
@@ -32,7 +32,7 @@ document.getElementById("example").addEventListener('click', ()=>{
 })
 
 
-var Range = function(startRow, startColumn, endRow, endColumn) {
+var Range = function (startRow, startColumn, endRow, endColumn) {
     this.start = {
         row: startRow,
         column: startColumn
@@ -44,22 +44,22 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
     };
 };
 
-(function() {
-    this.isEqual = function(range) {
+(function () {
+    this.isEqual = function (range) {
         return this.start.row === range.start.row &&
             this.end.row === range.end.row &&
             this.start.column === range.start.column &&
             this.end.column === range.end.column;
     };
-    this.toString = function() {
+    this.toString = function () {
         return ("Range: [" + this.start.row + "/" + this.start.column +
             "] -> [" + this.end.row + "/" + this.end.column + "]");
     };
 
-    this.contains = function(row, column) {
+    this.contains = function (row, column) {
         return this.compare(row, column) == 0;
     };
-    this.compareRange = function(range) {
+    this.compareRange = function (range) {
         var cmp,
             end = range.end,
             start = range.start;
@@ -87,23 +87,23 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             }
         }
     };
-    this.comparePoint = function(p) {
+    this.comparePoint = function (p) {
         return this.compare(p.row, p.column);
     };
-    this.containsRange = function(range) {
+    this.containsRange = function (range) {
         return this.comparePoint(range.start) == 0 && this.comparePoint(range.end) == 0;
     };
-    this.intersects = function(range) {
+    this.intersects = function (range) {
         var cmp = this.compareRange(range);
         return (cmp == -1 || cmp == 0 || cmp == 1);
     };
-    this.isEnd = function(row, column) {
+    this.isEnd = function (row, column) {
         return this.end.row == row && this.end.column == column;
     };
-    this.isStart = function(row, column) {
+    this.isStart = function (row, column) {
         return this.start.row == row && this.start.column == column;
     };
-    this.setStart = function(row, column) {
+    this.setStart = function (row, column) {
         if (typeof row == "object") {
             this.start.column = row.column;
             this.start.row = row.row;
@@ -112,7 +112,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             this.start.column = column;
         }
     };
-    this.setEnd = function(row, column) {
+    this.setEnd = function (row, column) {
         if (typeof row == "object") {
             this.end.column = row.column;
             this.end.row = row.row;
@@ -121,7 +121,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             this.end.column = column;
         }
     };
-    this.inside = function(row, column) {
+    this.inside = function (row, column) {
         if (this.compare(row, column) == 0) {
             if (this.isEnd(row, column) || this.isStart(row, column)) {
                 return false;
@@ -131,7 +131,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
         }
         return false;
     };
-    this.insideStart = function(row, column) {
+    this.insideStart = function (row, column) {
         if (this.compare(row, column) == 0) {
             if (this.isEnd(row, column)) {
                 return false;
@@ -141,7 +141,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
         }
         return false;
     };
-    this.insideEnd = function(row, column) {
+    this.insideEnd = function (row, column) {
         if (this.compare(row, column) == 0) {
             if (this.isStart(row, column)) {
                 return false;
@@ -151,7 +151,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
         }
         return false;
     };
-    this.compare = function(row, column) {
+    this.compare = function (row, column) {
         if (!this.isMultiLine()) {
             if (row === this.start.row) {
                 return column < this.start.column ? -1 : (column > this.end.column ? 1 : 0);
@@ -172,21 +172,21 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
 
         return 0;
     };
-    this.compareStart = function(row, column) {
+    this.compareStart = function (row, column) {
         if (this.start.row == row && this.start.column == column) {
             return -1;
         } else {
             return this.compare(row, column);
         }
     };
-    this.compareEnd = function(row, column) {
+    this.compareEnd = function (row, column) {
         if (this.end.row == row && this.end.column == column) {
             return 1;
         } else {
             return this.compare(row, column);
         }
     };
-    this.compareInside = function(row, column) {
+    this.compareInside = function (row, column) {
         if (this.end.row == row && this.end.column == column) {
             return 1;
         } else if (this.start.row == row && this.start.column == column) {
@@ -195,48 +195,48 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             return this.compare(row, column);
         }
     };
-    this.clipRows = function(firstRow, lastRow) {
+    this.clipRows = function (firstRow, lastRow) {
         if (this.end.row > lastRow)
-            var end = {row: lastRow + 1, column: 0};
+            var end = { row: lastRow + 1, column: 0 };
         else if (this.end.row < firstRow)
-            var end = {row: firstRow, column: 0};
+            var end = { row: firstRow, column: 0 };
 
         if (this.start.row > lastRow)
-            var start = {row: lastRow + 1, column: 0};
+            var start = { row: lastRow + 1, column: 0 };
         else if (this.start.row < firstRow)
-            var start = {row: firstRow, column: 0};
+            var start = { row: firstRow, column: 0 };
 
         return Range.fromPoints(start || this.start, end || this.end);
     };
-    this.extend = function(row, column) {
+    this.extend = function (row, column) {
         var cmp = this.compare(row, column);
 
         if (cmp == 0)
             return this;
         else if (cmp == -1)
-            var start = {row: row, column: column};
+            var start = { row: row, column: column };
         else
-            var end = {row: row, column: column};
+            var end = { row: row, column: column };
 
         return Range.fromPoints(start || this.start, end || this.end);
     };
 
-    this.isEmpty = function() {
+    this.isEmpty = function () {
         return (this.start.row === this.end.row && this.start.column === this.end.column);
     };
-    this.isMultiLine = function() {
+    this.isMultiLine = function () {
         return (this.start.row !== this.end.row);
     };
-    this.clone = function() {
+    this.clone = function () {
         return Range.fromPoints(this.start, this.end);
     };
-    this.collapseRows = function() {
+    this.collapseRows = function () {
         if (this.end.column == 0)
-            return new Range(this.start.row, 0, Math.max(this.start.row, this.end.row-1), 0);
+            return new Range(this.start.row, 0, Math.max(this.start.row, this.end.row - 1), 0);
         else
             return new Range(this.start.row, 0, this.end.row, 0);
     };
-    this.toScreenRange = function(session) {
+    this.toScreenRange = function (session) {
         var screenPosStart = session.documentToScreenPosition(this.start);
         var screenPosEnd = session.documentToScreenPosition(this.end);
 
@@ -245,7 +245,7 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
             screenPosEnd.row, screenPosEnd.column
         );
     };
-    this.moveBy = function(row, column) {
+    this.moveBy = function (row, column) {
         this.start.row += row;
         this.start.column += column;
         this.end.row += row;
@@ -253,18 +253,18 @@ var Range = function(startRow, startColumn, endRow, endColumn) {
     };
 
 }).call(Range.prototype);
-Range.fromPoints = function(start, end) {
+Range.fromPoints = function (start, end) {
     return new Range(start.row, start.column, end.row, end.column);
 };
 
 
-Range.comparePoints = function(p1, p2) {
+Range.comparePoints = function (p1, p2) {
     return p1.row - p2.row || p1.column - p2.column;
 };
 
 
 class Instruction {
-    constructor(code_, name_,value_) {
+    constructor(code_, name_, value_) {
         this.code = code_;
         this.name = name_;
         this.value = parseInt(value_);
@@ -291,12 +291,12 @@ class tmpFor {
         this.init = init_;
         this.fin = fin_;
         this.incrementation = incrementation_;
-        this.jc=jc_;
+        this.jc = jc_;
     }
 }
 
 class tmpSwitch {
-    constructor(var_,NbCase_, FinSwitch_) {
+    constructor(var_, NbCase_, FinSwitch_) {
         this.var = var_;
         this.nbCase = NbCase_;
         this.tabCase = [];
@@ -306,7 +306,7 @@ class tmpSwitch {
 }
 
 let code_genere = [];
-let ic=0;
+let ic = 0;
 let r1 = 0;
 let r2 = 0;
 let tabTmpIf = []
@@ -318,7 +318,7 @@ let CurseurFor = -1;
 let tabTmpSwitch = []
 let CurseurSwitch = -1;
 let variables = new Map();
-let tableCode =[];
+let tableCode = [];
 let tableRange = [];
 let marker;
 let retourhiglight = [];
@@ -332,23 +332,23 @@ if (position != -1) {
 }
 
 
-function addTmpSwitch(){
-    tabTmpSwitch.push(new tmpSwitch(0,0,0))
+function addTmpSwitch() {
+    tabTmpSwitch.push(new tmpSwitch(0, 0, 0))
     CurseurSwitch++;
 }
 
-function addTmpIf(){
-    tabTmpIf.push(new tmpIf(0,0))
+function addTmpIf() {
+    tabTmpIf.push(new tmpIf(0, 0))
     CurseurIf++;
 }
 
-function addTmpWhile(){
-    tabTmpWhile.push(new tmpWhiles(0,0))
+function addTmpWhile() {
+    tabTmpWhile.push(new tmpWhiles(0, 0))
     CurseurWhile++;
 }
 
-function addTmpFor(){
-    tabTmpFor.push(new tmpFor("",0,0,0,0))
+function addTmpFor() {
+    tabTmpFor.push(new tmpFor("", 0, 0, 0, 0))
     CurseurFor++;
 }
 
@@ -356,68 +356,68 @@ function test() {
     console.log("test");
 }
 
-function parseCodeHighlight(){
-    let tmp = editor.getValue().replace("DEBUT SOURCE {","").replace("}FIN SOURCE","")
+function parseCodeHighlight() {
+    let tmp = editor.getValue().replace("DEBUT SOURCE {", "").replace("}FIN SOURCE", "")
     let tmpTable;
     let length = 0;
     let ligne = 0;
     tmpTable = tmp.split(":");
-    for(let i of tmpTable){
-        tableCode = [...tableCode,...i.split(";")];
+    for (let i of tmpTable) {
+        tableCode = [...tableCode, ...i.split(";")];
     }
     console.log(tableCode)
 
-    tmpTable = tableCode;tableCode=[];
-    for(let i of tmpTable){
-        tableCode = [...tableCode,...i.split("\n")];
+    tmpTable = tableCode; tableCode = [];
+    for (let i of tmpTable) {
+        tableCode = [...tableCode, ...i.split("\n")];
     }
     console.log(tableCode)
-    for(let i of tableCode){
-        if(i == ""){
+    for (let i of tableCode) {
+        if (i == "") {
             ligne++;
             length = 0;
         }
-        else{
-            tableRange.push(new Range(ligne,length,ligne,length + i.length +1));
-            length = i.length+1;
+        else {
+            tableRange.push(new Range(ligne, length, ligne, length + i.length + 1));
+            length = i.length + 1;
         }
     }
 
 }
 
-function adaptIndex(){
+function adaptIndex() {
     let instruction = 0;
-    for(let i in code_genere){
-        if(code_genere[i].name =="NUM" || code_genere[i].name =="INCFOR" || code_genere[i].name =="VARFOR" ||code_genere[i].name =="SUP" || code_genere[i].name =="INF" || code_genere[i].name =="SUPEGAL" || code_genere[i].name =="INFEGAL" || code_genere[i].name =="EGAL" || code_genere[i].name =="NOTEGAL" ||code_genere[i].name =="VAR" ||code_genere[i].name =="SUB" || code_genere[i].name =="ADD" ||code_genere[i].name =="MULT" ||code_genere[i].name =="DIV" ){
+    for (let i in code_genere) {
+        if (code_genere[i].name == "NUM" || code_genere[i].name == "INCFOR" || code_genere[i].name == "VARFOR" || code_genere[i].name == "SUP" || code_genere[i].name == "INF" || code_genere[i].name == "SUPEGAL" || code_genere[i].name == "INFEGAL" || code_genere[i].name == "EGAL" || code_genere[i].name == "NOTEGAL" || code_genere[i].name == "VAR" || code_genere[i].name == "SUB" || code_genere[i].name == "ADD" || code_genere[i].name == "MULT" || code_genere[i].name == "DIV") {
             retourhiglight.push(-1);
         }
-        else{
+        else {
             retourhiglight.push(instruction)
             instruction++;
         }
     }
-    for(let i in code_genere){
-        if(code_genere[i].name =="INCFOR"){
+    for (let i in code_genere) {
+        if (code_genere[i].name == "INCFOR") {
             console.log(i)
-            console.log(retourhiglight[parseInt(i)+1]);
-            retourhiglight[i] = retourhiglight[parseInt(i)+1];
+            console.log(retourhiglight[parseInt(i) + 1]);
+            retourhiglight[i] = retourhiglight[parseInt(i) + 1];
         }
-        if(code_genere[i].name =="VARFOR"){
+        if (code_genere[i].name == "VARFOR") {
 
-            retourhiglight[i] = retourhiglight[parseInt(i)+4];
-            retourhiglight[parseInt(i)+1] = retourhiglight[parseInt(i)+3];
-            retourhiglight[parseInt(i)+2] = retourhiglight[parseInt(i)+2];
-            retourhiglight[parseInt(i)+3] = retourhiglight[parseInt(i)+1];
+            retourhiglight[i] = retourhiglight[parseInt(i) + 4];
+            retourhiglight[parseInt(i) + 1] = retourhiglight[parseInt(i) + 3];
+            retourhiglight[parseInt(i) + 2] = retourhiglight[parseInt(i) + 2];
+            retourhiglight[parseInt(i) + 3] = retourhiglight[parseInt(i) + 1];
         }
 
     }
 
-    for(let i in code_genere){
+    for (let i in code_genere) {
         let j = 1;
-        while(j <= 3  && j< code_genere.length-i-j){
-            if(code_genere[i].name =="NUM" && code_genere[i+j]){
+        while (j <= 3 && j < code_genere.length - i - j) {
+            if (code_genere[i].name == "NUM" && code_genere[i + j]) {
 
-                retourhiglight[i] = retourhiglight[parseInt(i)+parseInt(j)];
+                retourhiglight[i] = retourhiglight[parseInt(i) + parseInt(j)];
             }
             j++;
         }
@@ -429,6 +429,8 @@ function adaptIndex(){
 
 document.getElementById("compilation").addEventListener('click', async () => {
     document.getElementById("compilation").disabled = true;
+
+    
 
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
@@ -450,27 +452,29 @@ document.getElementById("clear").addEventListener('click', () => {
 })
 
 
-function addInstruction(code,name,value){
-    code_genere.push(new Instruction(code,name,value))
+function addInstruction(code, name, value) {
+    code_genere.push(new Instruction(code, name, value))
     ic++;
 }
 
 
 
-async function execution(){
+async function execution() {
     let ic = 0;
     let pile = [];
     let pileVar = [];
     console.log(code_genere)
-    while(ic < code_genere.length) {
+    while (ic < code_genere.length) {
+        let btnClear = document.getElementById("clear");
+        btnClear.disabled = true;
 
         await new Promise(r => setTimeout(r, 400));
-        if(retourhiglight[ic] != -1)
+        if (retourhiglight[ic] != -1)
             editor.getSession().removeMarker(marker);
         let ins = code_genere[ic];
         console.log("pointeur :" + ic)
         console.log(ins)
-        if(retourhiglight[ic] != -1) {
+        if (retourhiglight[ic] != -1) {
 
             marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "ace_active-line", "screenLine");
         }
@@ -481,9 +485,9 @@ async function execution(){
                 ic++;
                 break;
             case 'VAR':
-                if(variables.has(ins.code)){
+                if (variables.has(ins.code)) {
                     pile.push(variables.get(ins.code));
-                    console.log(ins.code ," " , variables.get(ins.code));
+                    console.log(ins.code, " ", variables.get(ins.code));
                     ic++;
                 }
                 else {
@@ -493,9 +497,9 @@ async function execution(){
                 }
                 break;
             case 'VARFOR':
-                if(variables.has(ins.code)){
+                if (variables.has(ins.code)) {
                     pile.push(variables.get(ins.code));
-                    console.log(ins.code ," " , variables.get(ins.code));
+                    console.log(ins.code, " ", variables.get(ins.code));
                     ic++;
                 }
                 else {
@@ -513,7 +517,7 @@ async function execution(){
             case 'JMPCOND':
                 //Teste de la condition
                 r1 = pile.pop();
-                if( r1 != 0){
+                if (r1 != 0) {
                     console.log("Condition Vrai")
                     ic++;
                 }
@@ -524,7 +528,7 @@ async function execution(){
                 break;
             case 'JMPCONDWHILE':
                 r1 = pile.pop();
-                if( r1 != 0){
+                if (r1 != 0) {
                     ic++;
                 }
                 else {
@@ -547,7 +551,7 @@ async function execution(){
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                if(!(await game.scene.scenes[0].player.children.entries[0].move("up",1) ))
+                if (!(await game.scene.scenes[0].player.children.entries[0].move("up", 1)))
                     return;
 
 
@@ -556,7 +560,7 @@ async function execution(){
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                if(!(await game.scene.scenes[0].player.children.entries[0].move("down",1) ))
+                if (!(await game.scene.scenes[0].player.children.entries[0].move("down", 1)))
                     return;
                 //victory(lvl,game);
 
@@ -564,14 +568,14 @@ async function execution(){
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                if(!(await game.scene.scenes[0].player.children.entries[0].move("right",1) ))
+                if (!(await game.scene.scenes[0].player.children.entries[0].move("right", 1)))
                     return;
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                if(!(await game.scene.scenes[0].player.children.entries[0].move("left",1) ))
+                if (!(await game.scene.scenes[0].player.children.entries[0].move("left", 1)))
                     return;
                 //victory(lvl,game);
                 ic++;
@@ -579,35 +583,35 @@ async function execution(){
             case 'ADD':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                pile.push(r1+r2);
+                pile.push(r1 + r2);
                 console.log("addition entre ", r1, " et ", r2);
                 ic++;
                 break;
             case 'SUB':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                pile.push(r2-r1);
+                pile.push(r2 - r1);
                 console.log("soustration entre ", r1, " et ", r2);
                 ic++;
                 break;
             case 'MULT':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                pile.push(r1*r2);
+                pile.push(r1 * r2);
                 console.log("multiplication entre ", r1, " et ", r2);
                 ic++;
                 break;
             case 'DIV':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                pile.push(r2/r1);
+                pile.push(r2 / r1);
                 console.log("division entre ", r1, " et ", r2);
                 ic++;
                 break;
             case 'SUP':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2>r1){
+                if (r2 > r1) {
                     pile.push(1);
                 }
                 else {
@@ -619,7 +623,7 @@ async function execution(){
             case 'INF':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2<r1){
+                if (r2 < r1) {
                     pile.push(1);
                 }
                 else {
@@ -631,7 +635,7 @@ async function execution(){
             case 'INFEGAL':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2<=r1){
+                if (r2 <= r1) {
                     pile.push(1);
                 }
                 else {
@@ -643,7 +647,7 @@ async function execution(){
             case 'SUPEGAL':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2>=r1){
+                if (r2 >= r1) {
                     pile.push(1);
                 }
                 else {
@@ -655,7 +659,7 @@ async function execution(){
             case 'EGAL':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2==r1){
+                if (r2 == r1) {
                     pile.push(1);
                 }
                 else {
@@ -667,7 +671,7 @@ async function execution(){
             case 'NOTEGAL':
                 r1 = pile.pop();
                 r2 = pile.pop();
-                if(r2!=r1){
+                if (r2 != r1) {
                     pile.push(1);
                 }
                 else {
@@ -678,7 +682,7 @@ async function execution(){
                 break;
             case 'INC':
                 r1 = pile.pop();
-                variables.set(ins.code,variables.get(ins.code)+1);
+                variables.set(ins.code, variables.get(ins.code) + 1);
                 ic++;
                 break;
             case 'PRINT':
@@ -687,84 +691,85 @@ async function execution(){
                 PrintConsole(r1);
                 ic++;
                 break;
-            case 'POUR' :
+            case 'POUR':
                 CurseurFor++;
                 tabTmpFor[CurseurFor].var = pileVar.pop();
                 tabTmpFor[CurseurFor].incrementation = pile.pop();
                 tabTmpFor[CurseurFor].fin = pile.pop();
                 tabTmpFor[CurseurFor].init = pile.pop();
-                variables.set(tabTmpFor[CurseurFor].var,tabTmpFor[CurseurFor].init );
+                variables.set(tabTmpFor[CurseurFor].var, tabTmpFor[CurseurFor].init);
                 console.log(variables, tabTmpFor[CurseurFor]);
-                if(variables.get(tabTmpFor[CurseurFor].var)<tabTmpFor[CurseurFor].fin){
+                if (variables.get(tabTmpFor[CurseurFor].var) < tabTmpFor[CurseurFor].fin) {
                     ic++;
                 }
                 else {
                     ic = ins.value;
                 }
                 break;
-            case 'INCFOR' :
-                variables.set(tabTmpFor[CurseurFor].var, variables.get(tabTmpFor[CurseurFor].var) +  tabTmpFor[CurseurFor].incrementation);
-                console.log(variables.get(tabTmpFor[CurseurFor].var),tabTmpFor[CurseurFor].fin)
-                if(variables.get(tabTmpFor[CurseurFor].var) <=  tabTmpFor[CurseurFor].fin) {
+            case 'INCFOR':
+                variables.set(tabTmpFor[CurseurFor].var, variables.get(tabTmpFor[CurseurFor].var) + tabTmpFor[CurseurFor].incrementation);
+                console.log(variables.get(tabTmpFor[CurseurFor].var), tabTmpFor[CurseurFor].fin)
+                if (variables.get(tabTmpFor[CurseurFor].var) <= tabTmpFor[CurseurFor].fin) {
                     ic = ins.value;
                 }
                 else {
                     ic++;
                 }
                 break;
-            case 'FINPOUR' :
+            case 'FINPOUR':
                 variables.delete(tabTmpFor[CurseurFor].var);
                 CurseurFor--;
                 ic++;
                 break;
-            case 'SWITCH' :
+            case 'SWITCH':
                 CurseurSwitch++;
-                tabTmpSwitch[CurseurSwitch].var =variables.get(pileVar.pop());
+                tabTmpSwitch[CurseurSwitch].var = variables.get(pileVar.pop());
                 ic++;
                 break;
-            case 'PAUSE' :
+            case 'PAUSE':
                 ic = tabTmpSwitch[CurseurSwitch].FinSwitch;
                 break;
-            case 'CASE' :
+            case 'CASE':
                 r1 = pile.pop();
-                if(tabTmpSwitch[CurseurSwitch].var==r1){
-                    console.log("on rentre dans le case ",ins.value )
+                if (tabTmpSwitch[CurseurSwitch].var == r1) {
+                    console.log("on rentre dans le case ", ins.value)
                     ic++;
                 }
                 else {
-                    console.log("on saute le case ",ins.value )
-                    if(ins.value < (tabTmpSwitch[CurseurSwitch].nbCase-1)){
+                    console.log("on saute le case ", ins.value)
+                    if (ins.value < (tabTmpSwitch[CurseurSwitch].nbCase - 1)) {
                         console.log("on va au switch d'apres");
-                        ic=tabTmpSwitch[CurseurSwitch].tabCase[ins.value+1];
+                        ic = tabTmpSwitch[CurseurSwitch].tabCase[ins.value + 1];
                     }
-                    else{
+                    else {
                         console.log("son sort de switch");
-                        if(tabTmpSwitch[CurseurSwitch].default!=-1){
+                        if (tabTmpSwitch[CurseurSwitch].default != -1) {
                             ic = tabTmpSwitch[CurseurSwitch].default;
                         }
-                        else{
+                        else {
                             ic = tabTmpSwitch[CurseurSwitch].FinSwitch;
                         }
                     }
                 }
                 break;
             case 'ENDSWITCH':
-                CurseurSwitch=CurseurSwitch-1;
-            default :
+                CurseurSwitch = CurseurSwitch - 1;
+            default:
                 ic++;
 
         }
 
 
     }
-    if(retourhiglight[ic] != -1)
+    if (retourhiglight[ic] != -1) {
         editor.getSession().removeMarker(marker);
+    }
     GameOver();
 }
 
-function InitCompilation(){
+function InitCompilation() {
     code_genere = [];
-    ic=0;
+    ic = 0;
     r1 = 0;
     r2 = 0;
     tabTmpIf = []
