@@ -764,7 +764,9 @@ async function execution() {
     if (retourhiglight[ic] != -1) {
         editor.getSession().removeMarker(marker);
     }
-    GameOver();
+    if(lvl != '8') {
+        GameOver();
+    }
 }
 
 function InitCompilation() {

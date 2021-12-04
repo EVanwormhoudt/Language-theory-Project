@@ -139,7 +139,7 @@ function create() {
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.50);
+        this.cameras.main.setZoom(0.72);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
     
@@ -155,13 +155,17 @@ function create() {
         }
 
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
+        //movePlayer(this.player);
+
     }
+    
 }
 
 function update() {
-
     victory(lvl);
     isInArea();
+    //var pointer = this.input.activePointer;
+    //console.log(pointer.x,  ' y',pointer.y);
 
 }
 
@@ -170,6 +174,7 @@ function isInArea(){
     if(lvl == '4' || lvl =='5'){
         if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
             if(lvl=='4'){
+                console.log('mdp', 34);
                 return 34;
             }else{
                return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
@@ -193,7 +198,9 @@ function victory(lvl) {
             }
             break;
         case '3':
-
+            if ((game.scene.scenes[0].player.children.entries[0].y <= 125 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1700 && game.scene.scenes[0].player.children.entries[0].x > 1531)) {
+                Win();
+            }
             break;
         case '4':
 
@@ -204,4 +211,25 @@ function victory(lvl) {
             break;
         default:
     }
+}
+function movePlayer() {
+
+
+    cursors.on('keydown-Q', () => {
+        game.scene.scenes[0].player.children.entries[0].setVelocity(-150, 0);
+        game.scene.scenes[0].player.children.entries[0].anims.play('left');
+    });
+    cursors.on('keydown-D', () => {
+        game.scene.scenes[0].player.children.entries[0].setVelocity(150, 0);
+        game.scene.scenes[0].player.children.entries[0].anims.play('right');
+    });
+    cursors.on('keydown-S', () => {
+        game.scene.scenes[0].player.children.entries[0].setVelocity(0, 150);
+        game.scene.scenes[0].player.children.entries[0].anims.play('face');
+    });
+    cursors.on('keydown-Z', () => {
+        game.scene.scenes[0].player.children.entries[0].setVelocity(0, -150);
+        game.scene.scenes[0].player.children.entries[0].anims.play('back');
+    });
+    return 0;
 }

@@ -57,7 +57,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         nbCase++;
         console.log(this.testCollision(direction))
         if(this.testCollision(direction)) {
-            GameOver();
+            if(lvl != '8') {
+                GameOver();
+            }
+            
             CollisionConsole();
             return 0;
         }
