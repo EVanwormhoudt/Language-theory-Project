@@ -1,7 +1,8 @@
 function GameOver() {
     document.getElementById("popupGameOver").hidden = false;
 
-    document.getElementById("compilation").disabled = false;
+    let btnSubmit = document.getElementById("compilation");
+    btnSubmit.disabled = true;
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;
 
@@ -17,42 +18,24 @@ function GameOver() {
 
     let tryAgain = document.getElementById('tryAgain');
     tryAgain.addEventListener('click', () => {
-        var position = window.location.href.indexOf('?');
+        game.scene.scenes[0].player.children.entries[0].x = 400;
+        game.scene.scenes[0].player.children.entries[0].y = 800;
 
-        if (position != -1) {
-            let lvl = "";
-            var fin_url = window.location.href.substr(position + 1);
-            fin_url = fin_url.replace(/-/g, " ");
+        document.getElementById("popupGameOver").hidden = true;
 
-            lvl = fin_url.substr(7);
+        document.getElementById("compilation").disabled = false;
+        let btnClear = document.getElementById("clear");
+        btnClear.disabled = false;
 
-            switch (lvl) {
-                case '1':
-                    document.location.href = "../html/lvl1.html?niveau=1";
-                    break;
-                case '2':
-                    document.location.href = "../html/lvl2.html?niveau=2";
-                    break;
-                case '3':
-                    document.location.href = "../html/lvl3.html?niveau=3";
-                    break;
-                case '4':
-                    document.location.href = "../html/lvl4.html?niveau=4";
-                    break;
-                case '5':
-                    document.location.href = "../html/lvl5.html?niveau=5";
-                    break;
-                case '6':
-                    document.location.href = "../html/lvl6.html?niveau=6";
-                    break;
-                case '7':
-                    document.location.href = "../html/lvl7.html?niveau=7";
-                    break;
-                case '8':
-                    document.location.href = "../html/lvl8.html?niveau=8";
-                    break;
-            }
-        }
+        let objBTN = document.getElementById("objBTN");
+        objBTN.disabled = false;
+        let rulesBTN = document.getElementById("rulesBTN");
+        rulesBTN.disabled = false;
+
+        let example = document.getElementById("example");
+        example.disabled = false;
+        let back = document.getElementById("back");
+        back.disabled = false;
     });
 
     let leave = document.getElementById('leave3');
@@ -131,7 +114,7 @@ function PrintConsole(variable) {
     var ul = document.getElementById("list");
     var li = document.createElement("li");
     var p = document.createElement("p");
-    p.innerHTML=variable.toString();
+    p.innerHTML = variable.toString();
     li.appendChild(p);
     ul.appendChild(li);
 }
@@ -144,7 +127,7 @@ function CollisionConsole() {
     var ul = document.getElementById("list");
     var li = document.createElement("li");
     var p = document.createElement("p");
-    p.innerHTML="ERROR : Collision area";
+    p.innerHTML = "ERROR : Collision area";
     li.appendChild(p);
     ul.appendChild(li);
 }

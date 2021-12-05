@@ -166,7 +166,7 @@ function update() {
     isInArea();
     //var pointer = this.input.activePointer;
     //console.log(pointer.x,  ' y',pointer.y);
-
+    //console.log(game.scene.scenes[0].player.children.entries[0].x,game.scene.scenes[0].player.children.entries[0].y)
 }
 
 
