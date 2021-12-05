@@ -1,10 +1,12 @@
 function GameOver() {
     document.getElementById("popupGameOver").hidden = false;
 
-    let btnSubmit = document.getElementById("compilation");
-    btnSubmit.disabled = true;
+
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;
+    let btnSubmit = document.getElementById("compilation");
+    console.log(btnSubmit.disabled);
+    btnSubmit.disabled = true;
 
     let objBTN = document.getElementById("objBTN");
     objBTN.disabled = true;
@@ -19,17 +21,18 @@ function GameOver() {
     let tryAgain = document.getElementById('tryAgain');
     tryAgain.addEventListener('click', () => {
         if(lvl == "3"){
-            game.scene.scenes[0].player.children.entries[0].x = 400-64;
-            game.scene.scenes[0].player.children.entries[0].y = 800-64;
+            game.scene.scenes[0].player.children.entries[0].x = 400-64 - (400-64)%64;
+            game.scene.scenes[0].player.children.entries[0].y = 800-64 - (800-64)%64;
         }else{
-            game.scene.scenes[0].player.children.entries[0].x = 400;
-            game.scene.scenes[0].player.children.entries[0].y = 800;
+            game.scene.scenes[0].player.children.entries[0].x = 400 - 400%64;
+            game.scene.scenes[0].player.children.entries[0].y = 800 - 800%64;
 
         }
 
         document.getElementById("popupGameOver").hidden = true;
 
         document.getElementById("compilation").disabled = false;
+
         let btnClear = document.getElementById("clear");
         btnClear.disabled = false;
 
@@ -55,6 +58,7 @@ function Win() {
     document.getElementById("popupWin").hidden = false;
 
     let btnSubmit = document.getElementById("compilation");
+    btnSubmit.disabled=true;
     btnSubmit.disabled = true;
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;

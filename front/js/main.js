@@ -430,11 +430,9 @@ function adaptIndex() {
 document.getElementById("compilation").addEventListener('click', async () => {
     document.getElementById("compilation").disabled = true;
 
-    
-
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
-    //ClearConsole();
+    ClearConsole();
     parseCodeHighlight();
     langage.parse(editor.getValue());
     adaptIndex();
@@ -443,7 +441,7 @@ document.getElementById("compilation").addEventListener('click', async () => {
     console.log(tableRange)
     await execution();
     InitCompilation();
-    document.getElementById("compilation").disabled = false;
+
     btnStyle.style.color = 'white';
 })
 
@@ -766,6 +764,7 @@ async function execution() {
     }
     if(lvl != '8') {
         GameOver();
+
     }
 }
 
