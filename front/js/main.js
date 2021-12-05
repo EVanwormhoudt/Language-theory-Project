@@ -433,8 +433,8 @@ document.getElementById("compilation").addEventListener('click', async () => {
     }
     catch (err){
         ErrorConsole(err.toString())
-        console.log( (err.toString())[27])
-        marker = editor.getSession().addMarker(new Range(err.toString()[27],0,err.toString()[27],100000), "errorHighlight", "screenLine");
+        console.log(err)
+        marker = editor.getSession().addMarker(new Range(err.toString()[27]-1,0,err.toString()[27]-1,100000), "errorHighlight", "screenLine");
         return;
     }
     adaptIndex();

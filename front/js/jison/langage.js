@@ -71,9 +71,10 @@
     recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
   }
 */
+var testParser;
 var langage = (function(){
     var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[2,23],$V1=[1,13],$V2=[1,18],$V3=[1,12],$V4=[1,15],$V5=[1,19],$V6=[1,16],$V7=[1,3],$V8=[1,4],$V9=[1,9],$Va=[1,10],$Vb=[1,17],$Vc=[1,13,15,24,30,34,36,38,42],$Vd=[36,42],$Ve=[2,21],$Vf=[1,34],$Vg=[1,38],$Vh=[1,39],$Vi=[1,40],$Vj=[1,41],$Vk=[2,49],$Vl=[1,47],$Vm=[2,5],$Vn=[7,22,39,45,46,47,48,49,50,63,65,66,67],$Vo=[1,50],$Vp=[1,4,5,13,15,17,19,24,28,30,32,34,36,38,42,51,53,56,61,64],$Vq=[34,36,42],$Vr=[7,22,39,45,46,47,48,49,50];
-    var parser = {trace: function trace () { },
+     var parser = {trace: function trace () { },
         yy: {},
         symbols_: {"error":2,"IF":3,"SI":4,"(":5,"condition":6,")":7,":":8,"THEN":9,"ALORS":10,"ELSE":11,"bloc":12,"SINON":13,"ENDIF":14,"FINSI":15,"VARFOR":16,"VAR":17,"FOR":18,"POUR":19,"ALLANT":20,"e":21,",":22,"INC":23,"FINPOUR":24,"ENDFOR":25,"WHILE":26,"WHILEFIRST":27,"TANTQUE":28,"ENDWHILE":29,"FINTANTQUE":30,"SWITCH":31,"CHOIX":32,"CASE":33,"CAS":34,"DEFAULT":35,"DEFAUT":36,"ENDCASE":37,"PAUSE":38,";":39,"ENDSWITCH":40,"BLOCSWITCH":41,"FINCHOIX":42,"INSTRUCTIONSWITCH":43,"instruction":44,"SUP":45,"INF":46,"SUPEGAL":47,"INFEGAL":48,"EGAL":49,"NOTEGAL":50,"DEBUT":51,"{":52,"}":53,"FIN":54,"EOF":55,"MOVE":56,"UP":57,"DOWN":58,"LEFT":59,"RIGHT":60,"PRINT":61,"=":62,"ADD":63,"NUMBER":64,"SUB":65,"MULT":66,"DIV":67,"$accept":0,"$end":1},
         terminals_: {2:"error",4:"SI",5:"(",7:")",8:":",10:"ALORS",13:"SINON",15:"FINSI",17:"VAR",19:"POUR",20:"ALLANT",22:",",24:"FINPOUR",28:"TANTQUE",30:"FINTANTQUE",32:"CHOIX",34:"CAS",36:"DEFAUT",38:"PAUSE",39:";",42:"FINCHOIX",45:"SUP",46:"INF",47:"SUPEGAL",48:"INFEGAL",49:"EGAL",50:"NOTEGAL",51:"DEBUT",52:"{",53:"}",54:"FIN",55:"EOF",56:"MOVE",57:"UP",58:"DOWN",59:"LEFT",60:"RIGHT",61:"PRINT",62:"=",63:"ADD",64:"NUMBER",65:"SUB",66:"MULT",67:"DIV"},
@@ -82,6 +83,7 @@ var langage = (function(){
             /* this == yyval */
 
             var $0 = $$.length - 1;
+
             switch (yystate) {
                 case 1:
                     console.log("SI");addInstruction(0,"JMPCOND", 0);addTmpIf();tabTmpIf[CurseurIf].jc = ic;
@@ -271,6 +273,7 @@ var langage = (function(){
                         }
                     }
                     if (lexer.showPosition) {
+                        testParser = this.symbols_;
                         errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
                     } else {
                         errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
@@ -547,6 +550,7 @@ var langage = (function(){
                 this._backtrack = false;
                 this._input = this._input.slice(match[0].length);
                 this.matched += match[0];
+
                 token = this.performAction.call(this, this.yy, this, indexed_rule, this.conditionStack[this.conditionStack.length - 1]);
                 if (this.done && this._input) {
                     this.done = false;
