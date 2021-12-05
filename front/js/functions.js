@@ -18,8 +18,14 @@ function GameOver() {
 
     let tryAgain = document.getElementById('tryAgain');
     tryAgain.addEventListener('click', () => {
-        game.scene.scenes[0].player.children.entries[0].x = 400;
-        game.scene.scenes[0].player.children.entries[0].y = 800;
+        if(lvl == "3"){
+            game.scene.scenes[0].player.children.entries[0].x = 400-64;
+            game.scene.scenes[0].player.children.entries[0].y = 800-64;
+        }else{
+            game.scene.scenes[0].player.children.entries[0].x = 400;
+            game.scene.scenes[0].player.children.entries[0].y = 800;
+
+        }
 
         document.getElementById("popupGameOver").hidden = true;
 

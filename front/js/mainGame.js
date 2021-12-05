@@ -177,27 +177,8 @@ function create() {
         }
         if(lvl=="3"){
             this.player.setDepth(4000);
-            this.add.image(0,0,'mask');
-            var lights = [
-            {x:472,y:192},
-            {x:761,y:184},
-                {x:860,y:170},
-                {x:581,y:520},
-                {x:668,y:520},
-                {x:1077,y:520},
-            {x:288,y:440},
-            {x:170,y:590},
 
-            ];
-            var mask = this.textures.get('mask').getSourceImage();
 
-            for (let light of Object.values(lights)){
-                texture.draw(light.x - mask.width/2,light.y - mask.width/2,mask);
-
-                console.log(texture.draw(light.x - mask.width/2,light.y - mask.width/2,mask));
-            }
-
-            texture.refresh();
         }
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
         //movePlayer(this.player);
