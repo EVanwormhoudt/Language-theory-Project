@@ -182,9 +182,14 @@ function create() {
         }
 
         this.win=false;
-        this.area=false;
+        this.win2=false;
+        this.win3=false;
+        this.win4=false;
+        this.win5=false;
+        this.aera=false;
+        this.area5=false;
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
-        //movePlayer(this.player);
+        movePlayer(this.player);
 
 
     }
@@ -192,8 +197,27 @@ function create() {
 }
 
 function update() {
-    if(!this.win)victory(lvl);
-    if(!this.area)isInArea();
+    switch (lvl){
+        case '1':
+            if(!this.win)victory(lvl);
+            break;
+        case '2':
+            if(!this.win2)victory(lvl);
+            break;
+        case '3':
+            if(!this.win3)victory(lvl);
+            break;
+        case '4':
+            if(!this.win4)victory(lvl);
+            if(!this.area)isInArea();
+            break;
+        case '5':
+            if(!this.win5)victory(lvl);
+            if(!this.area5)isInArea();
+
+    }
+
+
     //var pointer = this.input.activePointer;
     //console.log(pointer.x,  ' y',pointer.y);
     //console.log(game.scene.scenes[0].player.children.entries[0].x,game.scene.scenes[0].player.children.entries[0].y)
@@ -203,11 +227,13 @@ function update() {
 function isInArea(){
     if(lvl == '4' || lvl =='5'){
         if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
-            game.scene.scenes[0].area=true;
+
             if(lvl=='4'){
+                game.scene.scenes[0].area=true;
                 console.log('mdp', 34);
                 return 34;
             }else{
+                game.scene.scenes[0].area5=true;
                return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
             }
 
@@ -217,29 +243,32 @@ function isInArea(){
 }
 
 function victory(lvl) {
-    game.scene.scenes[0].win=true;
+
     switch (lvl) {
         case '1':
             if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
+                game.scene.scenes[0].win=true;
                 Win();
             }
             break;
         case '2':
             if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
+                game.scene.scenes[0].win2=true;
                 Win();
             }
             break;
         case '3':
             if ((game.scene.scenes[0].player.children.entries[0].y <= 125 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1700 && game.scene.scenes[0].player.children.entries[0].x > 1531)) {
+                game.scene.scenes[0].win3=true;
                 Win();
             }
             break;
         case '4':
-
+            game.scene.scenes[0].win4=true;
             break;
 
         case '5':
-
+            game.scene.scenes[0].win5=true;
             break;
         default:
     }
