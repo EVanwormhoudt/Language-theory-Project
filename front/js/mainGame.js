@@ -75,12 +75,31 @@ function create() {
                 break;
             case '3':
                 map = this.add.tilemap('mapLvl3');
+                console.log(map);
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
                 tuyau = map.addTilesetImage('aerationn', 'tilestuyau');
 
                 this.mur = map.createLayer('mur', tilesets);
+                this.mur.setDepth(2000);
+                this.sol=map.createLayer('sol',tilesets);
+                this.sol.setDepth(4000);
                 this.tuyau = map.createLayer('aeration',tuyau);
+                this.tuyau.setDepth(2000);
+
+                var texture = this.textures.createCanvas('night-layer',map.widthInPixels+32*56,map.heightInPixels+32*32);
+                texture.context.fillStyle = '#000000'; //pour mettre la couleur noir
+                texture.context.fillRect(0,0,map.widthInPixels+32*56,map.heightInPixels+32*32); //fait un rectangle à partir de la coordonéee (0,0) et de taille de la map
+                texture.context.globalCompositeOperation = 'destination-out'; //comment se met la couleur sur la map
+                texture.refresh();
+
+                var overlay = this.add.image(0,0,'night-layer');
+
+                overlay.setDepth(3000);
+                overlay.setAlpha(0.99);
+
+
+
 
                 break;
 
@@ -121,6 +140,7 @@ function create() {
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
 
                 this.sol = map.createLayer('sol', tilesets);
+
                 this.mur = map.createLayer('murs', tilesets);
 
                 this.deco = map.createLayer('deco', tilesetsdeco);
@@ -139,7 +159,7 @@ function create() {
 
         //rendu de la scène
 
-        this.cameras.main.setZoom(0.72);
+        this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
     
@@ -149,13 +169,39 @@ function create() {
         this.player = this.physics.add.group({ classType: Player });
         if(lvl=='8'){
             this.player.create(800, 500, 'face');
+        }else if(lvl=="3"){
+            this.player.create(400-64, 800-64, 'face');
         }else{
             this.player.create(400, 800, 'face');
 
         }
+        if(lvl=="3"){
+            this.player.setDepth(4000);
+            this.add.image(0,0,'mask');
+            var lights = [
+            {x:472,y:192},
+            {x:761,y:184},
+                {x:860,y:170},
+                {x:581,y:520},
+                {x:668,y:520},
+                {x:1077,y:520},
+            {x:288,y:440},
+            {x:170,y:590},
 
+            ];
+            var mask = this.textures.get('mask').getSourceImage();
+
+            for (let light of Object.values(lights)){
+                texture.draw(light.x - mask.width/2,light.y - mask.width/2,mask);
+
+                console.log(texture.draw(light.x - mask.width/2,light.y - mask.width/2,mask));
+            }
+
+            texture.refresh();
+        }
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
         //movePlayer(this.player);
+
 
     }
     
