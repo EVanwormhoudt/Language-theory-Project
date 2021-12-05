@@ -110,8 +110,9 @@ function Win() {
     });
 
     let leave = document.getElementById('leave3');
-    leave.disabled = false;
     leave.addEventListener('click', () => {
+        leave.disabled = false;
+
         document.location.href = "../html/accueil.html";
     });
 }

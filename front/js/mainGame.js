@@ -180,6 +180,9 @@ function create() {
 
 
         }
+
+        this.win=false;
+        this.area=false;
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
         //movePlayer(this.player);
 
@@ -189,8 +192,8 @@ function create() {
 }
 
 function update() {
-    victory(lvl);
-    isInArea();
+    if(!this.win)victory(lvl);
+    if(!this.area)isInArea();
     //var pointer = this.input.activePointer;
     //console.log(pointer.x,  ' y',pointer.y);
     //console.log(game.scene.scenes[0].player.children.entries[0].x,game.scene.scenes[0].player.children.entries[0].y)
@@ -200,6 +203,7 @@ function update() {
 function isInArea(){
     if(lvl == '4' || lvl =='5'){
         if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
+            game.scene.scenes[0].area=true;
             if(lvl=='4'){
                 console.log('mdp', 34);
                 return 34;
@@ -213,6 +217,7 @@ function isInArea(){
 }
 
 function victory(lvl) {
+    game.scene.scenes[0].win=true;
     switch (lvl) {
         case '1':
             if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
