@@ -33,3 +33,29 @@ FinPour;
 
 
 }FIN SOURCE
+
+
+Fonction myFonction(var1,var2):
+    move(haut);
+    testo = 5;
+    Afficher(var1);
+    Afficher(var2);
+Retourner testo;
+
+
+Afficher(myFonction(1,45));
+Afficher(testo);
+
+DEBUT SOURCE {
+
+var = 0;
+var2 = 0;
+
+Tantque(var != 3):
+Tantque(var != 3):
+
+FinTantque;
+
+FinTantque;
+
+}FIN SOURCE

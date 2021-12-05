@@ -262,6 +262,16 @@ Range.comparePoints = function(p1, p2) {
     return p1.row - p2.row || p1.column - p2.column;
 };
 
+class fonction {
+    constructor(name_, debut_, fin_) {
+        this.debut = debut_;
+        this.name = name_;
+        this.fin=fin_;
+        this.tabArguments = []
+        this.return;
+        this.mapReturn = new Map();
+    }
+}
 
 class Instruction {
     constructor(code_, name_,value_) {
@@ -317,6 +327,8 @@ let tabTmpFor = []
 let CurseurFor = -1;
 let tabTmpSwitch = []
 let CurseurSwitch = -1;
+let tabFonctions = []
+let CurseurFonctions = -1;
 let variables = new Map();
 let tableCode =[];
 let tableRange = [];
@@ -331,6 +343,10 @@ if (position != -1) {
     lvl = fin_url.substr(7);
 }
 
+function addFonctions(){
+    tabFonctions.push(new fonction("",0))
+    CurseurFonctions++;
+}
 
 function addTmpSwitch(){
     tabTmpSwitch.push(new tmpSwitch(0,0,0))
@@ -352,9 +368,6 @@ function addTmpFor(){
     CurseurFor++;
 }
 
-function test() {
-    console.log("test");
-}
 
 function parseCodeHighlight(){
     let tmp = editor.getValue().replace("DEBUT SOURCE {","").replace("}FIN SOURCE","")
@@ -441,7 +454,10 @@ document.getElementById("compilation").addEventListener('click', async () => {
     console.log(code_genere)
     console.log(retourhiglight)
     console.log(tableRange)
+    console.log(tabFonctions);
+    console.log(tabTmpWhile);
     await execution();
+    console.log(variables)
     InitCompilation();
     document.getElementById("compilation").disabled = false;
     btnStyle.style.color = 'white';
@@ -460,9 +476,12 @@ function addInstruction(code,name,value){
 
 
 async function execution(){
+    CurseurFonctions=-1;
     let ic = 0;
     let pile = [];
     let pileVar = [];
+    let pileFonction = [];
+    let AppelFonction = [];
     console.log(code_genere)
     while(ic < code_genere.length) {
 
@@ -699,9 +718,11 @@ async function execution(){
                 ic++;
                 break;
             case 'PRINT':
-                r1 = pile.pop();
-                console.log("PRINT : ", r1);
-                PrintConsole(r1);
+                let str = "";
+                while(pile.length!=0){
+                    str = str + pile.shift();
+                }
+                PrintConsole(str);
                 ic++;
                 break;
             case 'POUR' :
@@ -767,9 +788,78 @@ async function execution(){
                 break;
             case 'ENDSWITCH':
                 CurseurSwitch=CurseurSwitch-1;
+                break;
+            case 'NEWFUNCTION':
+                CurseurFonctions++;
+                ic = tabFonctions[CurseurFonctions].fin;
+                break;
+            case 'FINDFONCTION':
+                let NameFonction =  ins.code;
+
+                let i = 0;
+                
+                let isLargeNumber = (element) => element.name == NameFonction;
+                i=tabFonctions.findIndex(isLargeNumber);
+
+                if(i >=0){
+                    CurseurFonctions = i;
+                    let tab = [];
+                    while(pile.length!=0){
+                        tab.push(pile.pop());
+                    }
+                    if(tab.length==tabFonctions[CurseurFonctions].tabArguments.length){
+                        for(let j=0;j<tab.length;j++){
+                            variables.set(tabFonctions[CurseurFonctions].tabArguments[j], tab[j]);
+                        }
+                        pileFonction.push(ic+1);
+                        AppelFonction.push(CurseurFonctions);
+                        ic = tabFonctions[CurseurFonctions].debut;
+                        break;
+                    }
+                    else{
+                        messageConsole("ERROR :Fonction : "+ NameFonction + " Arguments");
+                        ic++;
+                        break;
+                    }
+                    
+                }
+                else {
+                    messageConsole("ERROR :Fonction : "+ NameFonction + " Indefinie");
+                    ic++;
+                }
+                break;
+            case 'RETURN':
+                let curseur = AppelFonction.pop();
+                console.log("retuuuurn",ic);
+                if((typeof tabFonctions[curseur].mapReturn.get(ic) )=="string"){
+                    pile.push(variables.get(tabFonctions[curseur].mapReturn.get(ic)));
+                }
+                else {
+                    pile.push(tabFonctions[curseur].mapReturn.get(ic));
+                }
+                for(let j = 0;j<tabFonctions[curseur].tabArguments.length;j++){
+                    variables.delete(tabFonctions[curseur].tabArguments[j]);
+                }
+                ic = pileFonction.pop();
+                break;
+            case 'STRING':
+                pile.push(ins.code.substring(1, ins.code.length-1));
+                console.log(ins.code)
+                ic++;
+                break;
+            case 'SPEAK': 
+                let MP = ins.code;
+                //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
+                ic++;
+                break;
+            case 'GET': 
+                //Fonction regarder si on est dans la zone et retunrn la valeur
+                let MP2 = 0; // a changer
+                pile.push(MP2);
+                ic++;
+                break;
             default :
                 ic++;
-
         }
         if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
             await new Promise(r => setTimeout(r, 500));
@@ -796,6 +886,8 @@ function InitCompilation(){
     CurseurSwitch = -1;
     tableRange = [];
     retourhiglight = [];
+    tabFonctions = []
+    CurseurFonctions = -1;
 }
 
 /** instructions :
