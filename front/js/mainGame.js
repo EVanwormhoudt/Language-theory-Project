@@ -20,15 +20,16 @@ const config = {
 const game = new Phaser.Game(config)
 let map, tilesets, tilesetsdeco;
 let cursors;
+let verif = false;
 
 function preload() {
     this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
     this.load.tilemapTiledJSON('mapLvl4', '../asset/mapLvl2.json');
-    this.load.tilemapTiledJSON('mapLvl3','../asset/mapLvl3.json');
+    this.load.tilemapTiledJSON('mapLvl3', '../asset/mapLvl3.json');
     this.load.tilemapTiledJSON('mapEntrainement', '../asset/mapEntrainement.json');
 
     this.load.image('tiles', '../asset/imgbin_prison-architect-landscape-architecture-sprite-png.png');
-    this.load.image('tilestuyau','../asset/aerationn.png');
+    this.load.image('tilestuyau', '../asset/aerationn.png');
     this.load.image('tilesdeco', '../asset/deco.png');
     this.load.image('basket', '../asset/basket.png');
     this.load.image('tilesdeco2', '../asset/deco2.png');
@@ -82,18 +83,18 @@ function create() {
 
                 this.mur = map.createLayer('mur', tilesets);
                 this.mur.setDepth(2000);
-                this.sol=map.createLayer('sol',tilesets);
+                this.sol = map.createLayer('sol', tilesets);
                 this.sol.setDepth(4000);
-                this.tuyau = map.createLayer('aeration',tuyau);
+                this.tuyau = map.createLayer('aeration', tuyau);
                 this.tuyau.setDepth(2000);
 
-                var texture = this.textures.createCanvas('night-layer',map.widthInPixels+32*56,map.heightInPixels+32*32);
+                var texture = this.textures.createCanvas('night-layer', map.widthInPixels + 32 * 56, map.heightInPixels + 32 * 32);
                 texture.context.fillStyle = '#000000'; //pour mettre la couleur noir
-                texture.context.fillRect(0,0,map.widthInPixels+32*56,map.heightInPixels+32*32); //fait un rectangle à partir de la coordonéee (0,0) et de taille de la map
+                texture.context.fillRect(0, 0, map.widthInPixels + 32 * 56, map.heightInPixels + 32 * 32); //fait un rectangle à partir de la coordonéee (0,0) et de taille de la map
                 texture.context.globalCompositeOperation = 'destination-out'; //comment se met la couleur sur la map
                 texture.refresh();
 
-                var overlay = this.add.image(0,0,'night-layer');
+                var overlay = this.add.image(0, 0, 'night-layer');
 
                 overlay.setDepth(3000);
                 overlay.setAlpha(0.99);
@@ -108,13 +109,13 @@ function create() {
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
-                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
+                tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
                 basket = map.addTilesetImage('basket', 'basket');
 
                 this.sol = map.createLayer('sol', tilesets);
                 this.mur = map.createLayer('mur', tilesets);
                 this.deco = map.createLayer('deco', tilesetsdeco2);
-                this.prisonnier = map.createLayer('prisonner',tilesetsdeco);
+                this.prisonnier = map.createLayer('prisonner', tilesetsdeco);
                 this.basket = map.createLayer('basket', basket);
                 break;
             case '5':
@@ -122,21 +123,21 @@ function create() {
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
-                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
+                tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
                 basket = map.addTilesetImage('basket', 'basket');
 
                 this.sol = map.createLayer('sol', tilesets);
                 this.mur = map.createLayer('mur', tilesets);
                 this.deco = map.createLayer('deco', tilesetsdeco2);
-                this.prisonnier = map.createLayer('prisonner',tilesetsdeco);
+                this.prisonnier = map.createLayer('prisonner', tilesetsdeco);
                 this.basket = map.createLayer('basket', basket);
                 break;
             case '8':
                 map = this.add.tilemap('mapEntrainement');
 
                 tilesets = map.addTilesetImage('imgbin_prison-architect-landscape-architecture-sprite-png', 'tiles');
-               
-                tilesetsdeco = map.addTilesetImage('deco','tilesdeco');
+
+                tilesetsdeco = map.addTilesetImage('deco', 'tilesdeco');
                 tilesetsdeco2 = map.addTilesetImage('deco2', 'tilesdeco2');
 
                 this.sol = map.createLayer('sol', tilesets);
@@ -145,7 +146,7 @@ function create() {
 
                 this.deco = map.createLayer('deco', tilesetsdeco);
                 this.deco = map.createLayer('deco2', tilesetsdeco2);
-                this.prisonnier = map.createLayer('prisonniers',tilesetsdeco);
+                this.prisonnier = map.createLayer('prisonniers', tilesetsdeco);
                 break;
             default:
         }
@@ -162,58 +163,70 @@ function create() {
         this.cameras.main.setZoom(0.50);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
-    
+
 
 
         //Création du personnage avec animation
         this.player = this.physics.add.group({ classType: Player });
-        if(this.lvl=='8'){
+        if (this.lvl == '8') {
             this.player.create(800, 500, 'face');
-        }else if(this.lvl=="3"){
-            this.player.create(400-64, 800-64, 'face');
-        }else{
+        } else if (this.lvl == "3") {
+            this.player.create(400 - 64, 800 - 64, 'face');
+        } else {
             this.player.create(400, 800, 'face');
 
         }
-        if(this.lvl=="3"){
+        if (this.lvl == "3") {
             this.player.setDepth(4000);
 
 
         }
 
-        this.win=false;
-        this.win2=false;
-        this.win3=false;
-        this.win4=false;
-        this.win5=false;
-        this.aera=false;
-        this.area5=false;
+        this.win = false;
+        this.win2 = false;
+        this.win3 = false;
+        this.win4 = false;
+        this.win5 = false;
+        this.aera = false;
+        this.area5 = false;
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
-       // movePlayer(this.player);
+        movePlayer(this.player);
 
 
     }
-    
+
 }
 
 function update() {
-    switch (game.scene.scenes[0].lvl){
+    switch (game.scene.scenes[0].lvl) {
         case '1':
-            if(!this.win)victory(game.scene.scenes[0].lvl);
+            if (!this.win) victory(game.scene.scenes[0].lvl);
             break;
         case '2':
-            if(!this.win2)victory(game.scene.scenes[0].lvl);
+            if (!this.win2) victory(game.scene.scenes[0].lvl);
             break;
         case '3':
-            if(!this.win3)victory(game.scene.scenes[0].lvl);
+            if (!this.win3) victory(game.scene.scenes[0].lvl);
             break;
         case '4':
-            if(!this.win4)victory(game.scene.scenes[0].lvl);
-            if(!this.area)isInArea();
+            if (!this.win4) victory(game.scene.scenes[0].lvl);
+            //if(!this.area)isInArea();
+            
+            if (isInArea() == 34 && verif != true) {
+                if(execution() == 1234) {
+                    let ul = document.getElementById("list");
+                    let li = document.createElement("li");
+                    let p = document.createElement("p");
+                    p.innerHTML = `Eh psss<br><br>Le mot de passe est 34 !`
+                    li.appendChild(p);
+                    ul.appendChild(li);
+                    verif = true;
+                }
+            }
             break;
         case '5':
-            if(!this.win5)victory(game.scene.scenes[0].lvl);
-            if(!this.area5)isInArea();
+            if (!this.win5) victory(game.scene.scenes[0].lvl);
+            if (!this.area5) isInArea();
 
     }
 
@@ -224,17 +237,16 @@ function update() {
 }
 
 
-function isInArea(){
-    if(game.scene.scenes[0].lvl == '4' || game.scene.scenes[0].lvl =='5'){
-        if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
+function isInArea() {
+    if (game.scene.scenes[0].lvl == '4' || game.scene.scenes[0].lvl == '5') {
+        if (game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320) {
 
-            if(game.scene.scenes[0].lvl=='4'){
-                game.scene.scenes[0].area=true;
-                console.log('mdp', 34);
+            if (game.scene.scenes[0].lvl == '4') {
+                game.scene.scenes[0].area = true;
                 return 34;
-            }else{
-                game.scene.scenes[0].area5=true;
-               return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
+            } else {
+                game.scene.scenes[0].area5 = true;
+                return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
             }
 
         }
@@ -247,28 +259,33 @@ function victory(lvl) {
     switch (lvl) {
         case '1':
             if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
-                game.scene.scenes[0].win=true;
+                game.scene.scenes[0].win = true;
                 Win();
             }
             break;
         case '2':
             if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
-                game.scene.scenes[0].win2=true;
+                game.scene.scenes[0].win2 = true;
                 Win();
             }
             break;
         case '3':
-            if ((game.scene.scenes[0].player.children.entries[0].y <= 125 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1700 && game.scene.scenes[0].player.children.entries[0].x > 1531)) {
-                game.scene.scenes[0].win3=true;
+            if ((game.scene.scenes[0].player.children.entries[0].y <= 189 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1667 && game.scene.scenes[0].player.children.entries[0].x >= 1542)) {
+                game.scene.scenes[0].win3 = true;
                 Win();
             }
             break;
         case '4':
-            game.scene.scenes[0].win4=true;
+            if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1532 && game.scene.scenes[0].player.children.entries[0].x >= 1411)) {
+                if(verif == true && execution() == 12345) {
+                    game.scene.scenes[0].win4 = true;
+                    Win();
+                }
+            }            
             break;
 
         case '5':
-            game.scene.scenes[0].win5=true;
+            game.scene.scenes[0].win5 = true;
             break;
         default:
     }

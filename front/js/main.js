@@ -899,12 +899,15 @@ async function execution(){
                 let MP = ins.code;
                 //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
                 ic++;
+                return 12345;
                 break;
             case 'GET':
                 //Fonction regarder si on est dans la zone et retunrn la valeur
+                
                 let MP2 = 0; // a changer
                 pile.push(MP2);
                 ic++;
+                if(isInArea() == 34) return 1234;
                 break;
             default :
                 ic++;
