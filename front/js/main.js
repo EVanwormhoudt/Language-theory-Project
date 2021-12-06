@@ -1,5 +1,9 @@
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
+editor.getSession().setMode("ace/mode/javascript");
+editor.getSession().setUseWorker(false);
+
+
 document.getElementById('back').style.visibility = 'hidden';
 console.log(1)
 let examples = ['DEBUT SOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE',
