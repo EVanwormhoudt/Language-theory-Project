@@ -67,7 +67,7 @@ var JavaScriptHighlightRules = function(options) {
                 "var|Fonction",
             "constant.language": "DEBUTSOURCE|FINSOURCE",
             "support.function":
-                "move|Afficher|Pause|parle|recup",
+                "move|Afficher|Pause|parle|recup|test",
             "constant.language.boolean": "true|false"
         }, "identifier");
 

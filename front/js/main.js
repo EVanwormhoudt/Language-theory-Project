@@ -6,11 +6,11 @@ editor.getSession().setUseWorker(false);
 
 document.getElementById('back').style.visibility = 'hidden';
 console.log(1)
-let examples = ['DEBUT SOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE',
-'DEBUT SOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FIN SOURCE',
-'DEBUT SOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '}FIN SOURCE',
-'DEBUT SOURCE {\n' + 'nbPas = 16;' + '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' + '\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n' + '\t' + 'move(haut);' + '\n' + 'FinPour' + '\n' + '}FIN SOURCE',
-'DEBUT SOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' + '\n\tnbPas = 2;' + '\n\tPause;' + '\nDefaut: //si var  ne vaut ni 1 ni 2' + '\n\tnbPas = 6;' + '\n\tPause;' + '\nFinSelon;' + '\nAfficher(nbPas);' + '\n}FIN SOURCE']
+let examples = ['DEBUTSOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'nbPas = 16;' + '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' + '\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n' + '\t' + 'move(haut);' + '\n' + 'FinPour' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' + '\n\tnbPas = 2;' + '\n\tPause;' + '\nDefaut: //si var  ne vaut ni 1 ni 2' + '\n\tnbPas = 6;' + '\n\tPause;' + '\nFinSelon;' + '\nAfficher(nbPas);' + '\n}FINSOURCE']
 
 let liste = "\n" + "\n" + "\n" + "Liste des fonctions :" + "\n" + "Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
     "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
@@ -374,7 +374,7 @@ function addTmpFor() {
 
 console.log(3)
 function parseCodeHighlight() {
-    let tmp = editor.getValue().replace("DEBUT SOURCE {", "").replace("}FIN SOURCE", "")
+    let tmp = editor.getValue().replace("DEBUTSOURCE {", "").replace("}FINSOURCE", "")
     let tmpTable;
     let length = 0;
     let ligne = 0;
@@ -467,12 +467,12 @@ document.getElementById("compilation").addEventListener('click', async () => {
 })
 
 document.getElementById("clear").addEventListener('click', () => {
-    editor.setValue("DEBUT SOURCE{" +
+    editor.setValue("DEBUTSOURCE{" +
         "\n" +
         "\n" +
         "\n" +
         "\n" +
-        "}FIN SOURCE");
+        "}FINSOURCE");
 })
 
 
@@ -571,6 +571,46 @@ async function execution(){
                 break;
             case 'FINSIF':
                 // je récupère l'adresse à partir de la table
+                ic++;
+                break;
+            case 'TH':
+                console.log("Ins : On anvance le personnage vers le haut");
+                if(await game.scene.scenes[0].player.children.entries[0].testCollision("up")){
+                    pile.push(0);
+                }
+                else {
+                    pile.push(1);
+                }
+                ic++;
+                break;
+            case 'TB':
+                console.log("Ins : On anvance le personnage vers le haut");
+                if(await game.scene.scenes[0].player.children.entries[0].testCollision("down")){
+                    pile.push(0);
+                }
+                else {
+                    pile.push(1);
+                }
+                ic++;
+                break;
+            case 'TD':
+                console.log("Ins : On anvance le personnage vers le haut");
+                if(await game.scene.scenes[0].player.children.entries[0].testCollision("right")){
+                    pile.push(0);
+                }
+                else {
+                    pile.push(1);
+                }
+                ic++;
+                break;
+            case 'TG':
+                console.log("Ins : On anvance le personnage vers le haut");
+                if(await game.scene.scenes[0].player.children.entries[0].testCollision("left")){
+                    pile.push(0);
+                }
+                else {
+                    pile.push(1);
+                }
                 ic++;
                 break;
             case 'MH':

@@ -1,4 +1,4 @@
-DEBUT SOURCE {
+DEBUTSOURCE {
 
     move(haut);
 
@@ -15,10 +15,10 @@ DEBUT SOURCE {
     FinChoix;
 
 
-}FIN SOURCE
+}FINSOURCE
 
 
-DEBUT SOURCE {
+DEBUTSOURCE {
 
 move(bas);
 move(bas);
@@ -32,7 +32,7 @@ Pour i Allant De (1,5,1):
 FinPour;
 
 
-}FIN SOURCE
+}FINSOURCE
 
 
 Fonction myFonction(var1,var2):
@@ -46,7 +46,7 @@ Retourner testo;
 Afficher(myFonction(1,45));
 Afficher(testo);
 
-DEBUT SOURCE {
+DEBUTSOURCE {
 
 var = 0;
 var2 = 0;
@@ -58,4 +58,4 @@ FinTantque;
 
 FinTantque;
 
-}FIN SOURCE
+}FINSOURCE

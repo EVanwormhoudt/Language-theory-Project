@@ -49,7 +49,7 @@
 "FinSi"               return 'FINSI';
 "Pour"                return 'POUR';
 "Faire"               return 'FAIRE';
-"Allant De"           return 'ALLANT';
+"AllantDe"           return 'ALLANT';
 "A"                   return 'A';
 "E"                   return 'E';
 <<EOF>>               return 'EOF';
@@ -60,8 +60,8 @@
 "bas"                 return 'DOWN';
 "droite"              return 'RIGHT';
 "gauche"              return 'LEFT';
-"DEBUT SOURCE"        return 'DEBUT';
-"FIN SOURCE"          return 'FIN';
+"DEBUTSOURCE"        return 'DEBUT';
+"FINSOURCE"          return 'FIN';
 "Tantque"            return 'TANTQUE';
 "test"                return 'TEST';
 [A-Za-z_][A-Za-z_0-9]* return 'VAR';
@@ -214,7 +214,7 @@ PARAMETERS3 :ARGUMENTS {}
             |
         ;
 
-ARGUMENTS :e {}
+ARGUMENTS :e     {}
         |STRING {addInstruction($1,"STRING", 0)}
         ;
 
@@ -272,4 +272,8 @@ e   : e ADD e {addInstruction(0,"ADD", 0);}
     | e DIV e    {addInstruction(0,"DIV", 0);}
     | CALLFUNCTION  {}
     | RECUP '('')' {addInstruction(0,"GET",0);}
+    | TEST '(' UP ')' {addInstruction(0,"TH",0);}
+    | TEST '(' DOWN ')' {addInstruction(0,"TB",0);}
+    | TEST '(' RIGHT ')' {addInstruction(0,"TD",0);}
+    | TEST '(' LEFT ')' {addInstruction(0,"TG",0);}
     ;

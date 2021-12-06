@@ -145,10 +145,10 @@ function CollisionConsole() {
 }
 
 function ErrorConsole(err){
-    let tab=["\n",'nombre',"Afficher",";",",",":","==","=",">","*","/","-","++","+","!=",">=","<=","^","{","}","(",")","PI",">","<","Selon","Cas","Defaut","Pause","FinChoix","FinTantque","FinPour","Si","Alors","Sinon","FinSi","Pour","Faire","Allant De","A","E","<<EOF>>","move","haut","bas","droite","gauche","DEBUT SOURCE","FIN SOURCE","Tantque","test","variable","\s+"];
+    let tab=["\n",'nombre',"Afficher",";",",",":","==","=",">","*","/","-","++","+","!=",">=","<=","^","{","}","(",")","PI",">","<","Selon","Cas","Defaut","Pause","FinChoix","FinTantque","FinPour","Si","Alors","Sinon","FinSi","Pour","Faire","Allant De","A","E","<<EOF>>","move","haut","bas","droite","gauche","DEBUTSOURCE","FINSOURCE","Tantque","test","variable","\s+"];
     err = err.split("\n")
     console.log(err[0][27])
-
+    let testParser = {"error":2,"IF":3,"SI":4,"(":5,"condition":6,")":7,":":8,"THEN":9,"ALORS":10,"ELSE":11,"bloc":12,"SINON":13,"ENDIF":14,"FINSI":15,"VARFOR":16,"VAR":17,"FOR":18,"POUR":19,"ALLANT":20,"e":21,",":22,"INC":23,"FINPOUR":24,"ENDFOR":25,"WHILE":26,"WHILEFIRST":27,"TANTQUE":28,"ENDWHILE":29,"FINTANTQUE":30,"SWITCH":31,"CHOIX":32,"CASE":33,"CAS":34,"DEFAULT":35,"DEFAUT":36,"ENDCASE":37,"PAUSE":38,";":39,"ENDSWITCH":40,"BLOCSWITCH":41,"FINCHOIX":42,"INSTRUCTIONSWITCH":43,"FUNCTION":44,"FONCTION":45,"FUNCTION2":46,"PARAMETERS":47,"FUNCTION3":48,"RETOURNER":49,"CALLFUNCTION":50,"PARAMETERS2":51,"PRINT":52,"AFFICHER":53,"PARAMETERS3":54,"ARGUMENTS":55,"STRING":56,"instruction":57,"SUP":58,"INF":59,"SUPEGAL":60,"INFEGAL":61,"EGAL":62,"NOTEGAL":63,"DEBUT":64,"{":65,"}":66,"FIN":67,"EOF":68,"MOVE":69,"UP":70,"DOWN":71,"LEFT":72,"RIGHT":73,"PARLE":74,"COM":75,"RETOURNE":76,"=":77,"ADD":78,"NUMBER":79,"[":80,"]":81,"SUB":82,"MULT":83,"DIV":84,"RECUP":85,"TEST":86,"$accept":0,"$end":1};
     console.log(testParser)
     let ul = document.getElementById("list");
     let li = document.createElement("li");
