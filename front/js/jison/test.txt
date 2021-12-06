@@ -25,11 +25,37 @@ move(bas);
 Pour i Allant De (1,15,1):
     move(droite);
 
-FinPour
-Pour i Allant De (1,35,1):
+FinPour;
+Pour i Allant De (1,5,1):
     move(haut);
 
-FinPour
+FinPour;
 
+
+}FIN SOURCE
+
+
+Fonction myFonction(var1,var2):
+    move(haut);
+    testo = 5;
+    Afficher(var1);
+    Afficher(var2);
+Retourner testo;
+
+
+Afficher(myFonction(1,45));
+Afficher(testo);
+
+DEBUT SOURCE {
+
+var = 0;
+var2 = 0;
+
+Tantque(var != 3):
+Tantque(var != 3):
+
+FinTantque;
+
+FinTantque;
 
 }FIN SOURCE

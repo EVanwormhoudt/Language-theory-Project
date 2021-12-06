@@ -262,6 +262,16 @@ Range.comparePoints = function (p1, p2) {
     return p1.row - p2.row || p1.column - p2.column;
 };
 
+class fonction {
+    constructor(name_, debut_, fin_) {
+        this.debut = debut_;
+        this.name = name_;
+        this.fin=fin_;
+        this.tabArguments = []
+        this.return;
+        this.mapReturn = new Map();
+    }
+}
 
 class Instruction {
     constructor(code_, name_, value_) {
@@ -317,6 +327,8 @@ let tabTmpFor = []
 let CurseurFor = -1;
 let tabTmpSwitch = []
 let CurseurSwitch = -1;
+let tabFonctions = []
+let CurseurFonctions = -1;
 let variables = new Map();
 let tableCode = [];
 let tableRange = [];
@@ -331,6 +343,10 @@ if (position != -1) {
     lvl = fin_url.substr(7);
 }
 
+function addFonctions(){
+    tabFonctions.push(new fonction("",0))
+    CurseurFonctions++;
+}
 
 function addTmpSwitch() {
     tabTmpSwitch.push(new tmpSwitch(0, 0, 0))
@@ -352,9 +368,6 @@ function addTmpFor() {
     CurseurFor++;
 }
 
-function test() {
-    console.log("test");
-}
 
 function parseCodeHighlight() {
     let tmp = editor.getValue().replace("DEBUT SOURCE {", "").replace("}FIN SOURCE", "")
@@ -372,15 +385,22 @@ function parseCodeHighlight() {
         tableCode = [...tableCode, ...i.split("\n")];
     }
     console.log(tableCode)
-    for (let i of tableCode) {
-        if (i == "") {
+    for(let i of tableCode){
+
+        if(i === "" || i === "\r" ){
             ligne++;
             length = 0;
         }
-        else {
-            tableRange.push(new Range(ligne, length, ligne, length + i.length + 1));
-            length = i.length + 1;
+        else if(i === "Alors"){
+
         }
+        else{
+            console.log(i)
+            console.log(ligne)
+            tableRange.push(new Range(ligne,length,ligne,length + i.length +1));
+            length = i.length+1;
+            console.log(tableRange)
+
     }
 
 }
@@ -396,11 +416,10 @@ function adaptIndex() {
             instruction++;
         }
     }
-    for (let i in code_genere) {
-        if (code_genere[i].name == "INCFOR") {
-            console.log(i)
-            console.log(retourhiglight[parseInt(i) + 1]);
-            retourhiglight[i] = retourhiglight[parseInt(i) + 1];
+    for(let i in code_genere){
+        if(code_genere[i].name =="INCFOR"){
+            console.log(retourhiglight[parseInt(i)+1]);
+            retourhiglight[i] = retourhiglight[parseInt(i)+1];
         }
         if (code_genere[i].name == "VARFOR") {
 
@@ -409,19 +428,6 @@ function adaptIndex() {
             retourhiglight[parseInt(i) + 2] = retourhiglight[parseInt(i) + 2];
             retourhiglight[parseInt(i) + 3] = retourhiglight[parseInt(i) + 1];
         }
-
-    }
-
-    for (let i in code_genere) {
-        let j = 1;
-        while (j <= 3 && j < code_genere.length - i - j) {
-            if (code_genere[i].name == "NUM" && code_genere[i + j]) {
-
-                retourhiglight[i] = retourhiglight[parseInt(i) + parseInt(j)];
-            }
-            j++;
-        }
-
 
     }
 
@@ -434,12 +440,23 @@ document.getElementById("compilation").addEventListener('click', async () => {
     btnStyle.style.color = 'grey';
     ClearConsole();
     parseCodeHighlight();
-    langage.parse(editor.getValue());
+    try{
+        langage.parse(editor.getValue());
+    }
+    catch (err){
+        ErrorConsole(err.toString())
+        console.log(err)
+        marker = editor.getSession().addMarker(new Range(err.toString()[27]-1,0,err.toString()[27]-1,100000), "errorHighlight", "screenLine");
+        return;
+    }
     adaptIndex();
     console.log(code_genere)
     console.log(retourhiglight)
     console.log(tableRange)
+    console.log(tabFonctions);
+    console.log(tabTmpWhile);
     await execution();
+    console.log(variables)
     InitCompilation();
 
     btnStyle.style.color = 'white';
@@ -457,25 +474,25 @@ function addInstruction(code, name, value) {
 
 
 
-async function execution() {
+
+async function execution(){
+    CurseurFonctions=-1;
     let ic = 0;
     let pile = [];
     let pileVar = [];
+    let pileFonction = [];
+    let AppelFonction = [];
     console.log(code_genere)
     while (ic < code_genere.length) {
         let btnClear = document.getElementById("clear");
         btnClear.disabled = true;
-
-        await new Promise(r => setTimeout(r, 400));
-        if (retourhiglight[ic] != -1)
-            editor.getSession().removeMarker(marker);
         let ins = code_genere[ic];
-        console.log("pointeur :" + ic)
-        console.log(ins)
-        if (retourhiglight[ic] != -1) {
+        if(retourhiglight[ic] !== -1) {
+            editor.getSession().removeMarker(marker);
+            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "currentHighlight", "screenLine");
 
-            marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "ace_active-line", "screenLine");
         }
+
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
@@ -549,32 +566,47 @@ async function execution() {
                 break;
             case 'MH':
                 console.log("Ins : On anvance le personnage vers le haut");
-                if (!(await game.scene.scenes[0].player.children.entries[0].move("up", 1)))
-                    return;
-
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("up",1) )) {
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
 
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MB':
                 console.log("Ins : On anvance le personnage vers le bas")
-                if (!(await game.scene.scenes[0].player.children.entries[0].move("down", 1)))
-                    return;
+
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("down",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
+
+
                 //victory(lvl,game);
 
                 ic++;
                 break;
             case 'MD':
                 console.log("Ins : On anvance le personnage vers la droite")
-                if (!(await game.scene.scenes[0].player.children.entries[0].move("right", 1)))
-                    return;
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("right",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
+
                 //victory(lvl,game);
                 ic++;
                 break;
             case 'MG':
                 console.log("Ins : On anvance le personnage vers la gauche")
-                if (!(await game.scene.scenes[0].player.children.entries[0].move("left", 1)))
-                    return;
+                if(!(await game.scene.scenes[0].player.children.entries[0].move("left",1) )){
+                    editor.getSession().removeMarker(marker);
+                    marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
+                    return -1;
+                }
                 //victory(lvl,game);
                 ic++;
                 break;
@@ -684,9 +716,11 @@ async function execution() {
                 ic++;
                 break;
             case 'PRINT':
-                r1 = pile.pop();
-                console.log("PRINT : ", r1);
-                PrintConsole(r1);
+                let str = "";
+                while(pile.length!=0){
+                    str = str + pile.shift();
+                }
+                PrintConsole(str);
                 ic++;
                 break;
             case 'POUR':
@@ -751,12 +785,83 @@ async function execution() {
                 }
                 break;
             case 'ENDSWITCH':
-                CurseurSwitch = CurseurSwitch - 1;
-            default:
+
+                CurseurSwitch=CurseurSwitch-1;
+                break;
+            case 'NEWFUNCTION':
+                CurseurFonctions++;
+                ic = tabFonctions[CurseurFonctions].fin;
+                break;
+            case 'FINDFONCTION':
+                let NameFonction =  ins.code;
+
+                let i = 0;
+                
+                let isLargeNumber = (element) => element.name == NameFonction;
+                i=tabFonctions.findIndex(isLargeNumber);
+
+                if(i >=0){
+                    CurseurFonctions = i;
+                    let tab = [];
+                    while(pile.length!=0){
+                        tab.push(pile.pop());
+                    }
+                    if(tab.length==tabFonctions[CurseurFonctions].tabArguments.length){
+                        for(let j=0;j<tab.length;j++){
+                            variables.set(tabFonctions[CurseurFonctions].tabArguments[j], tab[j]);
+                        }
+                        pileFonction.push(ic+1);
+                        AppelFonction.push(CurseurFonctions);
+                        ic = tabFonctions[CurseurFonctions].debut;
+                        break;
+                    }
+                    else{
+                        messageConsole("ERROR :Fonction : "+ NameFonction + " Arguments");
+                        ic++;
+                        break;
+                    }
+                    
+                }
+                else {
+                    messageConsole("ERROR :Fonction : "+ NameFonction + " Indefinie");
+                    ic++;
+                }
+                break;
+            case 'RETURN':
+                let curseur = AppelFonction.pop();
+                console.log("retuuuurn",ic);
+                if((typeof tabFonctions[curseur].mapReturn.get(ic) )=="string"){
+                    pile.push(variables.get(tabFonctions[curseur].mapReturn.get(ic)));
+                }
+                else {
+                    pile.push(tabFonctions[curseur].mapReturn.get(ic));
+                }
+                for(let j = 0;j<tabFonctions[curseur].tabArguments.length;j++){
+                    variables.delete(tabFonctions[curseur].tabArguments[j]);
+                }
+                ic = pileFonction.pop();
+                break;
+            case 'STRING':
+                pile.push(ins.code.substring(1, ins.code.length-1));
+                console.log(ins.code)
                 ic++;
-
+                break;
+            case 'SPEAK': 
+                let MP = ins.code;
+                //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
+                ic++;
+                break;
+            case 'GET': 
+                //Fonction regarder si on est dans la zone et retunrn la valeur
+                let MP2 = 0; // a changer
+                pile.push(MP2);
+                ic++;
+                break;
+            default :
+                ic++;
         }
-
+        if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
+            await new Promise(r => setTimeout(r, 500));
 
     }
     if (retourhiglight[ic] != -1) {
@@ -784,6 +889,8 @@ function InitCompilation() {
     CurseurSwitch = -1;
     tableRange = [];
     retourhiglight = [];
+    tabFonctions = []
+    CurseurFonctions = -1;
 }
 
 /** instructions :
