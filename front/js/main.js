@@ -463,7 +463,12 @@ document.getElementById("compilation").addEventListener('click', async () => {
 })
 
 document.getElementById("clear").addEventListener('click', () => {
-    editor.setValue("");
+    editor.setValue("DEBUT SOURCE{" +
+        "\n" +
+        "\n" +
+        "\n" +
+        "\n" +
+        "}FIN SOURCE");
 })
 
 
