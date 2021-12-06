@@ -1,7 +1,7 @@
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
 document.getElementById('back').style.visibility = 'hidden';
-
+console.log(1)
 let examples = ['DEBUT SOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FIN SOURCE',
 'DEBUT SOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FIN SOURCE',
 'DEBUT SOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '}FIN SOURCE',
@@ -31,7 +31,7 @@ document.getElementById("example").addEventListener('click', () => {
 
 })
 
-
+console.log(1)
 var Range = function (startRow, startColumn, endRow, endColumn) {
     this.start = {
         row: startRow,
@@ -314,7 +314,7 @@ class tmpSwitch {
         this.default = -1;
     }
 }
-
+console.log(2)
 let code_genere = [];
 let ic = 0;
 let r1 = 0;
@@ -368,7 +368,7 @@ function addTmpFor() {
     CurseurFor++;
 }
 
-
+console.log(3)
 function parseCodeHighlight() {
     let tmp = editor.getValue().replace("DEBUT SOURCE {", "").replace("}FIN SOURCE", "")
     let tmpTable;
@@ -432,7 +432,7 @@ function adaptIndex() {
     }
 
 }
-
+    console.log(1)
 document.getElementById("compilation").addEventListener('click', async () => {
     //document.getElementById("compilation").disabled = true;
 
@@ -801,7 +801,7 @@ async function execution(){
                 let NameFonction =  ins.code;
 
                 let i = 0;
-                
+
                 let isLargeNumber = (element) => element.name == NameFonction;
                 i=tabFonctions.findIndex(isLargeNumber);
 
@@ -825,7 +825,7 @@ async function execution(){
                         ic++;
                         break;
                     }
-                    
+
                 }
                 else {
                     messageConsole("ERROR :Fonction : "+ NameFonction + " Indefinie");
@@ -851,12 +851,12 @@ async function execution(){
                 console.log(ins.code)
                 ic++;
                 break;
-            case 'SPEAK': 
+            case 'SPEAK':
                 let MP = ins.code;
                 //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
                 ic++;
                 break;
-            case 'GET': 
+            case 'GET':
                 //Fonction regarder si on est dans la zone et retunrn la valeur
                 let MP2 = 0; // a changer
                 pile.push(MP2);
