@@ -44,13 +44,13 @@ function create() {
     var position = window.location.href.indexOf('?');
 
     if (position != -1) {
-        let lvl = "";
+        this.lvl = "";
         var fin_url = window.location.href.substr(position + 1);
         fin_url = fin_url.replace(/-/g, " ");
 
-        lvl = fin_url.substr(7);
+        this.lvl = fin_url.substr(7);
 
-        switch (lvl) {
+        switch (this.lvl) {
             case '1':
                 map = this.add.tilemap('mapLvl1');
 
@@ -167,15 +167,15 @@ function create() {
 
         //Création du personnage avec animation
         this.player = this.physics.add.group({ classType: Player });
-        if(lvl=='8'){
+        if(this.lvl=='8'){
             this.player.create(800, 500, 'face');
-        }else if(lvl=="3"){
+        }else if(this.lvl=="3"){
             this.player.create(400-64, 800-64, 'face');
         }else{
             this.player.create(400, 800, 'face');
 
         }
-        if(lvl=="3"){
+        if(this.lvl=="3"){
             this.player.setDepth(4000);
 
 
@@ -189,7 +189,7 @@ function create() {
         this.aera=false;
         this.area5=false;
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
-        movePlayer(this.player);
+       // movePlayer(this.player);
 
 
     }
@@ -197,22 +197,22 @@ function create() {
 }
 
 function update() {
-    switch (lvl){
+    switch (game.scene.scenes[0].lvl){
         case '1':
-            if(!this.win)victory(lvl);
+            if(!this.win)victory(game.scene.scenes[0].lvl);
             break;
         case '2':
-            if(!this.win2)victory(lvl);
+            if(!this.win2)victory(game.scene.scenes[0].lvl);
             break;
         case '3':
-            if(!this.win3)victory(lvl);
+            if(!this.win3)victory(game.scene.scenes[0].lvl);
             break;
         case '4':
-            if(!this.win4)victory(lvl);
+            if(!this.win4)victory(game.scene.scenes[0].lvl);
             if(!this.area)isInArea();
             break;
         case '5':
-            if(!this.win5)victory(lvl);
+            if(!this.win5)victory(game.scene.scenes[0].lvl);
             if(!this.area5)isInArea();
 
     }
@@ -225,10 +225,10 @@ function update() {
 
 
 function isInArea(){
-    if(lvl == '4' || lvl =='5'){
+    if(game.scene.scenes[0].lvl == '4' || game.scene.scenes[0].lvl =='5'){
         if(game.scene.scenes[0].player.children.entries[0].x >= 128 && game.scene.scenes[0].player.children.entries[0].x <= 250 && game.scene.scenes[0].player.children.entries[0].y < 447 && game.scene.scenes[0].player.children.entries[0].y > 320){
 
-            if(lvl=='4'){
+            if(game.scene.scenes[0].lvl=='4'){
                 game.scene.scenes[0].area=true;
                 console.log('mdp', 34);
                 return 34;

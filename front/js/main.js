@@ -891,7 +891,8 @@ function InitCompilation() {
     retourhiglight = [];
     tabFonctions = []
     CurseurFonctions = -1;
-}
+}}
+
 
 /** instructions :
  * MH move(haut)
