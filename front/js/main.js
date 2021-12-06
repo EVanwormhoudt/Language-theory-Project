@@ -394,13 +394,13 @@ function parseCodeHighlight() {
         else if(i === "Alors"){
 
         }
-        else{
+        else {
             console.log(i)
             console.log(ligne)
-            tableRange.push(new Range(ligne,length,ligne,length + i.length +1));
-            length = i.length+1;
+            tableRange.push(new Range(ligne, length, ligne, length + i.length + 1));
+            length = i.length + 1;
             console.log(tableRange)
-
+        }
     }
 
 }
@@ -434,7 +434,7 @@ function adaptIndex() {
 }
 
 document.getElementById("compilation").addEventListener('click', async () => {
-    document.getElementById("compilation").disabled = true;
+    //document.getElementById("compilation").disabled = true;
 
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
@@ -891,7 +891,7 @@ function InitCompilation() {
     retourhiglight = [];
     tabFonctions = []
     CurseurFonctions = -1;
-}}
+}
 
 
 /** instructions :
