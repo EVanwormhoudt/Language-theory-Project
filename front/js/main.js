@@ -16,6 +16,8 @@ let liste = "\n" + "\n" + "\n" + "Liste des fonctions :" + "\n" + "Afficher(i) /
     "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
     "\n" + "test(haut) //fonction qui renvoie 0 si le personnage" + "\n" + " ne peut pas aller dans la direction souhaitée sinon 1";
 
+let verifRecupMDPconsole = false;
+let verifParlerMDPconsole = false;
 document.getElementById("example").addEventListener('click', () => {
     document.getElementById('back').style.visibility = 'visible';
     document.getElementById("clear").disabled = true;
@@ -439,7 +441,9 @@ function adaptIndex() {
     console.log(1)
 document.getElementById("compilation").addEventListener('click', async () => {
     //document.getElementById("compilation").disabled = true;
-
+    verifRecupMDPconsole = false;
+    verifParlerMDPconsole = false;
+    
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
     ClearConsole();
@@ -898,16 +902,16 @@ async function execution(){
             case 'SPEAK':
                 let MP = ins.code;
                 //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
+                verifParlerMDPconsole = true;
                 ic++;
-                return 12345;
                 break;
             case 'GET':
                 //Fonction regarder si on est dans la zone et retunrn la valeur
-                
+                verifRecupMDPconsole = true;
+
                 let MP2 = 0; // a changer
                 pile.push(MP2);
                 ic++;
-                if(isInArea() == 34) return 1234;
                 break;
             default :
                 ic++;

@@ -1,6 +1,7 @@
 function GameOver() {
     document.getElementById("popupGameOver").hidden = false;
 
+    verifRecupMDP, verifRecupMDPconsole, verifParlerMDPconsole = false;
 
     let btnClear = document.getElementById("clear");
     btnClear.disabled = true;

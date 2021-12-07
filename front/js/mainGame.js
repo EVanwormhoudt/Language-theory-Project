@@ -20,7 +20,7 @@ const config = {
 const game = new Phaser.Game(config)
 let map, tilesets, tilesetsdeco;
 let cursors;
-let verif = false;
+let verifRecupMDP = false;
 
 function preload() {
     this.load.tilemapTiledJSON("mapLvl1", "../asset/mapLvl1.json");
@@ -190,7 +190,7 @@ function create() {
         this.aera = false;
         this.area5 = false;
         this.player.children.entries[0].setAnim('left', 'right', 'back', 'face');
-        movePlayer(this.player);
+        //movePlayer(this.player);
 
 
     }
@@ -212,15 +212,16 @@ function update() {
             if (!this.win4) victory(game.scene.scenes[0].lvl);
             //if(!this.area)isInArea();
             
-            if (isInArea() == 34 && verif != true) {
-                if(execution() == 1234) {
+            
+            if (isInArea() == 34 && verifRecupMDP != true) {
+                if(verifRecupMDPconsole == true ) {
                     let ul = document.getElementById("list");
                     let li = document.createElement("li");
                     let p = document.createElement("p");
                     p.innerHTML = `Eh psss<br><br>Le mot de passe est 34 !`
                     li.appendChild(p);
                     ul.appendChild(li);
-                    verif = true;
+                    verifRecupMDP = true;
                 }
             }
             break;
@@ -230,7 +231,7 @@ function update() {
 
     }
 
-
+    //console.log(verifRecupMDP, verifRecupMDPconsole, verifParlerMDPconsole);
     //var pointer = this.input.activePointer;
     //console.log(pointer.x,  ' y',pointer.y);
     //console.log(game.scene.scenes[0].player.children.entries[0].x,game.scene.scenes[0].player.children.entries[0].y)
@@ -276,8 +277,10 @@ function victory(lvl) {
             }
             break;
         case '4':
-            if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1532 && game.scene.scenes[0].player.children.entries[0].x >= 1411)) {
-                if(verif == true && execution() == 12345) {
+            if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
+                //console.log("bon area");
+                
+                if(verifRecupMDP == true && verifParlerMDPconsole == true) {
                     game.scene.scenes[0].win4 = true;
                     Win();
                 }
