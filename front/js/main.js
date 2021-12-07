@@ -526,13 +526,13 @@ async function execution(){
                 break;
             case 'VARFOR':
                 if (variables.has(ins.code)) {
-                    pile.push(variables.get(ins.code));
+                    //pile.push(variables.get(ins.code));
                     console.log(ins.code, " ", variables.get(ins.code));
                     ic++;
                 }
                 else {
                     variables.set(ins.code, 0);
-                    pile.push(variables.get(ins.code));
+                    //pile.push(variables.get(ins.code));
                     ic++;
                 }
                 pileVar.push((ins.code));
@@ -624,8 +624,6 @@ async function execution(){
                     marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "errorHighlight", "screenLine");
                     return -1;
                 }
-
-                //victory(lvl,game);
                 ic++;
                 break;
             case 'MB':
@@ -909,7 +907,8 @@ async function execution(){
                 //Fonction regarder si on est dans la zone et retunrn la valeur
                 verifRecupMDPconsole = true;
 
-                let MP2 = 0; // a changer
+                let MP2 = isInArea();
+                console.log("isareaaaa ", MP2)
                 pile.push(MP2);
                 ic++;
                 break;
@@ -927,6 +926,7 @@ async function execution(){
         GameOver();
 
     }
+
 }
 
 function InitCompilation() {

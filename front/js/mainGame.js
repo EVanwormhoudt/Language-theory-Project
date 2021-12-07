@@ -228,7 +228,7 @@ function update() {
         case '5':
             if (!this.win5) victory(game.scene.scenes[0].lvl);
             if (!this.area5) isInArea();
-
+            break;
     }
 
     //console.log(verifRecupMDP, verifRecupMDPconsole, verifParlerMDPconsole);
@@ -251,7 +251,10 @@ function isInArea() {
             }
 
         }
-        return;
+        return -1;
+    }
+    else{
+        return -1;
     }
 }
 
