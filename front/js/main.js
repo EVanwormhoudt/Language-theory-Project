@@ -509,7 +509,8 @@ async function execution(){
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
-                pile.push(ins.value);
+                console.log(ins.code);
+                pile.push(ins.code);
                 ic++;
                 break;
             case 'VAR':
