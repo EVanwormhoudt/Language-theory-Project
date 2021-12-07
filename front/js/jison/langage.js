@@ -807,44 +807,40 @@ case 43:return 'FAIRE';
 break;
 case 44:return 20;
 break;
-case 45:return 'A';
+case 45:return 68;
 break;
-case 46:return 'E';
+case 46:return 85;
 break;
-case 47:return 68;
+case 47:return 74;
 break;
-case 48:return 85;
+case 48:return 69;
 break;
-case 49:return 74;
+case 49:return 70;
 break;
-case 50:return 69;
+case 50:return 71;
 break;
-case 51:return 70;
+case 51:return 73;
 break;
-case 52:return 71;
+case 52:return 72;
 break;
-case 53:return 73;
+case 53:return 64;
 break;
-case 54:return 72;
+case 54:return 67;
 break;
-case 55:return 64;
+case 55:return 28;
 break;
-case 56:return 67;
+case 56:return 86;
 break;
-case 57:return 28;
+case 57:return 17;
 break;
-case 58:return 86;
+case 58:return 56;
 break;
-case 59:return 17;
-break;
-case 60:return 56;
-break;
-case 61:/* skip whitespace */
+case 59:/* skip whitespace */
 break;
 }
 },
-rules: [/^(?:\\n)/,/^(?:[-]?[0-9]+(\.[0-9]+)?\b)/,/^(?:Afficher\b)/,/^(?:\/\*\/.*?\/\*\/)/,/^(?:;)/,/^(?:,)/,/^(?::)/,/^(?:==)/,/^(?:=)/,/^(?:>)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+\+)/,/^(?:\+)/,/^(?:!=)/,/^(?:>=)/,/^(?:<=)/,/^(?:\^)/,/^(?:\{)/,/^(?:\})/,/^(?:\()/,/^(?:\))/,/^(?:\[)/,/^(?:\])/,/^(?:PI\b)/,/^(?:>)/,/^(?:<)/,/^(?:Retourner\b)/,/^(?:Retourne\b)/,/^(?:Fonction\b)/,/^(?:Selon\b)/,/^(?:Cas\b)/,/^(?:Defaut\b)/,/^(?:Pause\b)/,/^(?:FinChoix\b)/,/^(?:FinTantque\b)/,/^(?:FinPour\b)/,/^(?:Si\b)/,/^(?:Alors\b)/,/^(?:Sinon\b)/,/^(?:FinSi\b)/,/^(?:Pour\b)/,/^(?:Faire\b)/,/^(?:AllantDe\b)/,/^(?:A\b)/,/^(?:E\b)/,/^(?:$)/,/^(?:recup\b)/,/^(?:parle\b)/,/^(?:move\b)/,/^(?:haut\b)/,/^(?:bas\b)/,/^(?:droite\b)/,/^(?:gauche\b)/,/^(?:DEBUTSOURCE\b)/,/^(?:FINSOURCE\b)/,/^(?:Tantque\b)/,/^(?:test\b)/,/^(?:[A-Za-z_][A-Za-z_0-9]*)/,/^(?:'.*?')/,/^(?:\s+)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61],"inclusive":true}}
+rules: [/^(?:\\n)/,/^(?:[-]?[0-9]+(\.[0-9]+)?\b)/,/^(?:afficher\b)/,/^(?:\/\*\/.*?\/\*\/)/,/^(?:;)/,/^(?:,)/,/^(?::)/,/^(?:==)/,/^(?:=)/,/^(?:>)/,/^(?:\*)/,/^(?:\/)/,/^(?:-)/,/^(?:\+\+)/,/^(?:\+)/,/^(?:!=)/,/^(?:>=)/,/^(?:<=)/,/^(?:\^)/,/^(?:\{)/,/^(?:\})/,/^(?:\()/,/^(?:\))/,/^(?:\[)/,/^(?:\])/,/^(?:PI\b)/,/^(?:>)/,/^(?:<)/,/^(?:retourner\b)/,/^(?:retourne\b)/,/^(?:Fonction\b)/,/^(?:Selon\b)/,/^(?:Cas\b)/,/^(?:Defaut\b)/,/^(?:Pause\b)/,/^(?:FinSelon\b)/,/^(?:FinTantque\b)/,/^(?:FinPour\b)/,/^(?:Si\b)/,/^(?:Alors\b)/,/^(?:Sinon\b)/,/^(?:FinSi\b)/,/^(?:Pour\b)/,/^(?:Faire\b)/,/^(?:AllantDe\b)/,/^(?:$)/,/^(?:recup\b)/,/^(?:parle\b)/,/^(?:move\b)/,/^(?:haut\b)/,/^(?:bas\b)/,/^(?:droite\b)/,/^(?:gauche\b)/,/^(?:DEBUTSOURCE\b)/,/^(?:FINSOURCE\b)/,/^(?:Tantque\b)/,/^(?:test\b)/,/^(?:[A-Za-z_][A-Za-z_0-9]*)/,/^(?:'.*?')/,/^(?:\s+)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59],"inclusive":true}}
 });
 return lexer;
 })();

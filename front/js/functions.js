@@ -58,7 +58,7 @@ function GameOver() {
 
 function Win() {
     document.getElementById("popupWin").hidden = false;
-
+    fin = true;
     let btnSubmit = document.getElementById("compilation");
     btnSubmit.disabled=true;
     btnSubmit.disabled = true;

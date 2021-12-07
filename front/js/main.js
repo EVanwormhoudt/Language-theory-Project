@@ -2,7 +2,14 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chaos");
 editor.getSession().setMode("ace/mode/javascript");
 editor.getSession().setUseWorker(false);
+editor.setOptions({
+    enableBasicAutocompletion: true,
+    enableSnippets: true,
+    enableLiveAutocompletion: false
+});
 
+var vitesse = 5;
+var fin = false;
 
 document.getElementById('back').style.visibility = 'hidden';
 console.log(1)
@@ -443,7 +450,7 @@ document.getElementById("compilation").addEventListener('click', async () => {
     //document.getElementById("compilation").disabled = true;
     verifRecupMDPconsole = false;
     verifParlerMDPconsole = false;
-    
+
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
     ClearConsole();
@@ -496,7 +503,7 @@ async function execution(){
     let pileFonction = [];
     let AppelFonction = [];
     console.log(code_genere)
-    while (ic < code_genere.length) {
+    while (ic < code_genere.length && !fin) {
         let btnClear = document.getElementById("clear");
         btnClear.disabled = true;
         let ins = code_genere[ic];
@@ -917,7 +924,7 @@ async function execution(){
                 ic++;
         }
         if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, 500/vitesse));
 
     }
     if (retourhiglight[ic] != -1) {
@@ -948,6 +955,7 @@ function InitCompilation() {
     retourhiglight = [];
     tabFonctions = []
     CurseurFonctions = -1;
+    fin = false;
 }
 
 

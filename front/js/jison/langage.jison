@@ -7,7 +7,7 @@
 
 "\n"                   return '\n';
 [-]?[0-9]+("."[0-9]+)?\b  return 'NUMBER';
-"Afficher"          return 'AFFICHER';
+"afficher"          return 'AFFICHER';
 \/\*\/.*?\/\*\/    return 'COM';
 ";"                   return ';';
 ","                   return ',';
@@ -33,14 +33,14 @@
 "PI"                  return 'PI';
 ">"                   return 'SUP';
 "<"                   return 'INF';
-"Retourner"               return 'RETOURNER';
-"Retourne"               return 'RETOURNE';
+"retourner"               return 'RETOURNER';
+"retourne"               return 'RETOURNE';
 "Fonction"               return 'FONCTION';
 "Selon"               return 'CHOIX';
 "Cas"               return 'CAS';
 "Defaut"               return 'DEFAUT';
 "Pause"               return 'PAUSE';
-"FinChoix"               return 'FINCHOIX';
+"FinSelon"               return 'FINCHOIX';
 "FinTantque"        return 'FINTANTQUE';
 "FinPour"             return 'FINPOUR';
 "Si"                  return 'SI';
@@ -50,8 +50,6 @@
 "Pour"                return 'POUR';
 "Faire"               return 'FAIRE';
 "AllantDe"           return 'ALLANT';
-"A"                   return 'A';
-"E"                   return 'E';
 <<EOF>>               return 'EOF';
 "recup"                return 'RECUP';
 "parle"                return 'PARLE';
@@ -104,7 +102,6 @@
 %token POUR
 %token FAIRE
 %token ALLANT
-%token A
 %token FINPOUR
 %token MOVE
 %token UP
@@ -250,7 +247,7 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
             |FUNCTION3 {}
 
-            |PRINT ';' 
+            |PRINT ';'
 
             |COM {}
 

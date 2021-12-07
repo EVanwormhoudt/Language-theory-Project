@@ -159,8 +159,8 @@ function create() {
         };
 
         //rendu de la scène
-
-        this.cameras.main.setZoom(0.50);
+        console.log(0.50 + window.innerHeight*0.001)
+        this.cameras.main.setZoom( window.innerHeight*0.00079);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
@@ -211,8 +211,8 @@ function update() {
         case '4':
             if (!this.win4) victory(game.scene.scenes[0].lvl);
             //if(!this.area)isInArea();
-            
-            
+
+
             if (isInArea() == 34 && verifRecupMDP != true) {
                 if(verifRecupMDPconsole == true ) {
                     let ul = document.getElementById("list");
@@ -282,12 +282,12 @@ function victory(lvl) {
         case '4':
             if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
                 //console.log("bon area");
-                
+
                 if(verifRecupMDP == true && verifParlerMDPconsole == true) {
                     game.scene.scenes[0].win4 = true;
                     Win();
                 }
-            }            
+            }
             break;
 
         case '5':

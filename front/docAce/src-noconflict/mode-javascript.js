@@ -58,21 +58,27 @@ var identifierRe = "[a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*";
 
 var JavaScriptHighlightRules = function(options) {
         // see: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects
+    var keywordControls = (
+        "bonjour"
+    );
+
+
         var keywordMapper = this.createKeywordMapper({
             "variable.language":
-                "",
-            "keyword":
-                "(Si|Alors|Pour|AllantDe|FinPour|Sinon|A|Dans|Faire|Tantque|FinTantque|Selon|Cas|Retourne|Defaut|FinChoix|FinPour)|",
-            "storage.type":
+                "test",
+            "keyword.control" : keywordControls,
+            "keyword.operator":
+                "Si|Alors|Pour|Pause|AllantDe|FinPour|Sinon|A|Dans|Faire|Tantque|FinTantque|Selon|Cas|Defaut|FinSelon|FinPour|FinSi",
+            "support.constant":
                 "var|Fonction",
             "constant.language": "DEBUTSOURCE|FINSOURCE",
             "support.function":
-                "move|Afficher|Pause|parle|recup|test",
+                "move|afficher|parle|recup|test|retourne|retourner",
             "constant.language.boolean": "true|false"
         }, "identifier");
 
         // keywords which can be followed by regular expressions
-        var kwBeforeRe = "Cas|Sinon|Retourne";
+        var kwBeforeRe = "bonjour";
 
     var escapedRe = "\\\\(?:x[0-9a-fA-F]{2}|" + // hex
         "u[0-9a-fA-F]{4}|" + // unicode
@@ -157,7 +163,7 @@ var JavaScriptHighlightRules = function(options) {
                 next : "start"
             }, {
                 token : ["support.constant"],
-                regex : /that\b/
+                regex : /--|\+\+|\.{3}|===|==|=|!=|!==|<+=?|>+=?|!|&&|\|\||\?:|[!$%&*+\-~\/^]=?/
             }, {
                 token : ["storage.type", "punctuation.operator", "support.function.firebug"],
                 regex : /(console)(\.)(warn|info|log|error|time|trace|timeEnd|assert)\b/
@@ -170,11 +176,11 @@ var JavaScriptHighlightRules = function(options) {
                 next  : "property"
             }, {
                 token : "storage.type",
-                regex : /=>/,
+                regex : /gdfgdfgfds/,
                 next  : "start"
             }, {
                 token : "keyword.operator",
-                regex : /--|\+\+|\.{3}|===|==|=|!=|!==|<+=?|>+=?|!|&&|\|\||\?:|[!$%&*+\-~\/^]=?/,
+                regex : /(gffdgsdfsdffdgfdgfdwggqredg)/,
                 next  : "start"
             }, {
                 token : "punctuation.operator",
@@ -713,8 +719,8 @@ oop.inherits(Mode, TextMode);
 
 (function() {
 
-    this.lineCommentStart = "//";
-    this.blockComment = {start: "/*", end: "*/"};
+    //this.lineCommentStart = "//";
+    this.blockComment = {start: "/*/", end: "/*/"};
     this.$quotes = {'"': '"', "'": "'", "`": "`"};
 
     this.getNextLineIndent = function(state, line, tab) {
