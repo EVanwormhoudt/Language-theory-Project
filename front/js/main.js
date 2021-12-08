@@ -1,4 +1,6 @@
 var editor = ace.edit("editor");
+var testCompletion;
+var snippetComp;
 editor.setTheme("ace/theme/chaos");
 editor.getSession().setMode("ace/mode/javascript");
 editor.getSession().setUseWorker(false);
@@ -7,16 +9,53 @@ editor.setOptions({
         getCompletions: (editor, session, pos, prefix, callback) => {
             // note, won't fire if caret is at a word that does not have these letters
             callback(null, [
-                {snippet: 'Pour  AllantDe (,,):\n\nFinPour;',value:'Pour', score: 1, meta: 'bloc Pour'},
-                {snippet: 'Si():\nAlors:\n\nSinon:\n\nFinSi;', value:'Si',score: 1, meta: 'bloc Si'},
-                {snippet: 'Tantque():\n' +
-                        'FinTantque;', score: 1,value:'Tantque', meta: 'bloc Tantque'},
-                {snippet: 'Fonction   :\n\nretourner;',value:'Fonction', score: 1, meta: 'bloc Si'},
-                {snippet: 'Selon():\nFinSelon;',value:'Selon', score: 1, meta: 'bloc Si'},
-                {value: 'move();', score: 2, meta: 'Fonction'},
-                {value: 'test();', score: 2, meta: 'Fonction'},
-                {value: 'afficher();', score: 2, meta: 'Fonction'},
-                {value: 'parle();', score: 2, meta: 'Fonction'},
+                {snippet: 'Pour  AllantDe (,,):\n\nFinPour;',value:'Pour', score: 1, meta: 'bloc Pour',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,-1,-3);
+                        }
+                    }},
+                {snippet: 'Si():\nAlors:\n\nSinon:\n\nFinSi;', value:'Si',score: 1, meta: 'bloc Si',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,-4,-3);
+                        }
+                    }},
+
+                {snippet: 'Tantque():\n\n' +
+                        'FinTantque;', score: 1,value:'Tantque', meta: 'bloc Tantque',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,-1,-3);
+                        }
+                    }},
+                {snippet: 'Fonction  :\n\nretourner;',value:'Fonction', score: 1, meta: 'bloc Si',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,-1,-1);
+                        }
+                    }},
+                {snippet: 'Selon():\nCas ():\n\nFinSelon;',value:'Selon', score: 1, meta: 'bloc Si',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,-2,-3);
+                        }
+                    }},
+                {value: 'move();', score: 2, meta: 'Fonction',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,1,-2);
+                        }
+                    }},
+                {value: 'test();', score: 2, meta: 'Fonction',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,1,-2);
+                        }
+                    }},
+                {value: 'afficher();', score: 2, meta: 'Fonction',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,1,-2);
+                        }
+                    }},
+                {value: 'parle();', score: 2, meta: 'Fonction',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,1,-2);
+                        }
+                    }},
                 {value: 'droite', score: 3, meta: 'Direction'},
                 {value: 'gauche', score: 3, meta: 'Direction'},
                 {value: 'bas', score: 3, meta: 'Direction'},
@@ -29,7 +68,32 @@ editor.setOptions({
     enableLiveAutocompletion: true,
 });
 
-var vitesse = 3;
+function bienMettreLeCurseur(data,x,y){
+    var completions = testCompletion.completions;
+    //testCompletion.editor.startOperation({command: {name: "insertMatch"}});
+
+    if (completions.filterText) {
+        var ranges = testCompletion.editor.selection.getAllRanges();
+        for (var i = 0, range; range = ranges[i]; i++) {
+            range.start.column -= completions.filterText.length;
+            testCompletion.editor.session.remove(range);
+        }
+    }
+    if (data.snippet)
+        snippetComp.insertSnippet(testCompletion.editor, data.snippet);
+    else
+        testCompletion.editor.execCommand("insertstring", data.value || data);
+
+    if (testCompletion.completions == completions)
+        testCompletion.detach();
+    var pos = editor.selection.getCursor(); //Take the latest position on the editor
+    editor.gotoLine(pos.row + x, pos.column +y);
+}
+
+
+
+
+var vitesse = 1;
 
 var fin = false;
 
