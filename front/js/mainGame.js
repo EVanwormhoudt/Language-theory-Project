@@ -218,6 +218,12 @@ function update() {
     //console.log(game.scene.scenes[0].player.children.entries[0].x,game.scene.scenes[0].player.children.entries[0].y)
 }
 
+var tabLvl5 = [];
+tabLvl5.push(0);
+tabLvl5.push(2);
+tabLvl5.push(4);
+tabLvl5.push(6);
+var mpLvl5;
 
 function isInArea() {
     if (game.scene.scenes[0].lvl == '4' || game.scene.scenes[0].lvl == '5') {
@@ -228,7 +234,8 @@ function isInArea() {
                 return 34;
             } else {
                 game.scene.scenes[0].area5 = true;
-                return Math.floor(Math.random() * (7 - 4 + 1)) + 4;;
+                mpLvl5 = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+                return mpLvl5;
             }
 
         }
@@ -285,13 +292,14 @@ function movePlayer() {
     return 0;
 }
 
+
 function speackArea(mp,lvl) {
     console.log("ouuuu")
     switch(lvl) {
     case '4':
         console.log("ouuuu")
         if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
-            if(mp==34) {
+            if(mp==595) {
                 game.scene.scenes[0].win4 = true;
                 Win();
                 PrintConsole("Eh psss<br><br>Le mot de passe est correct !");
@@ -304,7 +312,7 @@ function speackArea(mp,lvl) {
 
     case '5':
         if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
-            if(mp==595) {
+            if(mp==tabLvl5[mpLvl5]) {
                 game.scene.scenes[0].win5 = true;
                 Win();
             }
