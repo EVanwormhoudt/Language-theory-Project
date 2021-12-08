@@ -3,17 +3,38 @@ editor.setTheme("ace/theme/chaos");
 editor.getSession().setMode("ace/mode/javascript");
 editor.getSession().setUseWorker(false);
 editor.setOptions({
-    enableBasicAutocompletion: true,
-    enableSnippets: true,
-    enableLiveAutocompletion: false
+    enableBasicAutocompletion: [{
+        getCompletions: (editor, session, pos, prefix, callback) => {
+            // note, won't fire if caret is at a word that does not have these letters
+            callback(null, [
+                {snippet: 'Pour  AllantDe (,,):\n\nFinPour;',value:'Pour', score: 1, meta: 'bloc Pour'},
+                {snippet: 'Si():\nAlors:\n\nSinon:\n\nFinSi;', value:'Si',score: 1, meta: 'bloc Si'},
+                {snippet: 'Tantque():\n' +
+                        'FinTantque;', score: 1,value:'Tantque', meta: 'bloc Tantque'},
+                {snippet: 'Fonction   :\n\nretourner;',value:'Fonction', score: 1, meta: 'bloc Si'},
+                {snippet: 'Selon():\nFinSelon;',value:'Selon', score: 1, meta: 'bloc Si'},
+                {value: 'move();', score: 2, meta: 'Fonction'},
+                {value: 'test();', score: 2, meta: 'Fonction'},
+                {value: 'afficher();', score: 2, meta: 'Fonction'},
+                {value: 'parle();', score: 2, meta: 'Fonction'},
+                {value: 'droite', score: 3, meta: 'Direction'},
+                {value: 'gauche', score: 3, meta: 'Direction'},
+                {value: 'bas', score: 3, meta: 'Direction'},
+                {value: 'haut', score: 3, meta: 'Direction'}
+
+            ]);
+        },
+    }],
+    // to make popup appear automatically, without explicit _ctrl+space_
+    enableLiveAutocompletion: true,
 });
 
-var vitesse = 5;
+var vitesse = 3;
 
 var fin = false;
 
 document.getElementById('back').style.visibility = 'hidden';
-console.log(1)
+
 let examples = ['DEBUTSOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '/*/après chaque instruction mettre un ;/*/' + '\n' + '}FINSOURCE',
 'DEBUTSOURCE {\n' + '\n' + '/*/ pour i AllantDe (debut,fin,pas)/*/' + '\n' + 'Pour i AllantDe (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FINSOURCE',
 'DEBUTSOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '\n' +'\n' +'\n'+ 'Fonction MyFonction():' +'\n' + '\tSi (i==0) :' + '\n' + '\tAlors :' + '\n' + '\t\tretourne; /*/pour retourner une valeur dans la fonction mais pas à la fin de celle ci/*/' +'\n' +'\tSinon :' +'\n' + '\tafficher(i);' +'\n' +'\t\ti=i-1;' +'\n' +'\tMyFonction();' +'\n\n' +'\tFinSi;' +'\n\tretourner; /*/Permet de retourner à la fin d\'une fonction:/*/' +'\n\n i=5;' +'\nMyFonction();\n\n'+ '}FINSOURCE',
@@ -50,7 +71,7 @@ document.getElementById("example").addEventListener('click', () => {
 
 })
 
-console.log(1)
+
 var Range = function (startRow, startColumn, endRow, endColumn) {
     this.start = {
         row: startRow,
@@ -389,7 +410,7 @@ function addTmpFor() {
 
 console.log(3)
 function parseCodeHighlight() {
-    let tmp = editor.getValue().replace("DEBUTSOURCE {", "").replace("}FINSOURCE", "")
+    let tmp = editor.getValue().replace("DEBUTSOURCE {", "").replace("}FINSOURCE", "").replaceAll("\r",``)
     let tmpTable;
     let length = 0;
     let ligne = 0;
@@ -402,32 +423,35 @@ function parseCodeHighlight() {
     tmpTable = tableCode; tableCode = [];
     for (let i of tmpTable) {
         tableCode = [...tableCode, ...i.split("\n")];
+
     }
     console.log(tableCode)
+    tmpTable = []
     for(let i of tableCode){
-
-        if(i === "" || i === "\r" ){
+        i = i.replaceAll(" ","")
+        if(i === ""){
             ligne++;
             length = 0;
         }
-        else if(i === "Alors"){
-
+        else if(i.includes("Alors") ){
         }
         else {
             console.log(i)
+            tmpTable.push(i)
             console.log(ligne)
             tableRange.push(new Range(ligne, length, ligne, length + i.length + 1));
             length = i.length + 1;
-            console.log(tableRange)
         }
-    }
 
+    }
+    console.log(tmpTable)
+    console.log(tableRange)
 }
 
 function adaptIndex() {
     let instruction = 0;
     for (let i in code_genere) {
-        if (code_genere[i].name == "NUM" || code_genere[i].name == "INCFOR" || code_genere[i].name == "VARFOR" || code_genere[i].name == "SUP" || code_genere[i].name == "INF" || code_genere[i].name == "SUPEGAL" || code_genere[i].name == "INFEGAL" || code_genere[i].name == "EGAL" || code_genere[i].name == "NOTEGAL" || code_genere[i].name == "VAR" || code_genere[i].name == "SUB" || code_genere[i].name == "ADD" || code_genere[i].name == "MULT" || code_genere[i].name == "DIV") {
+        if (code_genere[i].name == "NUM"||code_genere[i].name == "TG"||code_genere[i].name == "TH" ||code_genere[i].name == "TD" ||code_genere[i].name == "TB"  || code_genere[i].name == "GET" ||code_genere[i].name == "INCFOR" || code_genere[i].name == "VARFOR" || code_genere[i].name == "SUP" || code_genere[i].name == "INF" || code_genere[i].name == "SUPEGAL" || code_genere[i].name == "INFEGAL" || code_genere[i].name == "EGAL" || code_genere[i].name == "NOTEGAL" || code_genere[i].name == "VAR" || code_genere[i].name == "SUB" || code_genere[i].name == "ADD" || code_genere[i].name == "MULT" || code_genere[i].name == "DIV") {
             retourhiglight.push(-1);
         }
         else {
@@ -451,12 +475,11 @@ function adaptIndex() {
     }
 
 }
-    console.log(1)
 document.getElementById("compilation").addEventListener('click', async () => {
     //document.getElementById("compilation").disabled = true;
     verifRecupMDPconsole = false;
     verifParlerMDPconsole = false;
-
+    editor.setReadOnly(true)
     let btnStyle = document.getElementById("compilation");
     btnStyle.style.color = 'grey';
     ClearConsole();
@@ -479,7 +502,7 @@ document.getElementById("compilation").addEventListener('click', async () => {
     await execution();
     console.log(variables)
     InitCompilation();
-
+    editor.setReadOnly(false)
     btnStyle.style.color = 'white';
 })
 
@@ -518,7 +541,7 @@ async function execution(){
             marker = editor.getSession().addMarker(tableRange[retourhiglight[ic]], "currentHighlight", "screenLine");
 
         }
-
+        console.log(ic)
         switch (ins.name) {
             case 'NUM':
                 console.log("On rentre un chiffre dans la pile")
@@ -930,7 +953,6 @@ async function execution(){
         }
         if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
             await new Promise(r => setTimeout(r, 500/vitesse));
-            console.log(vitesse)
     }
     if (retourhiglight[ic] != -1) {
         editor.getSession().removeMarker(marker);
