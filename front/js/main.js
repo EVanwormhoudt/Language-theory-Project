@@ -9,29 +9,34 @@ editor.setOptions({
         getCompletions: (editor, session, pos, prefix, callback) => {
             // note, won't fire if caret is at a word that does not have these letters
             callback(null, [
-                {snippet: 'Pour  AllantDe (,,):\n\nFinPour;',value:'Pour', score: 1, meta: 'bloc Pour',completer: {
+                {snippet: 'Pour  AllantDe (,,):\n\nFinPour;',value:'Pour', score: 4, meta: 'bloc Pour',completer: {
                         insertMatch: function(editor, data) {
                             bienMettreLeCurseur(data,-1,-3);
                         }
                     }},
-                {snippet: 'Si():\nAlors:\n\nSinon:\n\nFinSi;', value:'Si',score: 1, meta: 'bloc Si',completer: {
+                {snippet: 'Si():\nAlors:\n\nSinon:\n\nFinSi;', value:'Si',score: 4, meta: 'bloc Si',completer: {
                         insertMatch: function(editor, data) {
                             bienMettreLeCurseur(data,-4,-3);
                         }
                     }},
 
                 {snippet: 'Tantque():\n\n' +
-                        'FinTantque;', score: 1,value:'Tantque', meta: 'bloc Tantque',completer: {
+                        'FinTantque;', score: 4,value:'Tantque', meta: 'bloc Tantque',completer: {
                         insertMatch: function(editor, data) {
                             bienMettreLeCurseur(data,-1,-3);
                         }
                     }},
-                {snippet: 'Fonction  :\n\nretourner;',value:'Fonction', score: 1, meta: 'bloc Si',completer: {
+                {snippet: 'Cas ():\n', value:'Cas',score: 4, meta: 'bloc Si',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,0,5);
+                        }
+                    }},
+                {snippet: 'Fonction  :\n\nretourner;',value:'Fonction', score: 4, meta: 'bloc Si',completer: {
                         insertMatch: function(editor, data) {
                             bienMettreLeCurseur(data,-1,-1);
                         }
                     }},
-                {snippet: 'Selon():\nCas ():\n\nFinSelon;',value:'Selon', score: 1, meta: 'bloc Si',completer: {
+                {snippet: 'Selon():\nCas ():\n\nFinSelon;',value:'Selon', score: 4, meta: 'bloc Si',completer: {
                         insertMatch: function(editor, data) {
                             bienMettreLeCurseur(data,-2,-3);
                         }
@@ -56,10 +61,15 @@ editor.setOptions({
                             bienMettreLeCurseur(data,1,-2);
                         }
                     }},
-                {value: 'droite', score: 3, meta: 'Direction'},
-                {value: 'gauche', score: 3, meta: 'Direction'},
-                {value: 'bas', score: 3, meta: 'Direction'},
-                {value: 'haut', score: 3, meta: 'Direction'}
+                {value: 'recup();', score: 2, meta: 'Fonction',completer: {
+                        insertMatch: function(editor, data) {
+                            bienMettreLeCurseur(data,1,-2);
+                        }
+                    }},
+                {value: 'droite', score: 1, meta: 'Direction'},
+                {value: 'gauche', score: 1, meta: 'Direction'},
+                {value: 'bas', score: 1, meta: 'Direction'},
+                {value: 'haut', score: 1, meta: 'Direction'}
 
             ]);
         },
@@ -93,7 +103,7 @@ function bienMettreLeCurseur(data,x,y){
 
 
 
-var vitesse = 1;
+var vitesse = 7;
 
 var fin = false;
 
@@ -515,7 +525,7 @@ function parseCodeHighlight() {
 function adaptIndex() {
     let instruction = 0;
     for (let i in code_genere) {
-        if (code_genere[i].name == "NUM"||code_genere[i].name == "TG"||code_genere[i].name == "TH" ||code_genere[i].name == "TD" ||code_genere[i].name == "TB"  || code_genere[i].name == "GET" ||code_genere[i].name == "INCFOR" || code_genere[i].name == "VARFOR" || code_genere[i].name == "SUP" || code_genere[i].name == "INF" || code_genere[i].name == "SUPEGAL" || code_genere[i].name == "INFEGAL" || code_genere[i].name == "EGAL" || code_genere[i].name == "NOTEGAL" || code_genere[i].name == "VAR" || code_genere[i].name == "SUB" || code_genere[i].name == "ADD" || code_genere[i].name == "MULT" || code_genere[i].name == "DIV") {
+        if (code_genere[i].name == "NUM"||code_genere[i].name == "JMPCONDWHILE"||code_genere[i].name == "TG"||code_genere[i].name == "TH" ||code_genere[i].name == "TD" ||code_genere[i].name == "TB"  || code_genere[i].name == "GET" ||code_genere[i].name == "INCFOR" || code_genere[i].name == "VARFOR" || code_genere[i].name == "SUP" || code_genere[i].name == "INF" || code_genere[i].name == "SUPEGAL" || code_genere[i].name == "INFEGAL" || code_genere[i].name == "EGAL" || code_genere[i].name == "NOTEGAL" || code_genere[i].name == "VAR" || code_genere[i].name == "SUB" || code_genere[i].name == "ADD" || code_genere[i].name == "MULT" || code_genere[i].name == "DIV") {
             retourhiglight.push(-1);
         }
         else {

@@ -7,7 +7,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+
         }
     },
     scene: {
@@ -155,8 +155,7 @@ function create() {
         };
 
         //rendu de la scène
-        console.log(0.50 + window.innerHeight*0.001)
-        this.cameras.main.setZoom( window.innerHeight*0.00079);
+        this.cameras.main.setZoom( window.innerHeight*0.00073);
         this.cameras.main.centerOn(896, 512);
         cursors = this.input.keyboard;
 
