@@ -14,15 +14,19 @@ var fin = false;
 
 document.getElementById('back').style.visibility = 'hidden';
 console.log(1)
-let examples = ['DEBUTSOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '//après chaque instruction mettre un ;' + '\n' + '}FINSOURCE',
-'DEBUTSOURCE {\n' + '\n' + '// pour i allant de (debut,fin,pas)' + '\n' + 'Pour i Allant De (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FINSOURCE',
-'DEBUTSOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '}FINSOURCE',
-'DEBUTSOURCE {\n' + 'nbPas = 16;' + '//déclaration d\'une variable' + '\n' + 'nbPas++; //incrémente d\'un la variable' + '\n' + 'Afficher(nbPas);' + '\n \n' + '//utilisation de la variable dans les structures' + '\n' + 'Pour i Allant De (1,nbPas,1):' + '\n' + '\t' + 'move(haut);' + '\n' + 'FinPour' + '\n' + '}FINSOURCE',
-'DEBUTSOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): //si var vaut 1' + '\n' + '\tnbPas = 1;' + '\n\tPause; //facultatif' + '\ncas (2): //si var vaut 2' + '\n\tnbPas = 2;' + '\n\tPause;' + '\nDefaut: //si var  ne vaut ni 1 ni 2' + '\n\tnbPas = 6;' + '\n\tPause;' + '\nFinSelon;' + '\nAfficher(nbPas);' + '\n}FINSOURCE']
+let examples = ['DEBUTSOURCE {\n' + '\n' + 'move(bas);' + '\n' + 'move(droite);' + '\n' + 'move(gauche);' + '\n' + 'move(haut);' + '\n' + '\n' + '/*/après chaque instruction mettre un ;/*/' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + '\n' + '/*/ pour i AllantDe (debut,fin,pas)/*/' + '\n' + 'Pour i AllantDe (1,15,1):\n' + '    move(droite);\n' + '\n' + 'FinPour;' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'Si(test(haut)):' + '\n' + 'Alors:' + '\n' + '\t' + 'move(haut);' + '\n' + 'Sinon:' + '\n' + '\t' + 'move(bas);' + '\n' + 'FinSi;' + '\n' + '\n' +'\n' +'\n'+ 'Fonction MyFonction():' +'\n' + '\tSi (i==0) :' + '\n' + '\tAlors :' + '\n' + '\t\tretourne; /*/pour retourner une valeur dans la fonction mais pas à la fin de celle ci/*/' +'\n' +'\tSinon :' +'\n' + '\tafficher(i);' +'\n' +'\t\ti=i-1;' +'\n' +'\tMyFonction();' +'\n\n' +'\tFinSi;' +'\n\tretourner; /*/Permet de retourner à la fin d\'une fonction:/*/' +'\n\n i=5;' +'\nMyFonction();\n\n'+ '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'nbPas = 16;' + '/*/déclaration d\'une variable/*/' + '\n' + 'nbPas = nbPas +1; /*/incrémente d\'un la variable/*/' + '\n' + 'afficher(nbPas);' + '\n \n' + '/*/:utilisation de la variable dans les structures/*/' + '\n' + 'Pour i AllantDe (1,nbPas,1):' + '\n' + '\t' + 'move(haut);' + '\n' + 'FinPour;' + '\n' + '}FINSOURCE',
+'DEBUTSOURCE {\n' + 'Selon (var) :' + '\n' + 'cas (1): /*/si var vaut 1/*/' + '\n' + '\tnbPas = 1;' + '\n\tPause; /*/facultatif /*/' + '\ncas (2): /*/si var vaut 2/*/' + '\n\tnbPas = 2;' + '\n\tPause;' + '\nDefaut: /*/si var  ne vaut ni 1 ni 2/*/' + '\n\tnbPas = 6;' + '\n\tPause;' + '\nFinSelon;' + '\nafficher(nbPas);' + '\n}FINSOURCE']
 
-let liste = "\n" + "\n" + "\n" + "Liste des fonctions :" + "\n" + "Afficher(i) //permet d'afficher une varibale, un chiffre etc.." +
-    "\n" + "move(haut) //permet de bouger le personnage dans la direction souhaitée" +
-    "\n" + "test(haut) //fonction qui renvoie 0 si le personnage" + "\n" + " ne peut pas aller dans la direction souhaitée sinon 1";
+let liste = "\n" + "\n" + "\n" + "Liste des fonctions :" + "\n" + "afficher(i) /*/permet d'afficher une varibale, un chiffre etc../*/" +
+    "\n" + "move(haut) /*/permet de bouger le personnage dans la direction souhaitée /*/" +
+    "\n" + "test(haut) /*/fonction qui renvoie 0 si le personnage" + "\n" + " ne peut pas aller dans la direction souhaitée sinon 1/*/" +
+    "\n" + "parle(var) /*/fonction qui permet de renvoyer var a un personnage /*/ " +
+    "\n" + "recup() /*/fonction qui permet de récuper une variable /*/"
+    ;
+
 
 let verifRecupMDPconsole = false;
 let verifParlerMDPconsole = false;
@@ -32,7 +36,8 @@ document.getElementById("example").addEventListener('click', () => {
     document.getElementById("compilation").disabled = true;
     document.getElementById("example").disabled = true;
     let tmp = editor.getValue();
-    editor.setValue(examples[lvl - 1] + liste);
+    if(lvl !="8")editor.setValue(examples[lvl - 1] + liste);
+    if(lvl=="8")editor.setValue(liste);
 
     document.getElementById("back").addEventListener('click', () => {
         document.getElementById('back').style.visibility = 'hidden';
