@@ -94,10 +94,10 @@ function create() {
                 texture.context.globalCompositeOperation = 'destination-out'; //comment se met la couleur sur la map
                 texture.refresh();
 
-                var overlay = this.add.image(0, 0, 'night-layer');
+                this.overlay = this.add.image(0, 0, 'night-layer');
 
-                overlay.setDepth(3000);
-                overlay.setAlpha(0.99);
+                this.overlay.setDepth(3000);
+                this.overlay.setAlpha(0.99);
 
 
 
@@ -262,7 +262,7 @@ function victory(lvl) {
 
     switch (lvl) {
         case '1':
-            if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
+            if ((game.scene.scenes[0].player.children.entries[0].y >= 704 && game.scene.scenes[0].player.children.entries[0].y <= 767) && (game.scene.scenes[0].player.children.entries[0].x >= 894)) {
                 game.scene.scenes[0].win = true;
                 Win();
             }
@@ -276,6 +276,7 @@ function victory(lvl) {
         case '3':
             if ((game.scene.scenes[0].player.children.entries[0].y <= 189 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1667 && game.scene.scenes[0].player.children.entries[0].x >= 1542)) {
                 game.scene.scenes[0].win3 = true;
+                game.scene.scenes[0].overlay.setAlpha(0);
                 Win();
             }
             break;
