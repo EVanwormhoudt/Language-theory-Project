@@ -94,10 +94,11 @@ function create() {
                 texture.context.globalCompositeOperation = 'destination-out'; //comment se met la couleur sur la map
                 texture.refresh();
 
-                var overlay = this.add.image(0, 0, 'night-layer');
+                this.overlay = this.add.image(0, 0, 'night-layer');
 
-                overlay.setDepth(3000);
-                overlay.setAlpha(0.99);
+
+                this.overlay.setDepth(3000);
+                this.overlay.setAlpha(0.99);
 
 
 
@@ -210,24 +211,9 @@ function update() {
             break;
         case '4':
             if (!this.win4) victory(game.scene.scenes[0].lvl);
-            //if(!this.area)isInArea();
-
-
-            if (isInArea() == 34 && verifRecupMDP != true) {
-                if(verifRecupMDPconsole == true ) {
-                    let ul = document.getElementById("list");
-                    let li = document.createElement("li");
-                    let p = document.createElement("p");
-                    p.innerHTML = `Eh psss<br><br>Le mot de passe est 34 !`
-                    li.appendChild(p);
-                    ul.appendChild(li);
-                    verifRecupMDP = true;
-                }
-            }
             break;
         case '5':
             if (!this.win5) victory(game.scene.scenes[0].lvl);
-            if (!this.area5) isInArea();
             break;
     }
 
@@ -262,8 +248,7 @@ function victory(lvl) {
 
     switch (lvl) {
         case '1':
-            if (game.scene.scenes[0].player.children.entries[0].y <= 0 && (game.scene.scenes[0].player.children.entries[0].x < 1215 && game.scene.scenes[0].player.children.entries[0].x > 894)) {
-                game.scene.scenes[0].win = true;
+            if ((game.scene.scenes[0].player.children.entries[0].y >= 704 && game.scene.scenes[0].player.children.entries[0].y <= 767) && (game.scene.scenes[0].player.children.entries[0].x >= 894)) {                game.scene.scenes[0].win = true;
                 Win();
             }
             break;
@@ -276,22 +261,9 @@ function victory(lvl) {
         case '3':
             if ((game.scene.scenes[0].player.children.entries[0].y <= 189 && game.scene.scenes[0].player.children.entries[0].y >= 0) && (game.scene.scenes[0].player.children.entries[0].x < 1667 && game.scene.scenes[0].player.children.entries[0].x >= 1542)) {
                 game.scene.scenes[0].win3 = true;
+                game.scene.scenes[0].overlay.setAlpha(0);
                 Win();
             }
-            break;
-        case '4':
-            if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
-                //console.log("bon area");
-
-                if(verifRecupMDP == true && verifParlerMDPconsole == true) {
-                    game.scene.scenes[0].win4 = true;
-                    Win();
-                }
-            }
-            break;
-
-        case '5':
-            game.scene.scenes[0].win5 = true;
             break;
         default:
     }
@@ -316,4 +288,32 @@ function movePlayer() {
         game.scene.scenes[0].player.children.entries[0].anims.play('back');
     });
     return 0;
+}
+
+function speackArea(mp,lvl) {
+    console.log("ouuuu")
+    switch(lvl) {
+    case '4':
+        console.log("ouuuu")
+        if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
+            if(mp==34) {
+                game.scene.scenes[0].win4 = true;
+                Win();
+                PrintConsole("Eh psss<br><br>Le mot de passe est correct !");
+            }
+            else {
+                PrintConsole("Eh psss<br><br>Le mot de passe est faux !");
+            }
+        }
+        break;
+
+    case '5':
+        if ((game.scene.scenes[0].player.children.entries[0].y <= 416 && game.scene.scenes[0].player.children.entries[0].y >= 284) && (game.scene.scenes[0].player.children.entries[0].x < 1520 && game.scene.scenes[0].player.children.entries[0].x >= 1403)) {
+            if(mp==595) {
+                game.scene.scenes[0].win5 = true;
+                Win();
+            }
+        }
+        break;
+    }
 }

@@ -907,17 +907,16 @@ async function execution(){
                 ic++;
                 break;
             case 'SPEAK':
-                let MP = ins.code;
-                //Fonction regarder si on est dans la zone et regarder si c'est le bon mp
-                verifParlerMDPconsole = true;
+                let motdepasse = pile.pop();
+                speackArea(motdepasse,lvl);
+                console.log("ouuuu");
                 ic++;
                 break;
             case 'GET':
                 //Fonction regarder si on est dans la zone et retunrn la valeur
                 verifRecupMDPconsole = true;
-
                 let MP2 = isInArea();
-                console.log("isareaaaa ", MP2)
+                PrintConsole("Eh psss<br><br>Voila le mot de passe");
                 pile.push(MP2);
                 ic++;
                 break;

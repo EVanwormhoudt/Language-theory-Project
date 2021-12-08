@@ -244,7 +244,7 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
             |MOVE '(' LEFT ')' ';' {addInstruction(0,"MG",0);}
             |MOVE '(' RIGHT ')' ';' {addInstruction(0,"MD",0);}
 
-            |PARLE '(' e ')' ';' {addInstruction($3,"SPEAK",0);}
+            |PARLE '(' e ')' ';' {addInstruction(0,"SPEAK",0);}
 
             |FUNCTION3 {}
 
