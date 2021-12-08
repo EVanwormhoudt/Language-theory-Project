@@ -6,7 +6,7 @@
 %%
 
 "\n"                   return '\n';
-[-]?[0-9]+("."[0-9]+)?\b  return 'NUMBER';
+[0-9]+("."[0-9]+)?\b  return 'NUMBER';
 "afficher"          return 'AFFICHER';
 \/\*\/.*?\/\*\/    return 'COM';
 ";"                   return ';';
@@ -17,7 +17,8 @@
 ">"                   return 'SUP';
 "*"                   return 'MULT';
 "/"                   return 'DIV';
-"-"                   return 'SUB';
+"-"                   return '-';
+"_"                   return 'SUB';
 "++"                   return 'INC';
 "+"                   return 'ADD';
 "!="                  return 'NOTEGAL';
@@ -262,6 +263,7 @@ instruction :'DEBUT' '{' {console.log("-----Debut du programme-----");}
 
 e   : e ADD e {addInstruction(0,"ADD", 0);}
     | NUMBER {$$ = Number(yytext);addInstruction(Number(yytext),"NUM", 0);}
+    | '-' NUMBER {$$ = Number(yytext);addInstruction((-1)*Number(yytext),"NUM", 0);}
     | VAR  {addInstruction($1,"VAR", 0);}
     | '[' e ']' {}
     | e SUB e {addInstruction(0,"SUB", 0);}

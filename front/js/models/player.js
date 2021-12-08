@@ -81,6 +81,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         for (let i = 0; i < 32; i++) {
             await new Promise(r => setTimeout(r, 15/vitesse));
+            console.log(vitesse)
             switch (direction) {
                 case 'up':
                     this.y -= 1;

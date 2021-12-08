@@ -9,6 +9,7 @@ editor.setOptions({
 });
 
 var vitesse = 5;
+
 var fin = false;
 
 document.getElementById('back').style.visibility = 'hidden';
@@ -875,14 +876,14 @@ async function execution(){
                         break;
                     }
                     else{
-                        messageConsole("ERROR :Fonction : "+ NameFonction + " Arguments");
+                        PrintConsole("ERROR :Fonction : "+ NameFonction + " Arguments");
                         ic++;
                         break;
                     }
 
                 }
                 else {
-                    messageConsole("ERROR :Fonction : "+ NameFonction + " Indefinie");
+                    PrintConsole("ERROR :Fonction : "+ NameFonction + " Indefinie");
                     ic++;
                 }
                 break;
@@ -925,7 +926,7 @@ async function execution(){
         }
         if(!(ins.name ==="MH"||ins.name ==="MD"||ins.name ==="MG"||ins.name ==="MD" ||ins.name ==="NUM"||ins.name ==="VAR"||ins.name ==="INF"||ins.name ==="SUP"||ins.name ==="SUPEGAL"||ins.name ==="INFEGAL"||ins.name ==="EGAL"||ins.name ==="NOTEGAL"||ins.name ==="ADD"||ins.name ==="SUB"||ins.name ==="MULT"||ins.name ==="DIV"))
             await new Promise(r => setTimeout(r, 500/vitesse));
-
+            console.log(vitesse)
     }
     if (retourhiglight[ic] != -1) {
         editor.getSession().removeMarker(marker);
