@@ -96,13 +96,8 @@ function create() {
 
                 this.overlay = this.add.image(0, 0, 'night-layer');
 
-
                 this.overlay.setDepth(3000);
                 this.overlay.setAlpha(0.99);
-
-
-
-
                 break;
 
             case '4':

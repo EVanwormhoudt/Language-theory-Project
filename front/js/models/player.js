@@ -54,6 +54,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     async move(direction, nbCase) {
+        
         nbCase++;
         console.log(direction);
         if(this.testCollision(direction)) {
@@ -63,6 +64,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             CollisionConsole();
             return 0;
         }
+        if(this.direction != direction)
         switch (direction) {
             case 'up':
 
@@ -97,6 +99,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     break;
             }
         }
+        this.direction = direction;
         return 1;
     }
     testCollision(direction) {
