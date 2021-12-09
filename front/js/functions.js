@@ -100,7 +100,7 @@ function Win() {
                     document.location.href = "../html/lvl5.html?niveau=4";
                     break;
                 case '5':
-                    document.location.href = "../html/lvl6.html?niveau=6";
+                    document.location.href = "../html/lvl8.html?niveau=8";
                     break;
                 case '6':
                     document.location.href = "../html/lvl7.html?niveau=7";
