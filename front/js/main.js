@@ -550,7 +550,7 @@ function adaptIndex() {
 
 }
 document.getElementById("compilation").addEventListener('click', async () => {
-    //document.getElementById("compilation").disabled = true;
+    document.getElementById("compilation").disabled = true;
     verifRecupMDPconsole = false;
     verifParlerMDPconsole = false;
     editor.setReadOnly(true)
