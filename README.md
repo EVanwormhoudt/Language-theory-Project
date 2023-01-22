@@ -1,7 +1,11 @@
-# ProjetThl
+# Language Theory Project
 
-Projet de théorie des languages 
 
-objectif : faire un jeu ludique pour apprendre les bases du code
+4 week project with a group of 5
 
-Pour lancer le jeu, vous devez exécuter cette commande dans votre terminal : node .\index.js
+The objectif was to create a small game in the browser to learn how to code.
+The game worked with a custom language that we created
+
+We used phaser.js for the front-end, and jison for the custom language parsing
+
+
